@@ -47,7 +47,7 @@ public class Dice extends JPanel implements ActionListener {
 	private Image resizedImage;
 
 	private int diceWidth = (screenSize.width) / 20;
-	private int diceHeight = (screenSize.height) / 10;
+	private int diceHeight = (screenSize.height) / 14;
 	private int roll;
 
 	
