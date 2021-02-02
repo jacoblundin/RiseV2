@@ -210,6 +210,7 @@ public class ManageEvents {
 
 		if (player.isAlive() == true) {
 			westPanel.append(player.getName() + " paid 200 GC in tax\n");
+			JOptionPane.showMessageDialog(null, "You paid 200 gold in tax to the Church");
 			player.decreaseBalace(chargePlayer);
 			player.decreaseNetWorth(chargePlayer);
 			taxCounter++;
