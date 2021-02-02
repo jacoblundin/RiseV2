@@ -113,7 +113,9 @@ public class GUITile extends JLabel {
 		labels[3] = label4;
 	}
 
-	// Adds 4 j label
+	/**
+	 * Adds four JLabels
+	 */
 	public void addLabelsToGrid() {
 		for (int i = 0; i < labels.length; i++) {
 			labels[i].setPreferredSize(new Dimension(200, 200));
@@ -122,7 +124,9 @@ public class GUITile extends JLabel {
 		add(labelArray, BorderLayout.CENTER);
 	}
 
-	// update level on property
+	/**
+	 * update level on property
+	 */
 	public void changeLevel(String level) {
 		infoLabel.setText(level);
 	}

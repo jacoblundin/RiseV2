@@ -14,7 +14,7 @@ import tiles.Tile;
 /**
  * Player class deals with everything that has to do with a player.
  * 
- * @author AevanDino, Seth Öberg, Muhammad Hasan, Sebastian Viro
+ * @author AevanDino, Seth ï¿½berg, Muhammad Hasan, Sebastian Viro
  */
 public class Player {
 
@@ -386,10 +386,14 @@ public class Player {
 
 		if (getNetWorth() >= 2000) {
 			setPlayerRank(PlayerRanks.KNIGHT);
+		} else if (getNetWorth() < 2000){
+			setPlayerRank(PlayerRanks.PEASANT);
 		}
 
 		if (getNetWorth() >= 4000) {
 			setPlayerRank(PlayerRanks.LORD);
+		} else if (getNetWorth() >= 2000 && getNetWorth() < 4000){
+			setPlayerRank(PlayerRanks.KNIGHT);
 		}
 		if (getNetWorth() >= 7500) {
 			setPlayerRank(PlayerRanks.KINGS);

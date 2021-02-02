@@ -76,7 +76,5 @@ public class CheatGui extends JPanel implements ActionListener {
 	 */
 	public void setIndex(int index) {
 		this.index = index;
-
 	}
-
 }
