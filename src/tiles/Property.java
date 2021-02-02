@@ -147,12 +147,17 @@ public class Property implements Tile {
 		
 		int res = JOptionPane.showConfirmDialog(null, "Do you want to upgrade " + getName() + " for: " + getLevelPrice());
 		if (res == 0 && player.getPlayerRank().nbrOfLevels() > levels && player.getBalance()>= getLevelPrice()) {
-			this.levels+=1;
+			this.levels += 1;
 
 			player.decreaseBalace(getLevelPrice());
+
+		} else if (res == 0 && player.getPlayerRank().nbrOfLevels() == levels){
+			JOptionPane.showMessageDialog(null, "You cannot upgrade the property futher at your current player rank");
+
+		} else if (player.getBalance() < getLevelPrice()){
+			JOptionPane.showMessageDialog(null, "You do not have enough gold");
+			}
 		}
-		
-	}
 	
 	public void decreaseLevel() {
 		int res = JOptionPane.showConfirmDialog(null, "Do you really want to downgrade " + getName() + " for: " + getLevelPrice());
