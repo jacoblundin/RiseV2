@@ -1,4 +1,4 @@
-package westSidePanel;
+package GUI.WestGUI;
 
 import java.awt.BorderLayout;
 import java.awt.*;

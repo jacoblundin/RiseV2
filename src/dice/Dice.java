@@ -14,8 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import board.Board;
-import cheat.CheatGui; //May be needed for testing in future 
-import eastSidePanels.EastSidePanel;
+import GUI.EastGUI.EastSidePanel;
 import events.ManageEvents;
 import player.PlayerList;
 import westSidePanel.WestSidePanel;
@@ -49,8 +48,6 @@ public class Dice extends JPanel implements ActionListener {
 	private int diceWidth = (screenSize.width) / 20;
 	private int diceHeight = (screenSize.height) / 14;
 	private int roll;
-
-	
 	
 	/**
 	 * @param playerList method used for updating the list of players 
@@ -128,7 +125,7 @@ public class Dice extends JPanel implements ActionListener {
 		btnEndTurn.setEnabled(false);
 	}
 
-	
+
 
 	/**
 	 * Action Listener that handles what happens if the buttons are pressed

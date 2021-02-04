@@ -18,10 +18,10 @@ import javax.swing.border.MatteBorder;
 
 import board.Board;
 import dice.Dice;
-import eastSidePanels.EastSidePanel;
+import GUI.EastGUI.EastSidePanel;
+import GUI.WestGUI.WestSidePanel
 import menu.Menu;
 import player.PlayerList;
-import westSidePanel.WestSidePanel;
 
 /**
  * This class combines most of the panels in the game and adds appropriate

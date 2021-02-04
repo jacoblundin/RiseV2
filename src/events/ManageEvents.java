@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 import board.Board;
 import dice.Dice;
-import eastSidePanels.EastSidePanel;
+import GUI.EastGUI.EastSidePanel;
 import messageGui.DeathGUI;
 import messageGui.FortuneTellerGUI;
 import messageGui.SecretGui;
@@ -19,7 +19,6 @@ import player.Player;
 import player.PlayerList;
 import player.PlayerRanks;
 import tiles.FortuneTeller;
-import tiles.Go;
 import tiles.GoToJail;
 import tiles.Jail;
 import tiles.Property;

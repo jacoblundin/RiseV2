@@ -6,7 +6,7 @@ import javax.swing.ImageIcon;
 
 import board.ColorIconMap;
 import colorsAndIcons.StringColorMap;
-import eastSidePanels.EastSidePanel;
+import GUI.EastGUI.EastSidePanel;
 
 /**
  * A class that holds all active players 

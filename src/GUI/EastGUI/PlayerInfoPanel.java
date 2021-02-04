@@ -1,4 +1,4 @@
-package eastSidePanels;
+package GUI.EastGUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,10 +7,9 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
+import GUI.EastGUI.Property.PropertyWindow;
 import player.PlayerList;
 
 /**

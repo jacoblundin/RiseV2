@@ -1,4 +1,4 @@
-package eastSidePanels;
+package GUI.EastGUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
