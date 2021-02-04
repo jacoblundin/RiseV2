@@ -19,7 +19,7 @@ import javax.swing.border.MatteBorder;
 import board.Board;
 import dice.Dice;
 import GUI.EastGUI.EastSidePanel;
-import GUI.WestGUI.WestSidePanel
+import GUI.WestGUI.WestSidePanel;
 import menu.Menu;
 import player.PlayerList;
 

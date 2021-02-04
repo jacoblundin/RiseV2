@@ -7,16 +7,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import GUI.WestGUI.WestSidePanel;
 import player.Player;
 import player.PlayerList;
 import tiles.Tile;
 import tileCollection.TileCollection;
 import tiles.TileInfo;
-import westSidePanel.WestSidePanel;
+
 
 
 
@@ -108,7 +108,7 @@ public class Board extends JPanel {
 	 * @param playerList, list of players
 	 * @param wp, WestSidePanel
 	 */
-	public Board(PlayerList playerList,WestSidePanel wp) {
+	public Board(PlayerList playerList, WestSidePanel wp) {
 		initializeAllPanels();	
 		this.playerList = playerList;  
 		

@@ -49,7 +49,7 @@ public class StartingScreen extends JFrame {
 			new ImageIcon("images/fancyRoll.jpg").getImage().getScaledInstance(900, 860, Image.SCALE_SMOOTH));
 
 	private Font fontRadioButtons = new Font("Gabriola", Font.PLAIN, 24);
-	private Font fontHeader = new Font("Gabriola", Font.BOLD, 92); 
+	private Font fontHeader = new Font("Gabriola", Font.BOLD, 92);
 	private Font fontLabel = new Font("Gabriola", Font.BOLD, 42);
 	private Font fontLabelPlayer = new Font("Gabriola", Font.BOLD, 30);
 
@@ -105,7 +105,7 @@ public class StartingScreen extends JFrame {
 
 	}
 
-	
+
 	/**
 	 * Method to initilize the GUI.
 	 */
@@ -220,7 +220,7 @@ public class StartingScreen extends JFrame {
 			add(btnRadio);
 		}
 	}
-	
+
 	/**
 	 * Creates all players, textfields, labels and color choice boxes
 	 */
@@ -287,32 +287,32 @@ public class StartingScreen extends JFrame {
 
 					switch(amountOfPlayers) {
 
-					case 2:
-						if(playerColors[0].getSelectedItem().equals(playerColors[1].getSelectedItem())) {
-							JOptionPane.showMessageDialog(null, "Two players are not allowed to have the same color");
-						} else {
-							startUpGame();
-						}
-						break;
+						case 2:
+							if(playerColors[0].getSelectedItem().equals(playerColors[1].getSelectedItem())) {
+								JOptionPane.showMessageDialog(null, "Two players are not allowed to have the same color");
+							} else {
+								startUpGame();
+							}
+							break;
 
-					case 3:
-						if(playerColors[0].getSelectedItem().equals(playerColors[1].getSelectedItem()) 
-								|| playerColors[2].getSelectedItem().equals(playerColors[0].getSelectedItem())) {
-							JOptionPane.showMessageDialog(null, "Two or more players are not allowed to have the same color");
-						} else {
-							startUpGame();
-						}
-						break;
+						case 3:
+							if(playerColors[0].getSelectedItem().equals(playerColors[1].getSelectedItem())
+									|| playerColors[2].getSelectedItem().equals(playerColors[0].getSelectedItem())) {
+								JOptionPane.showMessageDialog(null, "Two or more players are not allowed to have the same color");
+							} else {
+								startUpGame();
+							}
+							break;
 
-					case 4:
-						if(playerColors[0].getSelectedItem().equals(playerColors[1].getSelectedItem()) 
-								|| playerColors[2].getSelectedItem().equals(playerColors[3].getSelectedItem())
-								|| playerColors[0].getSelectedItem().equals(playerColors[3].getSelectedItem())) {
-							JOptionPane.showMessageDialog(null, "Two or more players are not allowed to have the same color");
-						} else {
-							startUpGame();
-						}
-						break;
+						case 4:
+							if(playerColors[0].getSelectedItem().equals(playerColors[1].getSelectedItem())
+									|| playerColors[2].getSelectedItem().equals(playerColors[3].getSelectedItem())
+									|| playerColors[0].getSelectedItem().equals(playerColors[3].getSelectedItem())) {
+								JOptionPane.showMessageDialog(null, "Two or more players are not allowed to have the same color");
+							} else {
+								startUpGame();
+							}
+							break;
 					}
 				}
 			}
@@ -328,7 +328,7 @@ public class StartingScreen extends JFrame {
 			dispose();
 			Introduction intro = new Introduction();
 		}
-		
+
 		/**
 		 * Creates the right amount of players.
 		 */
@@ -343,7 +343,7 @@ public class StartingScreen extends JFrame {
 			}
 
 		}
-		
+
 		/**
 		 * Whenever player chooses to reset the start screen
 		 * @param amountOfPlayers, how many players to draw

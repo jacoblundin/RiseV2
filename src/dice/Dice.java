@@ -13,11 +13,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import GUI.WestGUI.WestSidePanel;
 import board.Board;
 import GUI.EastGUI.EastSidePanel;
 import events.ManageEvents;
 import player.PlayerList;
-import westSidePanel.WestSidePanel;
+
 
 /**
  * @author Muhammad Abdulkhuder, Aevan Dino, Sebastian Viro, Seth Oberg
@@ -48,7 +49,7 @@ public class Dice extends JPanel implements ActionListener {
 	private int diceWidth = (screenSize.width) / 20;
 	private int diceHeight = (screenSize.height) / 14;
 	private int roll;
-	
+
 	/**
 	 * @param playerList method used for updating the list of players 
 	 */

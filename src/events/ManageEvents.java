@@ -8,6 +8,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.JOptionPane;
 
+import GUI.WestGUI.WestSidePanel;
 import board.Board;
 import dice.Dice;
 import GUI.EastGUI.EastSidePanel;
@@ -27,7 +28,6 @@ import tiles.Tavern;
 import tiles.Tax;
 import tiles.Tile;
 import tiles.Work;
-import westSidePanel.WestSidePanel;
 
 /**
  * The class handles all the events that occur when a player lands on a tile.
