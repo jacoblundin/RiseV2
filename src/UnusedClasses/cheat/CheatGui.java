@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import dice.Dice;
+import Controller.Dice;
 
 /**
  * @author Sebastian Viro, Muhammad Abdulkhuder

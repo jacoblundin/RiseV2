@@ -16,7 +16,7 @@ public class WinPanel extends JFrame {
 	private JLabel lblBackground = new JLabel("", imgBackground, JLabel.CENTER);
 
 	/**
-	 * Draws the GUI
+	 * Draws the View.GUI
 	 */
 	public WinPanel() {
 		createFrame();
