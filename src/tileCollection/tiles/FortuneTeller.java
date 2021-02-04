@@ -1,7 +1,6 @@
-package tiles;
+package tileCollection.tiles;
 
 import java.awt.Color;
-import java.util.Random;
 
 import javax.swing.ImageIcon;
 

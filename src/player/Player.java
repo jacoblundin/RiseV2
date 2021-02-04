@@ -6,10 +6,9 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import messageGui.WinGui;
-import tiles.Property;
-import tiles.Tavern;
-import tiles.Tile;
+import tileCollection.tiles.Property;
+import tileCollection.tiles.Tavern;
+import tileCollection.tiles.Tile;
 
 /**
  * Player class deals with everything that has to do with a player.

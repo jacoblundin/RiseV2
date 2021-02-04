@@ -4,20 +4,20 @@ import java.awt.Color;
 
 import javax.swing.ImageIcon;
 
-import tiles.FortuneTeller;
-import tiles.Go;
-import tiles.GoToJail;
-import tiles.Jail;
-import tiles.Property;
-import tiles.SundayChurch;
-import tiles.Tavern;
-import tiles.Tax;
-import tiles.Tile;
-import tiles.Work;
+import tileCollection.tiles.FortuneTeller;
+import tileCollection.tiles.Go;
+import tileCollection.tiles.GoToJail;
+import tileCollection.tiles.Jail;
+import tileCollection.tiles.Property;
+import tileCollection.tiles.SundayChurch;
+import tileCollection.tiles.Tavern;
+import tileCollection.tiles.Tax;
+import tileCollection.tiles.Tile;
+import tileCollection.tiles.Work;
 
 
 /** 
- * Informtion about each tiles. 
+ * Informtion about each tileCollection.tiles.
  * Price, Title, 
  * @author Rohan, Sebastian, Muhammad Abdulkhuder
  */

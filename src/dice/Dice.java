@@ -68,7 +68,7 @@ public class Dice extends JPanel implements ActionListener {
 	/**
 	 * @param board The board object 
 	 * @param playerList a list containing all the players in the game
-	 * @param westSidePanel panel containing all the information about the tiles and the history of all the events
+	 * @param westSidePanel panel containing all the information about the tileCollection.tiles and the history of all the events
 	 * @param eastSidePnl panel containing all the information about the players and their properties 
 	 */
 	public Dice(Board board, PlayerList playerList, WestSidePanel westSidePanel, EastSidePanel eastSidePnl) {

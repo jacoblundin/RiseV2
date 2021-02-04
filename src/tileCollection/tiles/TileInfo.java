@@ -1,11 +1,7 @@
-package tiles;
-
-import java.awt.Color;
-
-import events.ManageEvents;
+package tileCollection.tiles;
 
 /**
- * Information about each tiles.
+ * Information about each tileCollection.tiles.
  * @author Rohan Samandari
  *
  */

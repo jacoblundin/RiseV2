@@ -13,9 +13,9 @@ import javax.swing.JPanel;
 import GUI.WestGUI.WestSidePanel;
 import player.Player;
 import player.PlayerList;
-import tiles.Tile;
+import tileCollection.tiles.Tile;
 import tileCollection.TileCollection;
-import tiles.TileInfo;
+import tileCollection.tiles.TileInfo;
 
 
 
@@ -319,7 +319,7 @@ public class Board extends JPanel {
 	 */
 	public void initializeGUI() {
 		addEmptyGridPanels();
-		paintNewBoard(guiTiles); //Requires a array with all 40 tiles to be sent to paintNewBoard.
+		paintNewBoard(guiTiles); //Requires a array with all 40 tileCollection.tiles to be sent to paintNewBoard.
 		
 	}
 	
@@ -395,7 +395,7 @@ public class Board extends JPanel {
 	}
 	 
 	/**
-	 * Used to initilize all the tiles.
+	 * Used to initilize all the tileCollection.tiles.
 	 * @param spaces, receives a array with all 40 tile objects.
 	 */
 	public void paintNewBoard(GUITile[] spaces) {
@@ -406,7 +406,7 @@ public class Board extends JPanel {
 	}
 	
 	/**
-	 * Listener class for interactive tiles 
+	 * Listener class for interactive tileCollection.tiles
 	 */
 	public class Listener implements MouseListener {
 
@@ -417,7 +417,7 @@ public class Board extends JPanel {
 
 		}
 		/**
-		 * Method for when hovering over tiles.
+		 * Method for when hovering over tileCollection.tiles.
 		 */
 		public void mouseEntered(MouseEvent e) {
 			for (int i=0; i<panelarray.length; i++) {

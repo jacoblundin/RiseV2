@@ -1,10 +1,8 @@
-package tiles;
+package tileCollection.tiles;
 
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
-
-import player.Player;
 
 /**
  * Simple Go tile class. 

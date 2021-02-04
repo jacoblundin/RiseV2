@@ -1,11 +1,11 @@
-package tiles;
+package tileCollection.tiles;
 
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
 /**
- * All tiles will implement this interface. Methods listed are
- * common methods for all types of tiles.
+ * All tileCollection.tiles will implement this interface. Methods listed are
+ * common methods for all types of tileCollection.tiles.
  * @author AevanDino, SebastianViro
  */
 public interface Tile {

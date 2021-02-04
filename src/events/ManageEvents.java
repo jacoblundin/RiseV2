@@ -19,15 +19,15 @@ import messageGui.WinGui;
 import player.Player;
 import player.PlayerList;
 import player.PlayerRanks;
-import tiles.FortuneTeller;
-import tiles.GoToJail;
-import tiles.Jail;
-import tiles.Property;
-import tiles.SundayChurch;
-import tiles.Tavern;
-import tiles.Tax;
-import tiles.Tile;
-import tiles.Work;
+import tileCollection.tiles.FortuneTeller;
+import tileCollection.tiles.GoToJail;
+import tileCollection.tiles.Jail;
+import tileCollection.tiles.Property;
+import tileCollection.tiles.SundayChurch;
+import tileCollection.tiles.Tavern;
+import tileCollection.tiles.Tax;
+import tileCollection.tiles.Tile;
+import tileCollection.tiles.Work;
 
 /**
  * The class handles all the events that occur when a player lands on a tile.

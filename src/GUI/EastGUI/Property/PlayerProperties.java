@@ -22,7 +22,7 @@ import javax.swing.border.MatteBorder;
 
 import player.Player;
 import player.PlayerList;
-import tiles.Property;
+import tileCollection.tiles.Property;
 
 /**
  * @author Muhammad Abdulkhuder Aevan Dino sebastian Viro.

@@ -1,10 +1,9 @@
-package tiles;
+package tileCollection.tiles;
 
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
 
-import dice.Dice;
 import player.Player;
 
 /**
