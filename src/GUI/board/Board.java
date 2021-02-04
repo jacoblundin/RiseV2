@@ -1,4 +1,4 @@
-package board;
+package GUI.board;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -333,7 +333,7 @@ public class Board extends JPanel {
 	
 	
 	/**
-	 * Tile objects are created with an int depending on their position on the board.
+	 * Tile objects are created with an int depending on their position on the GUI.board.
 	 */
 	public void addEmptyGridPanels() {
 		for (int i = 0; i < guiTiles.length; i++) {

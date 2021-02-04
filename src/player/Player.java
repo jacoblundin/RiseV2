@@ -40,7 +40,7 @@ public class Player {
 
 	/**
 	 * Constructor for adding a new player, new players are created by the
-	 * playerList class and are automatically set at index 0 on the board with the
+	 * playerList class and are automatically set at index 0 on the GUI.board with the
 	 * counter variable set to 0
 	 * 
 	 * @param inPlayerName chosen Name
@@ -157,7 +157,7 @@ public class Player {
 	}
 
 	/**
-	 * Get the position a player has on the board from 0-39
+	 * Get the position a player has on the GUI.board from 0-39
 	 * 
 	 * @return counter
 	 */
@@ -166,7 +166,7 @@ public class Player {
 	}
 
 	/**
-	 * Move player to a specific index on the board
+	 * Move player to a specific index on the GUI.board
 	 * 
 	 * @param newPosition
 	 */

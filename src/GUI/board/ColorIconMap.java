@@ -1,8 +1,7 @@
-package board;
+package GUI.board;
 
 import java.util.HashMap;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 /**
  * @author Seth Oberg 

@@ -1,4 +1,4 @@
-package menu;
+package GUI.WestGUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -6,20 +6,19 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import board.Rules;
-import combinedPanels.GamePanels;
+import GUI.board.Rules;
+import GUI.GamePanels;
 import startMenu.BackgroundMusic;
 import startMenu.StartingScreen;
 
 /**
- * This class displays the game board as well as what the players are called and
+ * This class displays the game GUI.board as well as what the players are called and
  * how much they own.
  * 
  * @autho Muhammad Hasan, Rohan Samandari

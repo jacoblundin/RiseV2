@@ -9,13 +9,13 @@ import javax.sound.sampled.Clip;
 import javax.swing.JOptionPane;
 
 import GUI.WestGUI.WestSidePanel;
-import board.Board;
+import GUI.board.Board;
 import dice.Dice;
 import GUI.EastGUI.EastSidePanel;
-import messageGui.DeathGUI;
-import messageGui.FortuneTellerGUI;
-import messageGui.SecretGui;
-import messageGui.WinGui;
+import GUI.popupMessages.DeathGUI;
+import GUI.popupMessages.FortuneTellerGUI;
+import GUI.SecretGui;
+import GUI.popupMessages.WinGui;
 import player.Player;
 import player.PlayerList;
 import player.PlayerRanks;

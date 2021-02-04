@@ -20,11 +20,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import board.Board;
-import board.ColorIconMap;
-import combinedPanels.GamePanels;
-import dice.ShowPlayersTurn;
-import menu.Menu;
+import GUI.GamePanels;
+import GUI.WestGUI.Menu;
 import player.PlayerList;
 
 /**

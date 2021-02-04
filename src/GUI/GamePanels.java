@@ -1,4 +1,4 @@
-package combinedPanels;
+package GUI;
 
 import java.awt.Color;
 
@@ -16,11 +16,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
-import board.Board;
+import GUI.board.Board;
 import dice.Dice;
 import GUI.EastGUI.EastSidePanel;
 import GUI.WestGUI.WestSidePanel;
-import menu.Menu;
+import GUI.WestGUI.Menu;
 import player.PlayerList;
 
 /**

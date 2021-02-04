@@ -13,8 +13,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import GUI.ShowPlayersTurn;
 import GUI.WestGUI.WestSidePanel;
-import board.Board;
+import GUI.board.Board;
 import GUI.EastGUI.EastSidePanel;
 import events.ManageEvents;
 import player.PlayerList;
@@ -66,7 +67,7 @@ public class Dice extends JPanel implements ActionListener {
 	
 	
 	/**
-	 * @param board The board object 
+	 * @param board The GUI.board object
 	 * @param playerList a list containing all the players in the game
 	 * @param westSidePanel panel containing all the information about the tileCollection.tiles and the history of all the events
 	 * @param eastSidePnl panel containing all the information about the players and their properties 
@@ -122,7 +123,7 @@ public class Dice extends JPanel implements ActionListener {
 		btnEndTurn.addActionListener(this);
 
 		add(btnEndTurn);
-//		add(cheat); //Enable for testing with cheater.
+//		add(UnusedClasses.cheat); //Enable for testing with cheater.
 		btnEndTurn.setEnabled(false);
 	}
 
