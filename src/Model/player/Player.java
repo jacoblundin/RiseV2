@@ -387,7 +387,6 @@ public class Player {
 			setPlayerRank(PlayerRanks.KNIGHT);
 		} else if (getNetWorth() < 2000){
 			setPlayerRank(PlayerRanks.PEASANT);
-			JOptionPane.showMessageDialog(null, "You are now a peasant");
 		}
 
 		if (getNetWorth() >= 4000) {
