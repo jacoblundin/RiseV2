@@ -1,4 +1,4 @@
-package View.EastGUI.Property;
+package View.EastGUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
