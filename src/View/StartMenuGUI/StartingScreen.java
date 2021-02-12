@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import View.BoardGUI.GamePanels;
 import View.WestGUI.Menu;
 import Model.player.PlayerList;
+import soundservice.SoundService;
 
 /**
  * First screen which Model.player sees, here he is able to choose the amount of players and
@@ -34,7 +35,6 @@ public class StartingScreen extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	private BackgroundMusic bgm = new BackgroundMusic();
 	private PlayerList playerList = new PlayerList();
 	private GamePanels mainWindow = new GamePanels();
 
@@ -107,10 +107,7 @@ public class StartingScreen extends JFrame {
 	 */
 	public void initializeGUI() {
 
-		bgm.startMusic();
-
 		createFrame();
-		bgm.startMusic();
 
 		/**
 		 * JPanel for information about players
@@ -189,7 +186,6 @@ public class StartingScreen extends JFrame {
 		lblBackground.add(btnStartGame);
 		lblBackground.add(mute);
 		add(lblBackground);
-		new Menu(bgm);
 	}
 
 	public void createFrame() {
@@ -253,10 +249,10 @@ public class StartingScreen extends JFrame {
 			if (e.getSource() == mute) {
 				if (mute.getText().contains("n")) {
 					mute.setText("Music Off");
-					bgm.pauseMusic();
+					SoundService.instance().pauseBgMusic();
 				} else {
 					mute.setText("Music On");
-					bgm.startMusic();
+					SoundService.instance().playBgMusic();
 				}
 			}
 

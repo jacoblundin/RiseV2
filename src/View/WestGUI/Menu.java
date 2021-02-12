@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 
 import View.BoardGUI.Rules;
 import View.BoardGUI.GamePanels;
-import View.StartMenuGUI.BackgroundMusic;
 import View.StartMenuGUI.StartingScreen;
 
 /**
@@ -24,7 +23,6 @@ import View.StartMenuGUI.StartingScreen;
  * @autho Muhammad Hasan, Rohan Samandari
  */
 public class Menu extends JPanel {
-	private BackgroundMusic music;
 	private JMenu jmMenu = new JMenu("Menu");
 	private JMenuBar jmMenuBar = new JMenuBar();
 	private JMenuItem jmExit = new JMenuItem("Exit");
@@ -53,14 +51,6 @@ public class Menu extends JPanel {
 		
 		add(jmMenuBar, BorderLayout.WEST);
 		setBackground(Color.black);
-	}
-	
-	/**
-	 * Sets music reference
-	 * @param music
-	 */
-	public Menu(BackgroundMusic music) {
-		this.music = music;
 	}
 	
 	/**
