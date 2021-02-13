@@ -16,19 +16,21 @@ public class BackgroundMusic {
 	public BackgroundMusic() {
 		clip = null;
 		musicPausedAt = 0;
+
+		initClip();
 	}
 
 	/**
-	 * Call this method to start the background music
+	 * Initialize clip
+	 * Load audio file and setup clip behavior
 	 */
-	public void startMusic() {
+	private void initClip() {
 		try {
 			File musicPath = new File("music/bgMusic.wav");
 			AudioInputStream ais = AudioSystem.getAudioInputStream(musicPath);
 			clip = AudioSystem.getClip();
 			clip.open(ais);
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
-			clip.start();
 		} catch (Exception e) {
 			System.out.println("===== Exception occurred =====");
 			e.printStackTrace();
@@ -37,7 +39,7 @@ public class BackgroundMusic {
 	}
 
 	/**
-	 * Resume playing of the background music
+	 * Start/Resume playing of the background music
 	 */
 	public void playMusic() {
 		if (clip != null && !clip.isRunning()) {

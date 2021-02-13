@@ -28,7 +28,6 @@ public class SoundService {
 		soundFxThread.start();
 
 		backgroundMusic = new BackgroundMusic();
-		backgroundMusic.startMusic();
 
 	}
 
