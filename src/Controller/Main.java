@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        SoundService.instance(); //Initiate SoundService
+        SoundService.instance().playBgMusic(); //Start the background music
 
         StartingScreen su = new StartingScreen();
         su.initializeGUI();

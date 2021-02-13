@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import View.BoardGUI.Rules;
 import View.BoardGUI.GamePanels;
 import View.StartMenuGUI.StartingScreen;
+import soundservice.SoundService;
 
 /**
  * This class builds and handles the menu bar for the main game window
@@ -59,7 +60,7 @@ public class Menu extends JPanel {
 		});
 
 		menuItemMusic.addActionListener((event) -> {
-			//TODO: toggle background music
+			SoundService.instance().toggleBgMusic();
 		});
 
 		menuItemRules.addActionListener((event) -> {
