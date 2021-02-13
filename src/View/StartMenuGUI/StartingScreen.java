@@ -195,7 +195,7 @@ public class StartingScreen extends JFrame {
 		setVisible(true);
 		setResizable(false);
 		setLocationRelativeTo(null);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	/**
