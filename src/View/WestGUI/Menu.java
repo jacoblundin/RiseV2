@@ -3,13 +3,10 @@ package View.WestGUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import View.BoardGUI.Rules;
@@ -17,18 +14,18 @@ import View.BoardGUI.GamePanels;
 import View.StartMenuGUI.StartingScreen;
 
 /**
- * This class displays the game View.GUI.board as well as what the players are called and
- * how much they own.
- * 
- * @autho Muhammad Hasan, Rohan Samandari
+ * This class builds and handles the menu bar for the main game window
  */
 public class Menu extends JPanel {
-	private JMenu jmMenu = new JMenu("Menu");
-	private JMenuBar jmMenuBar = new JMenuBar();
-	private JMenuItem jmExit = new JMenuItem("Exit");
-	private JMenuItem jmOptions = new JMenuItem("Pause Music");
-	private JMenuItem jmRestart = new JMenuItem("Restart Game");
-	private JMenuItem jmRules = new JMenuItem("Read Rules");
+
+	private JMenu jMenu = new JMenu("Menu");
+	private JMenuBar jMenuBar = new JMenuBar();
+
+	private JMenuItem menuItemMusic = new JMenuItem("Play/Pause Music");
+	private JMenuItem menuItemRules = new JMenuItem("Read Rules");
+	private JMenuItem menuItemRestart = new JMenuItem("Restart Game");
+	private JMenuItem menuItemExit = new JMenuItem("Exit");
+
 	private Rules rules = new Rules();
 	
 	/**
@@ -38,42 +35,44 @@ public class Menu extends JPanel {
 		setOpaque(false);
 		setPreferredSize(new Dimension(400, 40));
 		setLayout(new BorderLayout());
-		jmMenuBar.setPreferredSize(new Dimension(100,5));
-		jmExit.addActionListener(new ButtonListener()); 
-		jmOptions.addActionListener(new ButtonListener()); 
-		jmRules.addActionListener(new ButtonListener());
-		jmRestart.addActionListener(new ButtonListener());
-		jmMenu.add(jmOptions);
-		jmMenu.add(jmRules);
-		jmMenu.add(jmRestart);
-		jmMenu.add(jmExit);
-		jmMenuBar.add(jmMenu);
+		jMenuBar.setPreferredSize(new Dimension(100,5));
+
+		initActionListeners();
+
+		jMenu.add(menuItemMusic);
+		jMenu.add(menuItemRules);
+		jMenu.add(menuItemRestart);
+		jMenu.add(menuItemExit);
+		jMenuBar.add(jMenu);
 		
-		add(jmMenuBar, BorderLayout.WEST);
+		add(jMenuBar, BorderLayout.WEST);
 		setBackground(Color.black);
 	}
-	
-	/**
-	 * Button listener class used to listen for actions
-	 * @author Rohan Samandari
-	 *
-	 */
-	public class ButtonListener implements ActionListener{
 
-		public void actionPerformed(ActionEvent e) {
-			if (e.getSource()==jmOptions) {
-				JOptionPane.showInputDialog("Hello");
-			} else if (e.getSource()==jmRestart) {
-				StartingScreen ss = new StartingScreen();
-				ss.initializeGUI();
-				GamePanels gp = new GamePanels();
-				gp.Dispose();
-			} else if (e.getSource()==jmExit) {
-				System.exit(0);
-			} else if (e.getSource()==jmRules) {
-				rules.showRules();
-			}
-		}
-		
+	/**
+	 * This method initiates all the action listeners of the menu's menu items.
+	 */
+	private void initActionListeners() {
+
+		menuItemExit.addActionListener((event) -> {
+			System.exit(0);
+		});
+
+		menuItemMusic.addActionListener((event) -> {
+			//TODO: toggle background music
+		});
+
+		menuItemRules.addActionListener((event) -> {
+			rules.showRules();
+		});
+
+		menuItemRestart.addActionListener((event) -> {
+			StartingScreen ss = new StartingScreen();
+			ss.initializeGUI();
+			GamePanels gp = new GamePanels();
+			gp.Dispose();
+		});
+
 	}
+
 }
