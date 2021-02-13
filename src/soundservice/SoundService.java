@@ -10,7 +10,7 @@ package soundservice;
 public class SoundService {
 
 	private SoundFxThread soundFxThread;
-	private BackgroundMusicThread backgroundMusicThread;
+	private BackgroundMusic backgroundMusic;
 
 	private static SoundService instance;
 
@@ -27,8 +27,8 @@ public class SoundService {
 		soundFxThread = new SoundFxThread();
 		soundFxThread.start();
 
-		backgroundMusicThread = new BackgroundMusicThread();
-		backgroundMusicThread.start();
+		backgroundMusic = new BackgroundMusic();
+		backgroundMusic.startMusic();
 
 	}
 
@@ -57,16 +57,23 @@ public class SoundService {
 	 * Call this method to start/resume the background music
 	 */
 	public void playBgMusic() {
-		backgroundMusicThread.startMusic();
+		backgroundMusic.playMusic();
 	}
 
 	/**
 	 * Call this method to pause the background music
 	 */
 	public void pauseBgMusic() {
-		backgroundMusicThread.pauseMusic();
+		backgroundMusic.pauseMusic();
 	}
 
+	/**
+	 * Call this method to toggle the playing state of the background music
+	 * If the music is playing it will pause and if it is paused it will resume.
+	 */
+	public void toggleBgMusic() {
+		backgroundMusic.toggleMusic();
+	}
 
 
 }

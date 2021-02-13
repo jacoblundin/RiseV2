@@ -26,6 +26,7 @@ public class SoundServiceTestGUI extends JPanel {
 	private JLabel lblBackgroundMusic = new JLabel("Background Music");
 	private JButton btnStartBgMusic = new JButton("Start");
 	private JButton btnStopBgMusic = new JButton("Stop");
+	private JButton btnToggleBgMusic = new JButton("Toggle");
 
 	public SoundServiceTestGUI() {
 
@@ -51,6 +52,7 @@ public class SoundServiceTestGUI extends JPanel {
 		pnlMain.add(lblBackgroundMusic);
 		pnlMain.add(btnStartBgMusic);
 		pnlMain.add(btnStopBgMusic);
+		pnlMain.add(btnToggleBgMusic);
 
 		add(pnlMain);
 
@@ -74,6 +76,8 @@ public class SoundServiceTestGUI extends JPanel {
 		btnStartBgMusic.addActionListener(e -> { SoundService.instance().playBgMusic(); });
 
 		btnStopBgMusic.addActionListener(e -> { SoundService.instance().pauseBgMusic(); });
+
+		btnToggleBgMusic.addActionListener(e -> { SoundService.instance().toggleBgMusic(); });
 	}
 
 	public static void main(String[] args) {
