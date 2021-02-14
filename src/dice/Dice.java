@@ -35,7 +35,7 @@ public class Dice {
 		int d1Roll = random.nextInt(6) + 1;
 		int d2Roll = random.nextInt(6) + 1;
 
-		int sumRoll = d1Roll == d2Roll ? (d1Roll + d2Roll) : (d1Roll + d2Roll) * 2;
+		int sumRoll = (d1Roll != d2Roll) ? (d1Roll + d2Roll) : (d1Roll + d2Roll) * 2;
 
 		//TODO There is probably a better way to synchronize than 2 callbacks.
 		dicePanel.animateRoll(
