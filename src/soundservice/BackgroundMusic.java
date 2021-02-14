@@ -31,6 +31,7 @@ public class BackgroundMusic {
 			clip = AudioSystem.getClip();
 			clip.open(ais);
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
+			clip.stop();
 		} catch (Exception e) {
 			System.out.println("===== Exception occurred =====");
 			e.printStackTrace();

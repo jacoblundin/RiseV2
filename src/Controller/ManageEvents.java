@@ -36,7 +36,7 @@ import Model.Tiles.Work;
 public class ManageEvents {
 	private PlayerList playerList;
 	private Board board;
-	private Dice dice;
+	private GameFlowPanel gameFlowPanel;
 	private DeathGUI deathGUI;
 	private FortuneTellerGUI msgGUI;
 	private EastSidePanel eastPanel;
@@ -50,11 +50,11 @@ public class ManageEvents {
 	 * @param board
 	 * @param playerList
 	 * @param pnlWest
-	 * @param dice
+	 * @param gameFlowPanel
 	 * @param eastPanel
 	 */
-	public ManageEvents(Board board, PlayerList playerList, WestSidePanel pnlWest, Dice dice, EastSidePanel eastPanel) {
-		this.dice = dice;
+	public ManageEvents(Board board, PlayerList playerList, WestSidePanel pnlWest, GameFlowPanel gameFlowPanel, EastSidePanel eastPanel) {
+		this.gameFlowPanel = gameFlowPanel;
 		this.westPanel = pnlWest;
 		this.board = board;
 		this.playerList = playerList;
@@ -115,7 +115,7 @@ public class ManageEvents {
 
 	/**
 	 * This method is supposed to be called from any class that requires the current
-	 * Model.player to pay any amount, if the user does not have the amount required they
+	 * player to pay any amount, if the user does not have the amount required they
 	 * should be removed from the game
 	 */
 	public void control(Player player, int amount) {
@@ -126,14 +126,14 @@ public class ManageEvents {
 			playerList.eliminatePlayer(player);
 			playerList.updatePlayerList();
 			eastPanel.addPlayerList(playerList.getList());
-			dice.setPlayerList(playerList.getList());
+			gameFlowPanel.setPlayerList(playerList.getList());
 			board.removePlayer(player);
 			deathGUI.addGui();
 		} 
 	}
 
 	/**
-	 * Method called when Model.player lands on a property. Checks if it's availability and if the Model.player has to pay rent or
+	 * Method called when player lands on a property. Checks if it's availability and if the Model.player has to pay rent or
 	 * can purchase the property.
 	 * @param tile
 	 * @param player
@@ -179,7 +179,7 @@ public class ManageEvents {
 	}
 
 	/**
-	 * Method called when the Model.player lands on a work tile.
+	 * Method called when the player lands on a work tile.
 	 * @param tile
 	 * @param player
 	 */
@@ -196,7 +196,7 @@ public class ManageEvents {
 	}
 
 	/**
-	 * Method called when the Model.player lands on a tax tile.
+	 * Method called when the player lands on a tax tile.
 	 * @param tile
 	 * @param player
 	 */
@@ -206,7 +206,7 @@ public class ManageEvents {
 
 		control(player, chargePlayer);
 
-		if (player.isAlive() == true) {
+		if (player.isAlive()) {
 			westPanel.append(player.getName() + " paid 200 GC in tax\n");
 			JOptionPane.showMessageDialog(null, "You paid 200 gold in tax to the Church");
 			player.decreaseBalace(chargePlayer);
@@ -277,12 +277,12 @@ public class ManageEvents {
 		} else if (player.getJailCounter() >= 2) {
 			player.setPlayerIsInJail(false);
 			player.setJailCounter(0);
-			dice.activateRollDice();
+			gameFlowPanel.activateRollDice();
 		}
 	}
 
 	/**
-	 * Method to jail a Model.player.
+	 * Method to jail a player.
 	 * @param tile
 	 * @param player
 	 */
@@ -296,7 +296,7 @@ public class ManageEvents {
 	}
 
 	/**
-	 * Method called if the Model.player lands on sunday church. Pays out all the collected tax then resets the counter.
+	 * Method called if the player lands on sunday church. Pays out all the collected tax then resets the counter.
 	 * @param player
 	 */
 	public void churchEvent(Player player) {
@@ -307,7 +307,7 @@ public class ManageEvents {
 	}
 
 	/**
-	 * Method for a dialog if the Model.player is able to purchase a property.
+	 * Method for a dialog if the player is able to purchase a property.
 	 * @param property in question.
 	 * @param player in question.
 	 */
@@ -330,7 +330,7 @@ public class ManageEvents {
 	}
 
 	/**
-	 * Method for a dialog if the Model.player wants to purchase a tavern.
+	 * Method for a dialog if the player wants to purchase a tavern.
 	 * @param tavern, the to buy.
 	 * @param player, Model.player who landed on the tavern.
 	 */
@@ -350,18 +350,18 @@ public class ManageEvents {
 	}
 
 	/**
-	 * @return roll of the dice.
+	 * @return roll of the gameFlowPanel.
 	 */
 	public int getRoll() {
-		return dice.getRoll();
+		return gameFlowPanel.getRoll();
 	}
 
 	/**
-	 * Sets the roll of the dice.
-	 * @param dice
+	 * Sets the roll of the gameFlowPanel.
+	 * @param roll combined value of the dice roll.
 	 */
-	public void setRoll(Dice dice) {
-		this.roll = dice.getRoll();
+	public void setRoll(int roll) {
+		this.roll = roll;
 	}
 
 	/**
@@ -378,7 +378,7 @@ public class ManageEvents {
 			player.setJailCounter(0);
 			player.setPlayerIsInJail(false);
 			westPanel.append(player.getName() + " paid the bail and\ngot free from jail\n");
-			dice.activateRollDice();
+			gameFlowPanel.activateRollDice();
 		} else {
 			westPanel.append(player.getName() + " did not pay tha bail\n and is still in jail\n");
 		}
@@ -402,7 +402,7 @@ public class ManageEvents {
 	}
 
 	/**
-	 * Method that either withdraws or adds gold coins to a Model.player depending on the type of fortune.
+	 * Method that either withdraws or adds gold coins to a player depending on the type of fortune.
 	 * @param tempCard, instance of FortuneTeller 
 	 * @param player, Model.player who landed on the tile
 	 */
@@ -413,7 +413,7 @@ public class ManageEvents {
 			tempCard.setIsBlessing(false);
 			tempCard.setFortune("CURSE");
 			control(player, pay);
-			if (player.isAlive() == true) {
+			if (player.isAlive()) {
 				westPanel.append(player.getName() + " paid " + pay + " GC\n");
 				player.decreaseBalace(pay);
 				player.decreaseNetWorth(pay);
@@ -431,7 +431,7 @@ public class ManageEvents {
 	}	
 	
 	/**
-	 * This class is an easter egg. That gives the Model.player 5 fortunes.
+	 * This class is an easter egg. That gives the player 5 fortunes.
 	 * @author Sebastian viro ,Muhammad Abdulkhuder
 	 *
 	 */

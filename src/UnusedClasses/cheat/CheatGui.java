@@ -9,28 +9,28 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Controller.Dice;
+import Controller.GameFlowPanel;
 
 /**
+ * This class is used for testing purposes only.
+ * It is a GUI through which you can move a player to specific tiles to test the game.
+ *
  * @author Sebastian Viro, Muhammad Abdulkhuder
- * 
- *         This class is used for testing purposes only.
  */
 public class CheatGui extends JPanel implements ActionListener {
 
 	private JTextField inputTF = new JTextField("");
 	private JButton btnTeleport = new JButton("Teleport");
-	private Dice betterDice;
+	private GameFlowPanel betterDice;
 	private int index;
 
 	/**
-	 * @param betterDice
-	 * 
-	 *                   Calls the method that starts the gui and gets a reference
-	 *                   from dice
+	 * Constructor
+	 *
+	 * @param gameFlowPanel gameFlowPanel reference
 	 */
-	public CheatGui(Dice dice) {
-		this.betterDice = dice;
+	public CheatGui(GameFlowPanel gameFlowPanel) {
+		this.betterDice = gameFlowPanel;
 		startGUI();
 	}
 
@@ -72,7 +72,7 @@ public class CheatGui extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * @param index 
+	 * @param index
 	 */
 	public void setIndex(int index) {
 		this.index = index;

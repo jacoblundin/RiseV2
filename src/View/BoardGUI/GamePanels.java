@@ -16,10 +16,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
+import Controller.GameFlowPanel;
 import View.EastGUI.EastSidePanel;
 import View.WestGUI.Menu;
 import View.WestGUI.WestSidePanel;
-import Controller.Dice;
 import Model.player.PlayerList;
 
 /**
@@ -37,7 +37,7 @@ public class GamePanels extends JPanel {
 	private Board board = new Board(westPanel);
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private PlayerList playerList;
-	private Dice dice = new Dice(board, playerList, westPanel, tPanel);
+	private GameFlowPanel gameFlowPanel = new GameFlowPanel(board, playerList, westPanel, tPanel);
 	private JFrame frame = new JFrame();
 	private JLabel lblPic = new JLabel();
 	private Menu m = new Menu();
@@ -61,8 +61,8 @@ public class GamePanels extends JPanel {
 		add(westPanel);
 		board.setBounds(346, 0, 750, 750);
 		add(board);
-		dice.setBounds(346, 751, 750, 109);
-		add(dice);
+		gameFlowPanel.setBounds(346, 751, 750, 109);
+		add(gameFlowPanel);
 		m.setBounds(0, 0, 50, 18);
 		add(m);
 
@@ -104,7 +104,7 @@ public class GamePanels extends JPanel {
 		board.addPlayers(playerList);
 		board.setPlayers();
 		tPanel.addPlayerList(playerList);
-		dice.addPlayerList(playerList);
+		gameFlowPanel.addPlayerList(playerList);
 
 	}
 
