@@ -7,6 +7,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import UnusedClasses.cheat.CheatGui;
 import View.BoardGUI.ShowPlayersTurn;
 import View.WestGUI.WestSidePanel;
 import View.BoardGUI.Board;
@@ -92,7 +93,7 @@ public class GameFlowPanel extends JPanel {
 
 		add(btnRollDice);
 		add(btnEndTurn);
-//		add(UnusedClasses.cheat); //Enable for testing with cheater.
+		//add(new CheatGui(this));
 		btnEndTurn.setEnabled(false);
 	}
 
@@ -139,7 +140,7 @@ public class GameFlowPanel extends JPanel {
 		 * When a player ends their turn
 		 * If the next player is in jail they will not have the ability to roll the
 		 * dice and will only have the ability to end their turn if they have not paid the bail
-		 * If the Model.player is not in jail they can roll the dice
+		 * If the player is not in jail they can roll the dice
 		 */
 
 		playerList.switchToNextPlayer();
