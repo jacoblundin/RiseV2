@@ -21,7 +21,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 import View.BoardGUI.GamePanels;
-import View.WestGUI.Menu;
 import Model.player.PlayerList;
 import soundservice.SoundService;
 
@@ -56,6 +55,7 @@ public class StartingScreen extends JFrame {
 	private ButtonGroup btnGroup = new ButtonGroup();
 
 	private JLabel lblPlayer = new JLabel("How many players?");
+	private JPanel pnlMain = new JPanel();
 	private JLabel lblBackground = new JLabel("", imgBackground, JLabel.CENTER);
 	private JLabel lblRise = new JLabel("RISE");
 
@@ -110,6 +110,12 @@ public class StartingScreen extends JFrame {
 		createFrame();
 
 		/**
+		 * Label used to create a background
+		 */
+		pnlMain.setBounds(0, 0, 900, 830);
+		pnlMain.setLayout(null);
+
+		/**
 		 * JPanel for information about players
 		 */
 		pnlPlayerInfo.setBounds(0, 0, 900, 830);
@@ -128,7 +134,7 @@ public class StartingScreen extends JFrame {
 		 */
 		lblRise.setFont(fontHeader);
 		lblRise.setBounds(375, 125, 175, 200);
-		lblBackground.add(lblRise);
+		pnlMain.add(lblRise);
 
 		/**
 		 * JLabel reading "How many players?"
@@ -178,14 +184,20 @@ public class StartingScreen extends JFrame {
 		/**
 		 * Adding stuff to background label
 		 */
-		lblBackground.add(lblRise);
-		lblBackground.add(lblPlayer);
-		lblBackground.add(btnConfirm);
-		lblBackground.add(pnlPlayerInfo);
-		lblBackground.add(btnReset);
-		lblBackground.add(btnStartGame);
-		lblBackground.add(mute);
-		add(lblBackground);
+		pnlMain.add(lblRise);
+		pnlMain.add(lblPlayer);
+		pnlMain.add(btnConfirm);
+		pnlMain.add(pnlPlayerInfo);
+		pnlMain.add(btnReset);
+		pnlMain.add(btnStartGame);
+		pnlMain.add(mute);
+		pnlMain.add(lblBackground);
+		add(pnlMain);
+
+		pnlMain.validate();
+		pnlMain.repaint();
+		this.validate();
+		this.repaint();
 	}
 
 	public void createFrame() {
@@ -243,7 +255,7 @@ public class StartingScreen extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 
 			if (e.getSource() == btnReset) {
-				btnPressed(3, false);
+				btnPressed(false);
 			}
 
 			if (e.getSource() == mute) {
@@ -259,15 +271,15 @@ public class StartingScreen extends JFrame {
 			if (e.getSource() == btnConfirm) {
 
 				if (radioButtons[0].isSelected()) {
-					btnPressed(2, true);
 					amountOfPlayers = 2;
+					btnPressed(true);
 				} else if (radioButtons[1].isSelected()) {
-					btnPressed(3, true);
 					amountOfPlayers = 3;
+					btnPressed(true);
 
 				} else if (radioButtons[2].isSelected()) {
-					btnPressed(4, true);
 					amountOfPlayers = 4;
+					btnPressed(true);
 				}
 			}
 
@@ -338,10 +350,9 @@ public class StartingScreen extends JFrame {
 
 		/**
 		 * Whenever Model.player chooses to reset the start screen
-		 * @param amountOfPlayers, how many players to draw
 		 * @param bool, boolean indicating whether or not components should be visible.
 		 */
-		public void btnPressed(int amountOfPlayers, boolean bool) {
+		public void btnPressed(boolean bool) {
 			for (int i = 0; i < amountOfPlayers; i++) {
 				playerLabels[i].setVisible(bool);
 				playerTf[i].setVisible(bool);

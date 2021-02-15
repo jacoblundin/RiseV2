@@ -123,7 +123,7 @@ public class GameFlowPanel extends JPanel {
 		playerList.getActivePlayer().checkPlayerRank();
 		manageEvents.setRoll(this.getRoll());
 
-		movePlayerThread = new Thread(new LoopThread(getRoll()));
+		movePlayerThread = new Thread(new LoopThread(this.getRoll()));
 		movePlayerThread.start();
 
 		goEvent();
@@ -226,18 +226,19 @@ public class GameFlowPanel extends JPanel {
 	 * Moves the player with a thread.
 	 */
 	private class LoopThread implements Runnable {
-		public LoopThread(int index) {
-			setRoll(index);
-		}
+
+		int roll;
+
+		public LoopThread(int roll) { this.roll = roll; }
 
 		public void run() {
 
-			for (int i = 0; i < getRoll(); i++) {
+			for (int i = 0; i < roll; i++) {
 				board.removePlayer(playerList.getActivePlayer());
 				playerList.getActivePlayer().setPosition(1);
 				board.setPlayer(playerList.getActivePlayer());
 
-				if (i == (getRoll() - 1)) {
+				if (i == (roll - 1)) {
 					manageEvents.newEvent(board.getDestinationTile(playerList.getActivePlayer().getPosition()),
 							playerList.getActivePlayer());
 					eastSidePnl.addPlayerList(playerList);
