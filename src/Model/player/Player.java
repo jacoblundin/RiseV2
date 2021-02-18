@@ -2,6 +2,8 @@ package Model.player;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -232,6 +234,7 @@ public class Player {
 	 */
 	public void decreaseBalace(int decrease) {
 		this.balance -= decrease;
+		checkPlayerRank();
 	}
 
 	/**
@@ -239,6 +242,7 @@ public class Player {
 	 */
 	public void increaseBalance(int income) {
 		this.balance += income;
+		checkPlayerRank();
 	}
 
 	/**
@@ -274,7 +278,10 @@ public class Player {
 	 * @param playerRank set the rank of this Model.player
 	 */
 	public void setPlayerRank(PlayerRanks playerRank) {
-		this.playerRank = playerRank;
+		if (this.playerRank != playerRank) {
+			this.playerRank = playerRank;
+			//Trigger rank notification
+		}
 	}
 
 	/**
@@ -384,20 +391,20 @@ public class Player {
 
 	public void checkPlayerRank() {
 
-		if (getNetWorth() >= 2000) {
-			setPlayerRank(PlayerRanks.KNIGHT);
-		} else if (getNetWorth() < 2000){
+		if (this.netWorth <= 2000) {
+			//Peasant
 			setPlayerRank(PlayerRanks.PEASANT);
-		}
-
-		if (getNetWorth() >= 4000) {
-			setPlayerRank(PlayerRanks.LORD);
-		} else if (getNetWorth() >= 2000 && getNetWorth() < 4000){
+		} else if (this.netWorth < 4000) {
+			//Knight
 			setPlayerRank(PlayerRanks.KNIGHT);
-		}
-		if (getNetWorth() >= 7500) {
+		} else if (this.netWorth < 7500) {
+			//Lord
+			setPlayerRank(PlayerRanks.LORD);
+		} else if (this.netWorth >= 7500) {
+			//King
 			setPlayerRank(PlayerRanks.KINGS);
 		}
+
 	}
 
 	/**
