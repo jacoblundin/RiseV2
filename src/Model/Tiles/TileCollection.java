@@ -16,13 +16,17 @@ public class TileCollection {
 	private Tile[] tileArray = new Tile[40];
 
 	public TileCollection() {
+
+		Work workTile = new Work();
+		SundayChurch churchTile = new SundayChurch();
+		Tax taxTile = new Tax(churchTile);
 		
-		tileArray[0] = new Go("GO");
+		tileArray[0] = new Go();
 		tileArray[1] = new Property("Wood Cutter Camp", 60, 2, 30, new Color(58,20,56,255), 50,new ImageIcon("tilePics/Wood.png"));
 		tileArray[2] = new FortuneTeller();
 		tileArray[3] = new Property("Stone Mason Camp", 60, 4, 30, new Color(58,20,56,255),50 ,new ImageIcon("tilePics/stone.png"));
-		tileArray[4] = new Tax();
-		tileArray[5] = new Work();
+		tileArray[4] = taxTile;
+		tileArray[5] = workTile;
 		tileArray[6] = new Property("Fish Stand", 100, 6, 40, new Color(131, 166, 219, 255),50 ,new ImageIcon("tilePics/fish.png"));
 		tileArray[7] = new FortuneTeller();
 		tileArray[8] = new Property("Vegetables Stand", 100, 6, 50, new Color(131, 166, 219, 255), 50,new ImageIcon("tilePics/veggieStall.png"));
@@ -32,7 +36,7 @@ public class TileCollection {
 		tileArray[12] = new Tavern("Western Tavern", 150);
 		tileArray[13] = new Property("Mill", 140, 10, 80, new Color(163,61,125,255), 100,new ImageIcon("tilePics/mill.png"));
 		tileArray[14] = new Property("Smith", 160, 12, 80, new Color(163,61,125,255),100, new ImageIcon("tilePics/smith.png"));
-		tileArray[15] = new Work();
+		tileArray[15] = workTile;
 		tileArray[16] = new Property("Bath House", 180, 14, 100, new Color(191,120,59,255),100, new ImageIcon("tilePics/bath.png"));
 		tileArray[17] = new FortuneTeller();
 		tileArray[18] = new Property("Bakery", 180, 14, 110, new Color(191,120,59,255),100, new ImageIcon("tilePics/bakerStore.png"));
@@ -42,7 +46,7 @@ public class TileCollection {
 		tileArray[22] = new FortuneTeller();
 		tileArray[23] = new Property("Alchemy Store", 220,18 ,140 , new Color(169, 60, 48, 255),150, new ImageIcon("tilePics/alch.png"));
 		tileArray[24] = new Property("Stable", 240, 20, 75, new Color(169, 60, 48, 255), 150,new ImageIcon("tilePics/stable.png"));
-		tileArray[25] = new Work();
+		tileArray[25] = workTile;
 		tileArray[26] = new Property("Cobbler", 260, 22, 160,  new Color(254,231,11, 255),150, new ImageIcon("tilePics/cobbler.png"));
 		tileArray[27] = new Property("General Store", 260, 22 , 170,  new Color(254,231,11, 55),150, new ImageIcon("tilePics/general.png"));
 		tileArray[28] = new Tavern("Northern Tavern", 150);
@@ -52,10 +56,10 @@ public class TileCollection {
 		tileArray[32] = new Property("Tailor", 300, 26, 200, new Color(95,178,77, 255),200, new ImageIcon("tilePics/tailor.png"));
 		tileArray[33] = new FortuneTeller();
 		tileArray[34] = new Property("Weapon Smith", 320, 28, 210, new Color(95,178,77, 255),200 ,new ImageIcon("tilePics/weapon.png"));
-		tileArray[35] = new Work();
+		tileArray[35] = workTile;
 		tileArray[36] = new FortuneTeller();
 		tileArray[37] = new Property("Church", 350, 35, 300, new Color(4,74,159, 255),200, new ImageIcon("tilePics/churchp.png"));
-		tileArray[38] = new Tax(); 
+		tileArray[38] = taxTile;
 		tileArray[39] = new Property("The Castle", 400, 50, 400, new Color(4,74,159, 255),200, new ImageIcon("tilePics/castle.png"));		
 
 	}

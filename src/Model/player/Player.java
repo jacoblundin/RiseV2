@@ -339,7 +339,6 @@ public class Player {
 			increaseBalance(total);
 			this.propertiesOwned.remove(property);
 			property.setOwner(null);
-			property.setPurchaseable(true);
 		}
 
 	}

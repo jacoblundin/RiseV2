@@ -420,6 +420,7 @@ public class Board extends JPanel {
 		 * Method for when hovering over Model.tileCollection.tiles.
 		 */
 		public void mouseEntered(MouseEvent e) {
+			//TODO Refactor this
 			for (int i=0; i<panelarray.length; i++) {
 				if (e.getSource()==panelarray[i]) {
 					if (i == 0 || i == 2 || i == 4 || i == 5 ||i == 7 || 
@@ -429,7 +430,7 @@ public class Board extends JPanel {
 							pnlWest.setTitleText(info.getInfo(i), info.getTitle(i), Color.DARK_GRAY, Color.white);
 					}else if(i==26 || i==27 || i==29) {
 						pnlWest.setTitleText(tileCollection.getTileAtIndex(i).getTileInfo(),
-								tileCollection.getTileAtIndex(i).getTitle(), new Color(254,231,11, 255), Color.black);
+								tileCollection.getTileAtIndex(i).getName(), new Color(254,231,11, 255), Color.black);
 					}
 					else if(i == 12 || i == 28) {
 						pnlWest.setTitleText(tileCollection.getTileAtIndex(i).getTileInfo(), 
@@ -437,7 +438,7 @@ public class Board extends JPanel {
 					}
 					else {						
 						pnlWest.setTitleText(tileCollection.getTileAtIndex(i).getTileInfo(),
-							tileCollection.getTileAtIndex(i).getTitle(), tileCollection.getTileAtIndex(i).getColor(), Color.white );
+							tileCollection.getTileAtIndex(i).getName(), tileCollection.getTileAtIndex(i).getColor(), Color.white );
 					}
 				}
 			}		

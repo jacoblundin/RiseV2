@@ -10,70 +10,29 @@ import Model.player.Player;
  * @author Muhammad abdulkhuder, AevanDino, Sebastian Viro, .
  */
 public class Work implements Tile {
-	private ImageIcon img = new ImageIcon("tilePics/Work.png");
-	private Player player;
+	//Tile variables
+	private String name = "Work";
+	private Color color = Color.DARK_GRAY;
 	private String info;
+	private ImageIcon img = new ImageIcon("tilePics/Work.png");
+
+	//Class variables
+	private Player player;
 	private int roll;
 
-	public Work(Player player) {
-		this.player = player;
-	}
-
-	public Work() {
-
-	}
 
 	public void payPlayer(int nbrOfDots) {
 		setRoll(nbrOfDots);
 		player.increaseBalance(player.getPlayerRank().getSalary(nbrOfDots));
 		player.increaseNetWorth(getPay());
-
 	}
 
 	public int getPay() {
-
 		return player.getPlayerRank().getSalary(getRoll());
-
-	}
-
-	public String getName() {
-		return "Work";
-	}
-
-	public Boolean getPurchaseable() {
-		return null;
-	}
-
-	public Color getColor() {
-		return Color.DARK_GRAY;
-	}
-
-	public String getTileInfo() {
-		info = getName() + "\nPlayer gets to roll the dice, and depending \n"
-				+ "on his or her rank they are rewarded gold coins for their effort. \n"
-				+ "Peasant: 20 times the sum of the roll \n" + "Knight: 25 times the sum of the roll \n"
-				+ "Lord: 30 times the sum of the roll \n" + "Ruler: 40 times the sum of the roll";
-
-		return info;
 	}
 
 	public Player setPlayer(Player player) {
 		return this.player = player;
-	}
-
-	@Override
-	public String getTitle() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Color getTitleColor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public ImageIcon getPicture() {
-		return img;
 	}
 
 	public int getRoll() {
@@ -83,4 +42,33 @@ public class Work implements Tile {
 	public void setRoll(int roll) {
 		this.roll = roll;
 	}
+
+
+	//Tile methods
+
+	@Override
+	public String getName() {
+		return this.name;
+	}
+
+	@Override
+	public Color getColor() {
+		return this.color;
+	}
+
+	@Override
+	public String getTileInfo() {
+		info = getName() + "\nPlayer gets to roll the dice, and depending \n"
+				+ "on his or her rank they are rewarded gold coins for their effort. \n"
+				+ "Peasant: 20 times the sum of the roll \n" + "Knight: 25 times the sum of the roll \n"
+				+ "Lord: 30 times the sum of the roll \n" + "Ruler: 40 times the sum of the roll";
+
+		return info;
+	}
+
+	@Override
+	public ImageIcon getPicture() {
+		return this.img;
+	}
+
 }

@@ -8,32 +8,29 @@ import Model.player.Player;
 
 public class Tavern implements Tile {
 
-	private final static String TAVERN = "Tavern";
-	private String info = "";
-	private boolean purchasable;
-	private Player owner;
-	private Color color;
-	private int price;
+	//Tile variables
 	private String name;
+	private Color color = Color.DARK_GRAY;
+	private String info;
 	private ImageIcon img = new ImageIcon("tilePics/tavern.png");
+
+	//Class variables
+	private Player owner;
+	private int price;
 
 	public Tavern(String namn, int price) {
 		this.name = namn;
 		this.price = price;
-		this.purchasable = true;
 		this.owner = null;
 	}
 
-	public String getName() {
-		return this.name;
+	public void clearTavern() {
+		this.owner = null;
 	}
 
-	public Boolean getPurchaseable() {
-		return this.purchasable;
-	}
-
-	public Color getColor() {
-		return Color.DARK_GRAY;
+	public Boolean getPurchasable() {
+		//If there is no owner the tavern is purchasable
+		return this.owner == null;
 	}
 
 	public void setOwner(Player newOwner) {
@@ -46,6 +43,17 @@ public class Tavern implements Tile {
 
 	public int getPrice() {
 		return price;
+	}
+
+
+	//Tile methods
+
+	public String getName() {
+		return this.name;
+	}
+
+	public Color getColor() {
+		return this.color;
 	}
 
 	public String getTileInfo() {
@@ -63,20 +71,8 @@ public class Tavern implements Tile {
 		return info;
 	}
 
-	public void setPurchaseable(boolean b) {
-		this.purchasable = b;
-	}
-
-	public void clearTavern() {
-		purchasable = true;
-	}
-
-	public String getTitle() {
-		return null;
-	}
-
 	public ImageIcon getPicture() {
-		return img;
+		return this.img;
 	}
 
 }

@@ -146,13 +146,13 @@ public class ManageEvents {
 		Property tempProperty = (Property) tile;
 		int tempInt = 0;
 
-		if (tempProperty.getPurchaseable() == true) {
+		if (tempProperty.getPurchasable()) {
 			if (player.getBalance() < tempProperty.getPrice()) {
 				JOptionPane.showMessageDialog(null, "Not enough funds to purchase this property");
 			} else {
 				propertyDialog(tempProperty, player);
 			}
-		} else if (tempProperty.getPurchaseable() == false) {
+		} else {
 
 			//TODO Is this if statement necessary? The if and else bodies seem to do the same thing
 			if (tempProperty.getLevel() == 0) {
@@ -246,7 +246,7 @@ public class ManageEvents {
 	public void tavernEvent(Tile tile, Player player) {
 		Tavern tempTavernObj = (Tavern) tile;
 
-		if (tempTavernObj.getPurchaseable()) {
+		if (tempTavernObj.getPurchasable()) {
 			if (player.getBalance() < tempTavernObj.getPrice()) {
 				JOptionPane.showMessageDialog(null, "Not enough funds to purchase this tavern");
 			} else {
@@ -342,7 +342,6 @@ public class ManageEvents {
 		if (yesOrNo == 0 && (property.getPrice() <= player.getBalance())) {
 			property.setOwner(player);
 			player.addNewProperty(property);
-			property.setPurchaseable(false);
 			player.decreaseBalace(property.getPrice());
 			gameHistoryLog.logPropertyBuyEvent(player, property);
 		} else {
@@ -363,7 +362,6 @@ public class ManageEvents {
 		if (yesOrNo == 0 && (tavern.getPrice() <= player.getBalance())) {
 			tavern.setOwner(player);
 			player.addNewTavern(tavern);
-			tavern.setPurchaseable(false);
 			player.decreaseBalace(tavern.getPrice());
 			//TODO Log tavern purchase
 			//gameHistoryLog.logPropertyBuyEvent(player, tavern);

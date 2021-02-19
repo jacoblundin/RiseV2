@@ -1,5 +1,7 @@
 package Model.Tiles;
 
+import Model.player.Player;
+
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
@@ -10,19 +12,34 @@ import javax.swing.ImageIcon;
  * @author AevanDino, SebastianViro
  */
 public class SundayChurch implements Tile {
-	private ImageIcon img = new ImageIcon("tilePics/church.png");
-	String info;
 
-	public String getName() {
-		return "Sunday Church";
+	//Tile variables
+	private String name = "Sunday Church";
+	private Color color = Color.DARK_GRAY;
+	private String info;
+	private ImageIcon img = new ImageIcon("tilePics/church.png");
+
+	//Class variables
+	private int collectedGold = 0;
+
+	public void payTax(int amount) {
+		collectedGold += amount;
 	}
 
-	public Boolean getPurchaseable() {
-		return Boolean.FALSE;
+	public void onVisit(Player player) {
+		player.increaseBalance(collectedGold);
+		collectedGold = 0;
+	}
+
+
+	//Tile methods
+
+	public String getName() {
+		return this.name;
 	}
 
 	public Color getColor() {
-		return Color.DARK_GRAY;
+		return this.color;
 	}
 
 	public String getTileInfo() {
@@ -30,12 +47,8 @@ public class SundayChurch implements Tile {
 		return info;
 	}
 
-	public String getTitle() {
-		return null;
-	}
-
 	public ImageIcon getPicture() {
-		return img;
+		return this.img;
 	}
 
 }

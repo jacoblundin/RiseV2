@@ -9,49 +9,28 @@ import javax.swing.ImageIcon;
  */
 public class GoToJail implements Tile {
 
+	//Tile variables
+	private String name = "Go to Jail";
+	private Color color = Color.DARK_GRAY;
+	private String info;
 	private ImageIcon img = new ImageIcon("tilePics/gojail.png");
 
-	/**
-	 * returns null
-	 */
+	@Override
 	public String getName() {
-		return "Go to Jail";
+		return this.name;
 	}
 
-	/**
-	 * returns null
-	 */
-	public Boolean getPurchaseable() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * returns null
-	 */
+	@Override
 	public Color getColor() {
-		return Color.DARK_GRAY;
+		return this.color;
 	}
 
-	/**
-	 * returns null
-	 */
+	@Override
 	public String getTileInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		return null; //TODO: this should not be null
 	}
 
-	/**
-	 * returns null
-	 */
-	public String getTitle() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * returns image
-	 */
+	@Override
 	public ImageIcon getPicture() {
 		return img;
 	}

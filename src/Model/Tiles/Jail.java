@@ -10,32 +10,24 @@ import javax.swing.ImageIcon;
  * @author Sebastian Viro, Aevan Dino
  */
 public class Jail implements Tile {
+
+	//Tile variables
+	private String name = "Go to Jail";
+	private Color color = Color.DARK_GRAY;
+	private String info;
 	private ImageIcon img = new ImageIcon("tilePics/jail.png");
 
-	/**
-	 * Returns name of tile
-	 */
+	@Override
 	public String getName() {
-		return "Jail";
+		return this.name;
 	}
 
-	/**
-	 * returns false, because it is not purchasable
-	 */
-	public Boolean getPurchaseable() {
-		return Boolean.FALSE;
-	}
-
-	/**
-	 * Returns Color.White
-	 */
+	@Override
 	public Color getColor() {
-		return Color.DARK_GRAY;
+		return this.color;
 	}
 
-	/**
-	 * returns information about tile
-	 */
+	@Override
 	public String getTileInfo() {
 		return "Jail + \nPlayer can choose to spend three rounds here"
 				+ "\nor pay the bail.\nFirst day costs 50 gold coins"
@@ -43,16 +35,7 @@ public class Jail implements Tile {
 				+ "\nThird time Model.player has to pay 200 and is set free";
 	}
 
-	/**
-	 * returns null
-	 */
-	public String getTitle() {
-		return null;
-	}
-
-	/**
-	 * returns image
-	 */
+	@Override
 	public ImageIcon getPicture() {
 		return img;
 	}

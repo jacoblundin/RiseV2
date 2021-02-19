@@ -8,41 +8,37 @@ import Model.player.Player;
 
 public class Tax implements Tile {
 
-	private final static String NAME = "Church Tax";
-	private final static Boolean PURCHASABLE = false;
-	private final static Color COLOR = Color.DARK_GRAY;
-	private String info, tileName;
-	private static Player player;
-	private int taxToPay = 200;
+	//Tile variables
+	private String name = "Church Tax";
+	private Color color = Color.DARK_GRAY;
+	private String info;
 	private ImageIcon img = new ImageIcon("tilePics/tax.png");
 
-	public Tax() {
+	//Class variables
+	private Player player;
+	private SundayChurch church;
+	private int baseTax = 200;
 
-	}
-
-	public void onLanding() {
-		taxToPay = player.getPlayerRank().calculateTax();
+	public Tax(SundayChurch church) {
+		this.church = church;
 	}
 
 	public int getTax() {
-		return this.taxToPay;
+		return this.baseTax;
 	}
 
+	//Tile methods
 	public String getName() {
-		return this.NAME;
-	}
-
-	public Boolean getPurchaseable() {
-		return this.PURCHASABLE;
+		return this.name;
 	}
 
 	public Color getColor() {
-		return this.COLOR;
+		return this.color;
 	}
 
 	public String getTileInfo() {
 		info = getName() + "\n"
-				+ "Owner: \t \t" + "The king" + "\n"
+				+ "Owner: \t \t" + "The Church" + "\n"
 				+ "Peasant tax: \t" + "100 gold coins" + "\n"
 				+ "Knight tax: \t" + "150 gold coins" + "\n"
 				+ "Lord tax: \t" + "200 gold coins" + "\n"
@@ -51,12 +47,7 @@ public class Tax implements Tile {
 		return info;
 	}
 
-	@Override
-	public String getTitle() {
-		return null;
-	}
-
 	public ImageIcon getPicture() {
-		return img;
+		return this.img;
 	}
 }

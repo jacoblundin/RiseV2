@@ -13,40 +13,20 @@ import javax.swing.ImageIcon;
 public class FortuneTeller implements Tile {
 
 	private Color color = Color.DARK_GRAY;
-	private static final String NAME = "Fortune Teller";
+	private String name = "Fortune Teller";
+	private ImageIcon img = new ImageIcon("tilePics/fortune.png");
 
-	private static final Boolean PURCHASEABLE = false;
 	private String fortune = "";
 	private Boolean isBlessing = false;
 
-	private String description = "";
 	private int amount;
 
-	private ImageIcon img = new ImageIcon("tilePics/fortune.png");
 
 	/**
 	 * Empty constructor
 	 */
 	public FortuneTeller() {
 
-	}
-
-	/**
-	 * Constructor to create a fortune.
-	 *
-	 * @param isBlessing,  indicates whether or not its a blessing
-	 * @param description, string to display on the card
-	 * @param amount,      amount to pay or be paid.
-	 */
-	public FortuneTeller(Boolean isBlessing, String description, int amount) {
-
-		if (isBlessing) {
-			setFortune("BLESSING");
-		} else {
-			setFortune("CURSE");
-		}
-		setDescription(description);
-		setAmount(amount);
 	}
 
 	/**
@@ -78,20 +58,6 @@ public class FortuneTeller implements Tile {
 	}
 
 	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * @param description the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	/**
 	 * @return the amount
 	 */
 	public int getAmount() {
@@ -105,47 +71,28 @@ public class FortuneTeller implements Tile {
 		this.amount = amount;
 	}
 
-	/**
-	 * Returns name
-	 */
+
+	//Tile methods
+
+	@Override
 	public String getName() {
-		return this.NAME;
+		return this.name;
 	}
 
-	/**
-	 * REturns whether or not its purchasable
-	 */
-	public Boolean getPurchaseable() {
-		return PURCHASEABLE;
-	}
-
-	/**
-	 * returns color
-	 */
+	@Override
 	public Color getColor() {
 		return this.color;
 	}
 
-	/**
-	 * Returns tile info
-	 */
+	@Override
 	public String getTileInfo() {
 		return "There are two types of cards, blessings and curses." +
 				"\nBlessing affect the Model.player in a positive way." +
 				"\nCurses affect the Model.player in a negative way.";
 	}
 
-	/**
-	 * returns title
-	 */
-	public String getTitle() {
-		return null;
-	}
-
-	/**
-	 * returns image icon of tile
-	 */
+	@Override
 	public ImageIcon getPicture() {
-		return img;
+		return this.img;
 	}
 }

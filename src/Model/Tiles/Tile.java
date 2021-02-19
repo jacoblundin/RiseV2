@@ -18,28 +18,18 @@ public interface Tile {
 	public String getName();
 
 	/**
-	 * @return if tile can be bought.
-	 */
-	public Boolean getPurchaseable();
-
-	/**
 	 * @return color, returns a color-object representing color of tile.
 	 */
 	public Color getColor();
 
 	/**
-	 * @return info, information about tile. (Price, owner, stuff).
-	 */
-	public String getTileInfo();
-
-	/**
-	 * @return the tile title.
-	 */
-	public String getTitle();
-
-	/**
 	 * @return picture of the tile.
 	 */
 	public ImageIcon getPicture();
+
+	/**
+	 * @return info, information about tile. (Price, owner, stuff).
+	 */
+	public String getTileInfo();
 
 }

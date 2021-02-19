@@ -13,12 +13,14 @@ import Model.player.Player;
  */
 public class Property implements Tile {
 
-	private String name, info;
-	private int price, rentPerLevel, defaultRent, levels;
-	private Boolean purchaseable;
+	//Tile variables
+	private String name;
 	private Color color;
-	private Player player ;
+	private String info;
 	private ImageIcon img;
+
+	private int price, rentPerLevel, defaultRent, levels;
+	private Player owner;
 	private int levelPrice;
 
 	/**
@@ -32,84 +34,33 @@ public class Property implements Tile {
 	 * @param img, image of tile
 	 */
 	public Property(String name, int price, int defaultRent, int rentPerLevel, Color color,int levelPrice , ImageIcon img) {
-		setName(name);
-		setPrice(price);
+		this.name = name;
+		this.color = color;
+		this.img=img;
+
+		this.price = price;
 		setDefaultRent(defaultRent);
 		setRentPerLevel(rentPerLevel);
-		setColor(color);
-		purchaseable=true;
-		player = null;
-		this.img=img;
+		this.owner = null;
 		this.levelPrice= levelPrice;
 	}
-	
-	/**
-	 * Returns information about tile
-	 */
-	public String getTileInfo() {
-		String ownerName = "";
-		if(player == null) {
-			ownerName = "No Owner";
-		} else {
-			ownerName = player.getName();
-		}
-		info =    "\nOwner: \t         " + ownerName + "\n"
-				+ "Price:\t\t" + price + "\n"
-				+ "Default rent:\t" + defaultRent + "\n"
-				+ "Rent per level:\t" 	+ rentPerLevel + "\n"
-				+ "Total rent:\t" 		+ getTotalRent();
-		return info;
-	}
-	
-	
-	public String getTitle() {
-		return name;
-	}
-	public Color getTitleColor() {
-		return color;
-	}
 
-	public void setName(String tileName) {
-		this.name = tileName;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setPurchaseable(Boolean canBeBought) {
-		this.purchaseable=canBeBought;
-	}
-
-	public Boolean getPurchaseable() {
-		return this.purchaseable;
-	}
-
-	public void setColor(Color colorOfTile) {
-		this.color=colorOfTile;
-	}
-
-	public Color getColor() {
-		return this.color;
-	} 
-
-	public void setPrice(int price) {
-		this.price=price;
+	public Boolean getPurchasable() {
+		//If there is no owner the property is purchasable
+		return this.owner == null;
 	}
 
 	public int getPrice() {
 		return this.price;
 	}
-
 	
 	public void setOwner(Player newOwner) {
-		this.player = newOwner;
+		this.owner = newOwner;
 	}
 	
 	public Player getOwner() {
-		return player;
+		return owner;
 	}
-	
 	
 	public void setDefaultRent(int defRent) {
 		this.defaultRent = defRent;
@@ -146,15 +97,15 @@ public class Property implements Tile {
 	public void increaseLevel() {
 		
 		int res = JOptionPane.showConfirmDialog(null, "Do you want to upgrade " + getName() + " for: " + getLevelPrice());
-		if (res == 0 && player.getPlayerRank().nbrOfLevels() > levels && player.getBalance()>= getLevelPrice()) {
+		if (res == 0 && owner.getPlayerRank().nbrOfLevels() > levels && owner.getBalance()>= getLevelPrice()) {
 			this.levels += 1;
 
-			player.decreaseBalace(getLevelPrice());
+			owner.decreaseBalace(getLevelPrice());
 
-		} else if (res == 0 && player.getPlayerRank().nbrOfLevels() == levels){
+		} else if (res == 0 && owner.getPlayerRank().nbrOfLevels() == levels){
 			JOptionPane.showMessageDialog(null, "You cannot upgrade the property futher at your current Model.player rank");
 
-		} else if (player.getBalance() < getLevelPrice()){
+		} else if (owner.getBalance() < getLevelPrice()){
 			JOptionPane.showMessageDialog(null, "You do not have enough gold");
 			}
 		}
@@ -163,7 +114,7 @@ public class Property implements Tile {
 		int res = JOptionPane.showConfirmDialog(null, "Do you really want to downgrade " + getName() + " for: " + getLevelPrice());
 		if (levels>0 && res == 0) {	
 			this.levels-=1;
-			player.increaseBalance(getLevelPrice());
+			owner.increaseBalance(getLevelPrice());
 		}
 	}
 		
@@ -171,15 +122,38 @@ public class Property implements Tile {
 		return this.levels;
 	}
 	
-	public void setPurchaseable(boolean b) {
-		this.purchaseable = b;
-	}	
-	
 	public void clearProperty() {
-		purchaseable = true; 
+		owner = null;
 		setLevel(0);
 	}
-	
+
+	@Override
+	public String getName() {
+		return this.name;
+	}
+
+	@Override
+	public Color getColor() {
+		return this.color;
+	}
+
+	@Override
+	public String getTileInfo() {
+		String ownerName = "";
+		if(owner == null) {
+			ownerName = "No Owner";
+		} else {
+			ownerName = owner.getName();
+		}
+		info =    "\nOwner: \t         " + ownerName + "\n"
+				+ "Price:\t\t" + price + "\n"
+				+ "Default rent:\t" + defaultRent + "\n"
+				+ "Rent per level:\t" 	+ rentPerLevel + "\n"
+				+ "Total rent:\t" 		+ getTotalRent();
+		return info;
+	}
+
+	@Override
 	public ImageIcon getPicture(){
 		return this.img;
 	}
