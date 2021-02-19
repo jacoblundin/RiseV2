@@ -5,45 +5,47 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 
 /**
- * Simple Go tile class. 
+ * Simple Go tile class.
+ *
  * @author AevanDino, SebastianViro
  */
 public class Go implements Tile {
 
 	private String info;
 	private String name = "GO";
-	
+
 	private ImageIcon img = new ImageIcon("tilePics/Go.png");
-	
+
 	/**
 	 * Constructor with name
+	 *
 	 * @param str
 	 */
 	public Go(String str) {
 		this.name = str;
 	}
-	
+
 	/**
 	 * returns name of go
 	 */
 	public String getName() {
 		return this.name;
 	}
-	
+
 	/**
 	 * Returns false, because go cant be purchased
 	 */
 	public Boolean getPurchaseable() {
 		return Boolean.FALSE;
 	}
-	
+
 	/**
 	 * Returns color of tile
 	 */
 	public Color getColor() {
-		return Color.WHITE;
+		return Color.DARK_GRAY;
 	}
-	
+
 	/**
 	 * Returns info about tile
 	 */
@@ -51,16 +53,16 @@ public class Go implements Tile {
 		info = name + "\n" + "Every time a Model.player passes by, he or she \nis rewarded 200 gold coins";
 		return info;
 	}
-	
+
 	/**
 	 * returns null
 	 */
 	public String getTitle() {
 		return null;
 	}
-	
+
 	/**
-	 * returns icon 
+	 * returns icon
 	 */
 	public ImageIcon getPicture() {
 		return img;

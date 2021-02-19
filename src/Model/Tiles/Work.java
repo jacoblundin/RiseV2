@@ -37,7 +37,7 @@ public class Work implements Tile {
 	}
 
 	public String getName() {
-		return null;
+		return "Work";
 	}
 
 	public Boolean getPurchaseable() {
@@ -45,7 +45,7 @@ public class Work implements Tile {
 	}
 
 	public Color getColor() {
-		return null; 
+		return Color.DARK_GRAY;
 	}
 
 	public String getTileInfo() {
@@ -60,8 +60,6 @@ public class Work implements Tile {
 	public Player setPlayer(Player player) {
 		return this.player = player;
 	}
-
-	
 
 	@Override
 	public String getTitle() {

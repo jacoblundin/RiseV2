@@ -5,17 +5,18 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 
 /**
- * Class for jail tile. 
- * @author Sebastian Viro, Aevan Dino	
+ * Class for jail tile.
+ *
+ * @author Sebastian Viro, Aevan Dino
  */
 public class Jail implements Tile {
 	private ImageIcon img = new ImageIcon("tilePics/jail.png");
-	
+
 	/**
 	 * Returns name of tile
 	 */
 	public String getName() {
-		return "JAIL";
+		return "Jail";
 	}
 
 	/**
@@ -24,19 +25,19 @@ public class Jail implements Tile {
 	public Boolean getPurchaseable() {
 		return Boolean.FALSE;
 	}
-	
+
 	/**
 	 * Returns Color.White
 	 */
 	public Color getColor() {
-		return Color.WHITE;
+		return Color.DARK_GRAY;
 	}
-	
+
 	/**
 	 * returns information about tile
 	 */
 	public String getTileInfo() {
-		return "JAIL + \nPlayer can choose to spend three rounds here"
+		return "Jail + \nPlayer can choose to spend three rounds here"
 				+ "\nor pay the bail.\nFirst day costs 50 gold coins"
 				+ "\nSecond time costs 100 gold coins"
 				+ "\nThird time Model.player has to pay 200 and is set free";
@@ -48,11 +49,11 @@ public class Jail implements Tile {
 	public String getTitle() {
 		return null;
 	}
-	
+
 	/**
 	 * returns image
 	 */
-	public ImageIcon getPicture(){
+	public ImageIcon getPicture() {
 		return img;
 	}
 }

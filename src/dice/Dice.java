@@ -51,8 +51,6 @@ public class Dice {
 		//Play dice sound
 		SoundService.instance().playSoundFx(SoundFx.SOUND_DICE);
 
-		//TODO Log the roll to the history
-
 	}
 
 	/**

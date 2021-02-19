@@ -6,15 +6,12 @@ import javax.swing.ImageIcon;
 
 /**
  * Player does not have to pay anything and doesn't get paid for it. // But the Model.player gets all the collected church taxes.
+ *
  * @author AevanDino, SebastianViro
  */
 public class SundayChurch implements Tile {
 	private ImageIcon img = new ImageIcon("tilePics/church.png");
 	String info;
-
-	public void onLanding() {
-
-	}
 
 	public String getName() {
 		return "Sunday Church";
@@ -25,7 +22,7 @@ public class SundayChurch implements Tile {
 	}
 
 	public Color getColor() {
-		return Color.WHITE;
+		return Color.DARK_GRAY;
 	}
 
 	public String getTileInfo() {
@@ -36,8 +33,8 @@ public class SundayChurch implements Tile {
 	public String getTitle() {
 		return null;
 	}
-	
-	public ImageIcon getPicture(){
+
+	public ImageIcon getPicture() {
 		return img;
 	}
 

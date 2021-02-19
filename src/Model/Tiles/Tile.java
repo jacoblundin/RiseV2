@@ -3,9 +3,11 @@ package Model.Tiles;
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
+
 /**
  * All Model.tileCollection.tiles will implement this interface. Methods listed are
  * common methods for all types of Model.tileCollection.tiles.
+ *
  * @author AevanDino, SebastianViro
  */
 public interface Tile {
@@ -18,8 +20,7 @@ public interface Tile {
 	/**
 	 * @return if tile can be bought.
 	 */
-	public Boolean getPurchaseable(); 
-
+	public Boolean getPurchaseable();
 
 	/**
 	 * @return color, returns a color-object representing color of tile.
@@ -30,12 +31,12 @@ public interface Tile {
 	 * @return info, information about tile. (Price, owner, stuff).
 	 */
 	public String getTileInfo();
-	
+
 	/**
 	 * @return the tile title.
 	 */
 	public String getTitle();
-		
+
 	/**
 	 * @return picture of the tile.
 	 */

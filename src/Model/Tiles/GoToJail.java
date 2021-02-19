@@ -3,10 +3,9 @@ package Model.Tiles;
 import java.awt.Color;
 
 import javax.swing.ImageIcon;
+
 /**
- * 
  * @author Sebastian Viro, Aevan Dino, MUHAMMAD ABDULKHUDER
- *
  */
 public class GoToJail implements Tile {
 
@@ -16,8 +15,7 @@ public class GoToJail implements Tile {
 	 * returns null
 	 */
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Go to Jail";
 	}
 
 	/**
@@ -32,8 +30,7 @@ public class GoToJail implements Tile {
 	 * returns null
 	 */
 	public Color getColor() {
-		// TODO Auto-generated method stub
-		return null;
+		return Color.DARK_GRAY;
 	}
 
 	/**
@@ -51,7 +48,7 @@ public class GoToJail implements Tile {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	/**
 	 * returns image
 	 */

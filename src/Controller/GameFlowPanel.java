@@ -7,6 +7,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import Model.player.Player;
 import UnusedClasses.cheat.CheatGui;
 import View.BoardGUI.ShowPlayersTurn;
 import View.WestGUI.WestSidePanel;
@@ -14,6 +15,7 @@ import View.BoardGUI.Board;
 import View.EastGUI.EastSidePanel;
 import Model.player.PlayerList;
 import dice.Dice;
+import gamehistorylog.GameHistoryLog;
 
 
 /**
@@ -118,10 +120,11 @@ public class GameFlowPanel extends JPanel {
 
 	//This is old code that needs to be refactored
 	private void legacyCodeRollDice(int sumRoll) {
+		Player activePlayer = playerList.getActivePlayer();
 
 		setRoll(sumRoll);
 
-		playerList.getActivePlayer().checkPlayerRank();
+		activePlayer.checkPlayerRank();
 		manageEvents.setRoll(this.getRoll());
 
 		movePlayerThread = new Thread(new LoopThread(this.getRoll()));
@@ -227,21 +230,31 @@ public class GameFlowPanel extends JPanel {
 	 * Moves the player with a thread.
 	 */
 	private class LoopThread implements Runnable {
-
+		//TODO: Needs refactoring, this should only graphically move the players piece.
+		// But it handles more than just the view, which is unnecessary.
 		int roll;
+		Player activePlayer;
 
-		public LoopThread(int roll) { this.roll = roll; }
+		public LoopThread(int roll) {
+			this.roll = roll;
+			this.activePlayer = playerList.getActivePlayer();
+		}
 
 		public void run() {
 
 			for (int i = 0; i < roll; i++) {
-				board.removePlayer(playerList.getActivePlayer());
-				playerList.getActivePlayer().setPosition(1);
-				board.setPlayer(playerList.getActivePlayer());
+				board.removePlayer(activePlayer);
+				activePlayer.setPosition(1);
+				board.setPlayer(activePlayer);
 
 				if (i == (roll - 1)) {
-					manageEvents.newEvent(board.getDestinationTile(playerList.getActivePlayer().getPosition()),
-							playerList.getActivePlayer());
+					//Log dice roll event
+					GameHistoryLog.instance().logDiceRollEvent(activePlayer, board.getDestinationTile(activePlayer.getPosition()), roll);
+
+					//Create the event the landing tile
+					manageEvents.newEvent(board.getDestinationTile(activePlayer.getPosition()),
+							activePlayer);
+
 					eastSidePnl.addPlayerList(playerList);
 					btnEndTurn.setEnabled(true);
 
@@ -261,14 +274,20 @@ public class GameFlowPanel extends JPanel {
 	 * If a player passes go.
 	 */
 	private void goEvent() {
+		//TODO: This method gets called the round after the player has passed go, this should happen the
+		// same round as the player passes go
 
-		if (playerList.getActivePlayer().passedGo()) {
+		Player activePlayer = playerList.getActivePlayer();
+		int payout = 200;
 
-			playerList.getActivePlayer().increaseBalance(200);
-			playerList.getActivePlayer().increaseNetWorth(200);
+		if (activePlayer.passedGo()) {
 
-			westSidePnl.append("Passed Go and received 200 GC\n");
-			playerList.getActivePlayer().resetPassedGo();
+			activePlayer.increaseBalance(200);
+			activePlayer.increaseNetWorth(200);
+
+			//Log the pass go event
+			GameHistoryLog.instance().logPassGoEvent(activePlayer, payout);
+			activePlayer.resetPassedGo();
 		}
 	}
 }

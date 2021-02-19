@@ -27,6 +27,7 @@ import Model.Tiles.Tavern;
 import Model.Tiles.Tax;
 import Model.Tiles.Tile;
 import Model.Tiles.Work;
+import gamehistorylog.GameHistoryLog;
 
 /**
  * The class handles all the Controller.events that occur when a Model.player lands on a tile.
@@ -45,6 +46,8 @@ public class ManageEvents {
 	private int taxCounter = 0;
 	private WestSidePanel westPanel;
 
+	private GameHistoryLog gameHistoryLog;
+
 	/**
 	 * Constructor initializes objects in the parameter. Creates Death -and MessageGUI.
 	 * @param board
@@ -61,6 +64,7 @@ public class ManageEvents {
 		this.eastPanel = eastPanel;
 		deathGUI = new DeathGUI();
 		msgGUI = new FortuneTellerGUI();
+		gameHistoryLog = GameHistoryLog.instance();
 	}
 
 	/**
@@ -150,15 +154,18 @@ public class ManageEvents {
 			}
 		} else if (tempProperty.getPurchaseable() == false) {
 
+			//TODO Is this if statement necessary? The if and else bodies seem to do the same thing
 			if (tempProperty.getLevel() == 0) {
-				tempInt = tempProperty.getDefaultRent();
+				tempInt = tempProperty.getDefaultRent(); //TODO This is the only difference, but this should be possible to change
 
 				control(player, tempInt);
 				if (player.isAlive() == true) {
 					JOptionPane.showMessageDialog(null, player.getName() + " paid " + tempProperty.getTotalRent() + " GC to " 
 							+ tempProperty.getOwner().getName());
-					westPanel.append(player.getName() + " paid " + tempProperty.getTotalRent() + " GC to "
-							+ tempProperty.getOwner().getName() + "\n");
+
+					//Log rent event
+					gameHistoryLog.logPropertyRentEvent(player, tempProperty);
+
 					player.decreaseBalace(tempInt);
 					player.decreaseNetWorth(tempInt);
 					tempProperty.getOwner().increaseBalance(tempInt);
@@ -169,8 +176,10 @@ public class ManageEvents {
 				if (player.isAlive() == true) {
 					JOptionPane.showMessageDialog(null, player.getName() + " paid " + tempProperty.getTotalRent() + " GC to " 
 							+ tempProperty.getOwner().getName());
-					westPanel.append(player.getName() + " paid " + tempProperty.getTotalRent() + " GC to "
-							+ tempProperty.getOwner().getName() + "\n");
+
+					//Log rent event
+					gameHistoryLog.logPropertyRentEvent(player, tempProperty);
+
 					player.decreaseBalace(tempInt);
 					tempProperty.getOwner().increaseBalance(tempInt);
 				}
@@ -189,7 +198,9 @@ public class ManageEvents {
 		tempWorkObject.setPlayer(player);
 		tempWorkObject.payPlayer(getRoll());
 
-		westPanel.append(player.getName() + " Got " + tempWorkObject.getPay() + " GC\n");
+		//Log work event
+		gameHistoryLog.logWorkEvent(player,tempWorkObject.getPay());
+
 		JOptionPane.showMessageDialog(null,
 				"The roll is " + roll + "\n" + "You got: " + tempWorkObject.getPay() + " GC for your hard work");
 
@@ -207,7 +218,10 @@ public class ManageEvents {
 		control(player, chargePlayer);
 
 		if (player.isAlive()) {
-			westPanel.append(player.getName() + " paid 200 GC in tax\n");
+
+			//Log tax event
+			gameHistoryLog.logTaxEvent(player, 200);
+
 			JOptionPane.showMessageDialog(null, "You paid 200 gold in tax to the Church");
 			player.decreaseBalace(chargePlayer);
 			player.decreaseNetWorth(chargePlayer);
@@ -251,8 +265,9 @@ public class ManageEvents {
 			if (player.isAlive() == true) {
 				JOptionPane.showMessageDialog(null, player.getName() + " paid " + randomValue + " GC to " 
 						+ tempTavernObj.getOwner().getName());
-				westPanel.append(player.getName() + " paid " + randomValue + " GC to "
-						+ tempTavernObj.getOwner().getName() + "\n");
+				//TODO Log tavern rent
+				/*westPanel.append(player.getName() + " paid " + randomValue + " GC to "
+						+ tempTavernObj.getOwner().getName() + "\n");*/
 				tempTavernObj.getOwner().increaseBalance(randomValue);
 				tempTavernObj.getOwner().increaseNetWorth(randomValue);
 				player.decreaseBalace(randomValue);
@@ -267,7 +282,6 @@ public class ManageEvents {
 	 */
 	public void jailEvent(Tile tile, Player player) {
 		if (player.isPlayerInJail() == true && (player.getJailCounter()) < 2) {
-			westPanel.append(player.getName() + " is in jail for " + (2 - player.getJailCounter()) + " more turns\n");
 			player.increaseJailCounter();
 			if (player.getBalance() > (player.getJailCounter() * 50)) {
 				jailDialog(player);
@@ -277,6 +291,10 @@ public class ManageEvents {
 		} else if (player.getJailCounter() >= 2) {
 			player.setPlayerIsInJail(false);
 			player.setJailCounter(0);
+
+			//Log jail exit event
+			gameHistoryLog.logJailExitEvent(player);
+
 			gameFlowPanel.activateRollDice();
 		}
 	}
@@ -292,7 +310,9 @@ public class ManageEvents {
 		player.setPositionInSpecificIndex(10);
 		board.setPlayer(player);
 		JOptionPane.showMessageDialog(null, player.getName() + " got in jail.");
-		westPanel.append(player.getName() + " is in jail for " + (2 - player.getJailCounter()) + " more turns\n");
+
+		//Log the event
+		gameHistoryLog.logJailEnterEvent(player);
 	}
 
 	/**
@@ -300,10 +320,13 @@ public class ManageEvents {
 	 * @param player
 	 */
 	public void churchEvent(Player player) {
-		player.increaseBalance(200 * taxCounter);
-		player.increaseNetWorth(200 * taxCounter);
-		westPanel.append(player.getName() + " got " + taxCounter * 200 + " GC from the church\n");
+		int taxPayout = 200*taxCounter;
+		player.increaseBalance(taxPayout);
+		player.increaseNetWorth(taxPayout);
 		taxCounter = 0;
+
+		//Log tax payout event
+		gameHistoryLog.logTaxPayoutEvent(player, taxPayout);
 	}
 
 	/**
@@ -321,11 +344,10 @@ public class ManageEvents {
 			player.addNewProperty(property);
 			property.setPurchaseable(false);
 			player.decreaseBalace(property.getPrice());
-			westPanel.append(player.getName() + " purchased " + property.getName() + "\n");
-		}
-
-		else {
-			westPanel.append(player.getName() + " did not purchase " + property.getName() + "\n");
+			gameHistoryLog.logPropertyBuyEvent(player, property);
+		} else {
+			//Player did not purchase the property
+			//TODO: Should this be logged?
 		}
 	}
 
@@ -343,9 +365,11 @@ public class ManageEvents {
 			player.addNewTavern(tavern);
 			tavern.setPurchaseable(false);
 			player.decreaseBalace(tavern.getPrice());
-			westPanel.append(player.getName() + " purchased " + tavern.getName() + "\n");
+			//TODO Log tavern purchase
+			//gameHistoryLog.logPropertyBuyEvent(player, tavern);
 		} else {
-			westPanel.append(player.getName() + " did not purchase " + tavern.getName() + "\n");
+			//Player did not purchase the tavern
+			//TODO: Should this be logged?
 		}
 	}
 
@@ -377,10 +401,13 @@ public class ManageEvents {
 		if (yesOrNo == 0 && (totalBail <= player.getBalance())) {
 			player.setJailCounter(0);
 			player.setPlayerIsInJail(false);
-			westPanel.append(player.getName() + " paid the bail and\ngot free from jail\n");
+			gameHistoryLog.logJailExitEvent(player);
 			gameFlowPanel.activateRollDice();
 		} else {
-			westPanel.append(player.getName() + " did not pay tha bail\n and is still in jail\n");
+			//Stay in jail
+
+			//Log stay in jail
+			gameHistoryLog.logJailStayEvent(player);
 		}
 	}
 	
@@ -414,7 +441,7 @@ public class ManageEvents {
 			tempCard.setFortune("CURSE");
 			control(player, pay);
 			if (player.isAlive()) {
-				westPanel.append(player.getName() + " paid " + pay + " GC\n");
+				//TODO: Log Fortune event
 				player.decreaseBalace(pay);
 				player.decreaseNetWorth(pay);
 				msgGUI.newFortune(false, pay);
@@ -425,7 +452,7 @@ public class ManageEvents {
 			tempCard.setFortune("BLESSING");
 			player.increaseBalance(tempCard.getAmount());
 			player.increaseNetWorth(tempCard.getAmount());
-			westPanel.append(player.getName() + " received " + tempCard.getAmount() + " CG\n");
+			//TODO: Log Fortune event
 			msgGUI.newFortune(true, tempCard.getAmount());
 		}
 	}	

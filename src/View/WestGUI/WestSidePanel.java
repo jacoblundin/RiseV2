@@ -1,5 +1,8 @@
 package View.WestGUI;
 
+import gamehistorylog.GameHistoryLog;
+import gamehistorylog.GameHistoryPanel;
+
 import java.awt.BorderLayout;
 import java.awt.*;
 import javax.swing.BorderFactory;
@@ -8,26 +11,20 @@ import javax.swing.border.Border;
 import javax.swing.text.DefaultCaret;
 
 /**
- * @author RohanSamandari, AevanDino
+ * WestPanel which shows Info about each Tile and The game history.
  *
+ * @author RohanSamandari
  */
 public class WestSidePanel extends JPanel {
 
-	/**
-	 * WestPanel which shows Info about each Boxes.
-	 * 
-	 * @author RohanSamandari
-	 */
 	private static final long serialVersionUID = 1L;
-	private JLabel lblInfoTitle, lblHistoryTitle;
-	private JPanel pnlSpace, pnlHeading, pnlInfo, pnlHistory;
+	private JLabel lblInfoTitle;
+	private JPanel pnlSpace, pnlHeading, pnlInfo;
 	private Font font = new Font("ALGERIAN", Font.BOLD, 19);
 	private JTextArea txtTileInfo = new JTextArea();
-	private JTextArea txtMessage = new JTextArea();
-	private JScrollPane scroller = new JScrollPane(txtMessage);
-	
-	private DefaultCaret caret = (DefaultCaret)txtMessage.getCaret();
-	
+
+	private GameHistoryPanel gameHistoryPanel;
+
 	private Border border = BorderFactory.createLineBorder(Color.DARK_GRAY);
 	private String def = "\n\nMove your mouse on a tile \n   which you want to see \n"
 			+ "      information about!";
@@ -35,8 +32,8 @@ public class WestSidePanel extends JPanel {
 	private Color titleColor = Color.DARK_GRAY;
 
 	public WestSidePanel() {
-		  
-		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE); 
+
+		gameHistoryPanel = GameHistoryLog.instance().getGameHistoryPanel();
 
 		/**
 		 * HeadPanel with Information Label
@@ -78,34 +75,6 @@ public class WestSidePanel extends JPanel {
 		pnlInfo.add(txtTileInfo);
 
 		/**
-		 * HistoryPanel
-		 */
-		pnlHistory = new JPanel();
-		txtMessage.setFont(new Font("Gabriola", Font.BOLD, 18));
-		txtMessage.setMargin(new Insets(10, 10, 10, 10));
-		txtMessage.setEditable(false);
-		txtMessage.setForeground(new Color(71, 60, 50, 225));
-
-		scroller.setBackground(Color.white);
-		scroller.setForeground(Color.black);
-		scroller.setForeground(new Color(71, 60, 50, 225));
-		scroller.setPreferredSize(new Dimension(320, 405));
-		scroller.setAutoscrolls(true);
-		
-		lblHistoryTitle = new JLabel("Game history");
-		lblHistoryTitle.setPreferredSize(new Dimension(320, 50));
-		lblHistoryTitle.setHorizontalAlignment(SwingConstants.CENTER);
-		lblHistoryTitle.setBorder(BorderFactory.createLineBorder(Color.black));
-		lblHistoryTitle.setForeground(Color.white);
-		lblHistoryTitle.setFont(font);
-
-		pnlHistory.setPreferredSize(new Dimension(340, 475));
-		pnlHistory.setBackground(new Color(0, 0, 0, 20));
-		pnlHistory.setBorder(border);
-		pnlHistory.add(lblHistoryTitle);
-		pnlHistory.add(scroller);
-
-		/**
 		 * The main Panel
 		 */
 		setOpaque(false);
@@ -115,13 +84,13 @@ public class WestSidePanel extends JPanel {
 		add(pnlSpace);
 		add(pnlHeading);
 		add(pnlInfo);
-		add(pnlHistory);
+		add(gameHistoryPanel);
 	}
 
 	/**
 	 * This method is like the above method but only for those boxes which has
 	 * default color.
-	 * 
+	 *
 	 * @param info
 	 * @param lblTitle
 	 * @param titleColor
@@ -142,14 +111,5 @@ public class WestSidePanel extends JPanel {
 		lblInfoTitle.setText(title);
 		lblInfoTitle.setBackground(titleColor);
 		lblInfoTitle.setForeground(Color.white);
-	}
-
-	/**
-	 * Adds the history of the game and updates it.
-	 * 
-	 * @param res
-	 */
-	public void append(String res) {
-		txtMessage.append(res);
 	}
 }
