@@ -3,9 +3,7 @@ package View.EastGUI;
 import java.awt.Color;
 import java.awt.Dimension;
 
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.UIManager;
+import javax.swing.*;
 
 import Model.player.PlayerList;
 
@@ -19,7 +17,7 @@ public class EastSidePanel extends JPanel {
 
 	private static final long serialVersionUID = 3397908521882247649L;
 	private PlayerList playerList;
-	private JTabbedPane tab;
+	private JTabbedPane tab = null;
 	private PlayerInfoPanel playerInfoPnl;
 
 	private int currentPlayer = 0;
@@ -28,8 +26,11 @@ public class EastSidePanel extends JPanel {
 	 * @param playerList
 	 * this method is also used to update the information displayed
 	 */
+	//TODO it is unnecessary to pass playerlist multiple times, just set the reference when creating this EastSidePanel object.
 	public void addPlayerList(PlayerList playerList) {
-		this.playerList = playerList;
+		if(this.playerList == null) {
+			this.playerList = playerList;
+		}
 		addtabs();
 	}
 
@@ -57,6 +58,7 @@ public class EastSidePanel extends JPanel {
 	 * this method adds tabs according to the amount of players
 	 */
 	public void addtabs() {
+		SwingUtilities.invokeLater( () -> {
 
 		tab.removeAll();
 
@@ -73,6 +75,7 @@ public class EastSidePanel extends JPanel {
 		tab.setForeground(Color.white);
 		tab.setBackground(new Color(157, 0, 0));
 		tab.setBackgroundAt(currentPlayer, new Color(0, 157, 0));
+		});
 
 	}
 
