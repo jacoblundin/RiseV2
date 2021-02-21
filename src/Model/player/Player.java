@@ -1,6 +1,7 @@
 package Model.player;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -11,6 +12,7 @@ import javax.swing.JOptionPane;
 import Model.Tiles.Property;
 import Model.Tiles.Tavern;
 import Model.Tiles.Tile;
+import gamehistorylog.GameHistoryLog;
 
 /**
  * Player class deals with everything that has to do with a Model.player.
@@ -42,47 +44,36 @@ public class Player {
 
 	/**
 	 * Constructor for adding a new Model.player, new players are created by the
-	 * playerList class and are automatically set at index 0 on the View.GUI.board with the
+	 * playerList class and are automatically set at index 0 on the board with the
 	 * counter variable set to 0
 	 * 
 	 * @param inPlayerName chosen Name
 	 * @param playerIcon   imageIcon from ColorIconMap
-	 * @param playerIndex  index of Model.player (for example if second Model.player the
-	 *                     playerIndex is 1)
+	 * @param playerIndex  index of player (for example if second player the playerIndex is 1)
 	 */
-
-	public Player(String inPlayerName, ImageIcon playerIcon, int playerIndex) {
-
-		setName(inPlayerName);
-		this.playerIcon = playerIcon;
-		setIsAlive(true);
-		this.playerIndex = playerIndex;
-
-		setBalance(1500);
-		setNetWorth(1500);
-		setPlayerRank(playerRank.PEASANT);
-		this.playerIndex = playerIndex;
-		this.tavernsOwned = new ArrayList<>();
-		this.propertiesOwned = new ArrayList<>();
-
-		counter = 0;
-	}
-
 	public Player(String inPlayerName, ImageIcon playerIcon, Color playerColor, int playerIndex) {
 		this.playerColor = playerColor;
-		setName(inPlayerName);
-		this.playerIcon = playerIcon;
-		setIsAlive(true);
+		this.name = inPlayerName;
+
+		this.isAlive = true;
 		this.playerIndex = playerIndex;
 
 		setBalance(1500);
 		setNetWorth(1500);
-		setPlayerRank(playerRank.PEASANT);
+
+		this.playerRank = PlayerRanks.PEASANT;
 		this.playerIndex = playerIndex;
 		this.tavernsOwned = new ArrayList<>();
 		this.propertiesOwned = new ArrayList<>();
 
 		counter = 0;
+
+		//Generate the boardPiece
+		try {
+			this.playerIcon = BoardPiece.newPiece(this.playerRank, this.playerColor);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -278,9 +269,35 @@ public class Player {
 	 * @param playerRank set the rank of this Model.player
 	 */
 	public void setPlayerRank(PlayerRanks playerRank) {
-		if (this.playerRank != playerRank) {
-			this.playerRank = playerRank;
-			//Trigger rank notification
+		//Compare the current rank with the new rank
+		switch (this.playerRank.compareTo(playerRank)) {
+			case -1:
+				//Rank up
+				this.playerRank = playerRank;
+
+				try {
+					this.playerIcon = BoardPiece.newPiece(playerRank, this.playerColor);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				GameHistoryLog.instance().logPlayerRankUpEvent(this);
+				break;
+			case 0:
+				//Equal rank set: do nothing
+				break;
+			case 1:
+				//Rank down
+				this.playerRank = playerRank;
+
+				try {
+					this.playerIcon = BoardPiece.newPiece(playerRank, this.playerColor);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				GameHistoryLog.instance().logPlayerRankDownEvent(this);
+				break;
 		}
 	}
 
@@ -336,6 +353,10 @@ public class Player {
 				"Do you really want to sell " + property.getName() + " for: " + total);
 
 		if (res == 0) {
+
+			//Log sell event
+			GameHistoryLog.instance().logPropertySellEvent(this, property);
+
 			increaseBalance(total);
 			this.propertiesOwned.remove(property);
 			property.setOwner(null);

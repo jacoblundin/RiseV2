@@ -27,30 +27,13 @@ public class GUITile extends JLabel {
 	private Font labelFont = new Font("Arial", Font.BOLD, 10);
 	private JLabel infoLabel = new JLabel("", SwingConstants.CENTER);
 	private JLabel labelArray = new JLabel();
-	private JLabel[] labels = new JLabel[4];
 	private JLabel label1 = new JLabel();
 	private JLabel label2 = new JLabel();
 	private JLabel label3 = new JLabel();
 	private JLabel label4 = new JLabel();
+	private JLabel[] labels = {label1, label2, label3, label4};
 	private int alignment = 1;
 	private Border tileBorder = BorderFactory.createLineBorder(Color.decode("#ff7723"));
-
-	/**
-	 * Initializes the gui
-	 */
-	public GUITile() {
-		setPreferredSize(new Dimension(200, 300));
-		setLayout(new BorderLayout());
-		setBorder(tileBorder);
-
-		labelArray.setLayout(new GridLayout(2, 2));
-		labelArray.setOpaque(true);
-		labelArray.setBackground(Color.decode("#ffe9c6"));
-
-		styleAndAddInfoLabel();
-		addLabelsToArray();
-		addLabelsToGrid();
-	}
 
 	/**
 	 * Constructor receiving an int gets the location of the info JLabel object
@@ -68,7 +51,6 @@ public class GUITile extends JLabel {
 		labelArray.setBackground(Color.decode("#ffe9c6"));
 
 		styleAndAddInfoLabel();
-		addLabelsToArray();
 		addLabelsToGrid();
 	}
 
@@ -98,16 +80,6 @@ public class GUITile extends JLabel {
 	}
 
 	/**
-	 * Varje grid ruta läggs till, 4st
-	 */
-	public void addLabelsToArray() {
-		labels[0] = label1;
-		labels[1] = label2;
-		labels[2] = label3;
-		labels[3] = label4;
-	}
-
-	/**
 	 * Adds four JLabels
 	 */
 	public void addLabelsToGrid() {
@@ -126,11 +98,12 @@ public class GUITile extends JLabel {
 	}
 
 	/**
-	 * Each gui tile has 4 places where a Model.player can be placed
+	 * Each gui tile has 4 places where a player can be placed
+	 * Place a players icon in the GUITile. The tile has 4 positions for a player icon.
+	 * The position of the icon is determined by the players player index.
 	 * 
-	 * @param index
+	 * @param player player to set in the GUITile
 	 */
-
 	public void setPlayer(Player player) {
 		labels[player.getPlayerIndex()].setIcon(player.getImage());
 		labels[player.getPlayerIndex()].setHorizontalAlignment(CENTER);

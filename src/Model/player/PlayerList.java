@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
 
-import View.BoardGUI.ColorIconMap;
+import Model.colorsAndIcons.ColorIconMap;
 import Model.colorsAndIcons.StringColorMap;
 import View.EastGUI.EastSidePanel;
 
@@ -39,16 +39,6 @@ public class PlayerList {
 	public PlayerList() {
 		currentPlayer = 0; 
 	}
-	
-	/**
-	 * Add new Model.player
-	 * @param name the chosen name for a Model.player
-	 * @param icon the chosen image for a Model.player
-	 */
-	public void addNewPlayer(String name, ImageIcon icon) {
-		activePlayers.add(new Player(name, icon, playerListLength)); 
-		playerListLength++;
-	} 
 		
 	/**
 	 * Adds new Model.player with the use of the ColorIconMap

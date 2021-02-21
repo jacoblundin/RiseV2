@@ -1,4 +1,4 @@
-package View.BoardGUI;
+package Model.colorsAndIcons;
 
 import java.util.HashMap;
 import javax.swing.ImageIcon;
