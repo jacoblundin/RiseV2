@@ -13,8 +13,6 @@ import Model.Tiles.Property;
 import Model.Tiles.Tavern;
 import Model.Tiles.Tile;
 import gamehistorylog.GameHistoryLog;
-import soundservice.SoundFx;
-import soundservice.SoundService;
 
 /**
  * Player class deals with everything that has to do with a player.
@@ -227,7 +225,6 @@ public class Player {
 	 */
 	public void decreaseBalace(int decrease) {
 		this.balance -= decrease;
-		SoundService.instance().playSoundFx(SoundFx.SOUND_MONEY);
 		checkPlayerRank();
 	}
 
@@ -236,7 +233,6 @@ public class Player {
 	 */
 	public void increaseBalance(int income) {
 		this.balance += income;
-		SoundService.instance().playSoundFx(SoundFx.SOUND_MONEY);
 		checkPlayerRank();
 	}
 
