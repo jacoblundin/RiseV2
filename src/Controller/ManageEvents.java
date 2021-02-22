@@ -28,8 +28,6 @@ import Model.Tiles.Tax;
 import Model.Tiles.Tile;
 import Model.Tiles.Work;
 import gamehistorylog.GameHistoryLog;
-import soundservice.SoundFx;
-import soundservice.SoundService;
 
 /**
  * The class handles all the Controller.events that occur when a Model.player lands on a tile.
@@ -203,8 +201,6 @@ public class ManageEvents {
 		//Log work event
 		gameHistoryLog.logWorkEvent(player,tempWorkObject.getPay());
 
-		SoundService.instance().playSoundFx(SoundFx.SOUND_WORK);
-
 		JOptionPane.showMessageDialog(null,
 				"The roll is " + roll + "\n" + "You got: " + tempWorkObject.getPay() + " GC for your hard work");
 
@@ -230,8 +226,6 @@ public class ManageEvents {
 			player.decreaseBalace(chargePlayer);
 			player.decreaseNetWorth(chargePlayer);
 			taxCounter++;
-
-			SoundService.instance().playSoundFx(SoundFx.SOUND_MONEY);
 		}
 	}
 
@@ -293,9 +287,6 @@ public class ManageEvents {
 				jailDialog(player);
 			} else {
 				JOptionPane.showMessageDialog(null, "You can not afford the bail");
-
-				SoundService.instance().playSoundFx(SoundFx.SOUND_PRISON);
-
 			}
 		} else if (player.getJailCounter() >= 2) {
 			player.setPlayerIsInJail(false);
@@ -319,9 +310,6 @@ public class ManageEvents {
 		player.setPositionInSpecificIndex(10);
 		board.setPlayer(player);
 		JOptionPane.showMessageDialog(null, player.getName() + " got in jail.");
-		SoundService.instance().playSoundFx(SoundFx.SOUND_PRISON2);
-		SoundService.instance().playSoundFx(SoundFx.SOUND_PRISON3);
-
 
 		//Log the event
 		gameHistoryLog.logJailEnterEvent(player);
@@ -332,7 +320,6 @@ public class ManageEvents {
 	 * @param player
 	 */
 	public void churchEvent(Player player) {
-		//sound
 		int taxPayout = 200*taxCounter;
 		player.increaseBalance(taxPayout);
 		player.increaseNetWorth(taxPayout);
@@ -414,13 +401,8 @@ public class ManageEvents {
 			player.setPlayerIsInJail(false);
 			gameHistoryLog.logJailExitEvent(player);
 			gameFlowPanel.activateRollDice();
-
-			SoundService.instance().playSoundFx(SoundFx.SOUND_CHEER);
-
 		} else {
 			//Stay in jail
-
-			SoundService.instance().playSoundFx(SoundFx.SOUND_PRISON);
 
 			//Log stay in jail
 			gameHistoryLog.logJailStayEvent(player);
@@ -438,7 +420,6 @@ public class ManageEvents {
 			new SecretGui();
 			new Thread(new SecretSleeper(tempCard, player));
 			eastPanel.addPlayerList(playerList);
-			SoundService.instance().playSoundFx(SoundFx.SOUND_WITCH);
 
 		} else {
 			fortune(tempCard, player);
@@ -471,7 +452,6 @@ public class ManageEvents {
 			player.increaseNetWorth(tempCard.getAmount());
 			//TODO: Log Fortune event
 			msgGUI.newFortune(true, tempCard.getAmount());
-			SoundService.instance().playSoundFx(SoundFx.SOUND_CHEER);
 		}
 	}	
 	
