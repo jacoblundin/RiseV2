@@ -16,7 +16,7 @@ import soundservice.SoundFx;
 import soundservice.SoundService;
 
 /**
- * Player class deals with everything that has to do with a Model.player.
+ * Player class deals with everything that has to do with a player.
  *
  * @author AevanDino, Seth �berg, Muhammad Hasan, Sebastian Viro
  */
