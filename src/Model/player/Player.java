@@ -3,20 +3,21 @@ package Model.player;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
-
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+
+import View.WestGUI.WestSidePanel;
 
 import Model.Tiles.Property;
 import Model.Tiles.Tavern;
 import Model.Tiles.Tile;
 import gamehistorylog.GameHistoryLog;
+import soundservice.SoundFx;
+import soundservice.SoundService;
 
 /**
  * Player class deals with everything that has to do with a Model.player.
- * 
+ *
  * @author AevanDino, Seth �berg, Muhammad Hasan, Sebastian Viro
  */
 public class Player {
@@ -42,11 +43,13 @@ public class Player {
 
 	private ArrayList<Tavern> tavernsOwned;
 
+	private WestSidePanel westSidePanel;
+
 	/**
 	 * Constructor for adding a new Model.player, new players are created by the
 	 * playerList class and are automatically set at index 0 on the board with the
 	 * counter variable set to 0
-	 * 
+	 *
 	 * @param inPlayerName chosen Name
 	 * @param playerIcon   imageIcon from ColorIconMap
 	 * @param playerIndex  index of player (for example if second player the playerIndex is 1)
@@ -80,7 +83,7 @@ public class Player {
 	 * Keep track of how many turns a user has been in jail, if 3 the Model.player gets
 	 * out of jail if less than 3 the "roll dice" button is to be inactivated and
 	 * the end turn activated
-	 * 
+	 *
 	 * @return playerJailCounter
 	 */
 	public int getJailCounter() {
@@ -89,7 +92,7 @@ public class Player {
 
 	/**
 	 * method used for increasing or resetting the jailCounter of a Model.player
-	 * 
+	 *
 	 * @param amount
 	 */
 	public void setJailCounter(int amount) {
@@ -135,7 +138,7 @@ public class Player {
 	/**
 	 * Set the playerIndex of the Model.player (the index the user has in the playerList
 	 * array)
-	 * 
+	 *
 	 * @param index
 	 */
 	public void setPlayerIndex(int index) {
@@ -151,7 +154,7 @@ public class Player {
 
 	/**
 	 * Get the position a Model.player has on the View.GUI.board from 0-39
-	 * 
+	 *
 	 * @return counter
 	 */
 	public int getPosition() {
@@ -160,7 +163,7 @@ public class Player {
 
 	/**
 	 * Move Model.player to a specific index on the View.GUI.board
-	 * 
+	 *
 	 * @param newPosition
 	 */
 	public void setPositionInSpecificIndex(int newPosition) {
@@ -169,7 +172,7 @@ public class Player {
 
 	/**
 	 * method used to move the Model.player by either one or many steps
-	 * 
+	 *
 	 * @param amountOfStepsToMove
 	 */
 	public void setPosition(int amountOfStepsToMove) {
@@ -225,6 +228,7 @@ public class Player {
 	 */
 	public void decreaseBalace(int decrease) {
 		this.balance -= decrease;
+		SoundService.instance().playSoundFx(SoundFx.SOUND_MONEY);
 		checkPlayerRank();
 	}
 
@@ -233,6 +237,7 @@ public class Player {
 	 */
 	public void increaseBalance(int income) {
 		this.balance += income;
+		SoundService.instance().playSoundFx(SoundFx.SOUND_MONEY);
 		checkPlayerRank();
 	}
 
@@ -331,7 +336,7 @@ public class Player {
 
 	/**
 	 * Adds newly purchased property to ownedProperties array
-	 * 
+	 *
 	 * @param newProperty, the newly bought property.
 	 */
 	public void addNewProperty(Property newProperty) {
@@ -362,7 +367,10 @@ public class Player {
 			property.setOwner(null);
 		}
 
+		//TODO play klirr sound here?
 	}
+
+
 
 	/**
 	 * @param newTavern add a new Tavern to a user
@@ -373,7 +381,7 @@ public class Player {
 
 	/**
 	 * If user has two taverns the event will differ
-	 * 
+	 *
 	 * @return amount of taverns
 	 */
 	public int getAmountOfTaverns() {
@@ -401,7 +409,7 @@ public class Player {
 
 	/**
 	 * Gets property at specified position
-	 * 
+	 *
 	 * @param pos
 	 * @return
 	 */
@@ -422,32 +430,32 @@ public class Player {
 			setPlayerRank(PlayerRanks.LORD);
 		} else if (this.netWorth >= 7500) {
 			//King
-			setPlayerRank(PlayerRanks.KINGS);
+				setPlayerRank(PlayerRanks.KINGS);
 		}
 
 	}
 
-	/**
-	 * @return propertiesOwned, returns entire ArrayList of properties owned.
-	 */
-	public ArrayList<Property> getProperties() {
-		return this.propertiesOwned;
-	}
+		/**
+		 * @return propertiesOwned, returns entire ArrayList of properties owned.
+		 */
+		public ArrayList<Property> getProperties() {
+			return this.propertiesOwned;
+		}
 
-	/**
-	 * @return all taverns owned by Model.player
-	 */
-	public ArrayList<Tavern> getTaverns() {
-		return this.tavernsOwned;
-	}
+		/**
+		 * @return all taverns owned by Model.player
+		 */
+		public ArrayList<Tavern> getTaverns() {
+			return this.tavernsOwned;
+		}
 
-	/**
-	 * Returns the players color
-	 * 
-	 * @return playerColor
-	 */
-	public Color getPlayerColor() {
-		return playerColor;
-	}
+		/**
+		 * Returns the players color
+		 *
+		 * @return playerColor
+		 */
+		public Color getPlayerColor() {
+			return playerColor;
+		}
 
-}
+	}

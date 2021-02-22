@@ -28,6 +28,8 @@ import Model.Tiles.Tax;
 import Model.Tiles.Tile;
 import Model.Tiles.Work;
 import gamehistorylog.GameHistoryLog;
+import soundservice.SoundFx;
+import soundservice.SoundService;
 
 /**
  * The class handles all the Controller.events that occur when a Model.player lands on a tile.
@@ -133,7 +135,7 @@ public class ManageEvents {
 			gameFlowPanel.setPlayerList(playerList.getList());
 			board.removePlayer(player);
 			deathGUI.addGui();
-		} 
+		}
 	}
 
 	/**
@@ -160,7 +162,7 @@ public class ManageEvents {
 
 				control(player, tempInt);
 				if (player.isAlive() == true) {
-					JOptionPane.showMessageDialog(null, player.getName() + " paid " + tempProperty.getTotalRent() + " GC to " 
+					JOptionPane.showMessageDialog(null, player.getName() + " paid " + tempProperty.getTotalRent() + " GC to "
 							+ tempProperty.getOwner().getName());
 
 					//Log rent event
@@ -174,7 +176,7 @@ public class ManageEvents {
 				tempInt = tempProperty.getTotalRent();
 				control(player, tempInt);
 				if (player.isAlive() == true) {
-					JOptionPane.showMessageDialog(null, player.getName() + " paid " + tempProperty.getTotalRent() + " GC to " 
+					JOptionPane.showMessageDialog(null, player.getName() + " paid " + tempProperty.getTotalRent() + " GC to "
 							+ tempProperty.getOwner().getName());
 
 					//Log rent event
@@ -201,6 +203,8 @@ public class ManageEvents {
 		//Log work event
 		gameHistoryLog.logWorkEvent(player,tempWorkObject.getPay());
 
+		SoundService.instance().playSoundFx(SoundFx.SOUND_WORK);
+
 		JOptionPane.showMessageDialog(null,
 				"The roll is " + roll + "\n" + "You got: " + tempWorkObject.getPay() + " GC for your hard work");
 
@@ -226,6 +230,8 @@ public class ManageEvents {
 			player.decreaseBalace(chargePlayer);
 			player.decreaseNetWorth(chargePlayer);
 			taxCounter++;
+
+			SoundService.instance().playSoundFx(SoundFx.SOUND_MONEY);
 		}
 	}
 
@@ -239,7 +245,7 @@ public class ManageEvents {
 	}
 
 	/**
-	 * Method called when players lands on a tavern tile, checks it's availability. 
+	 * Method called when players lands on a tavern tile, checks it's availability.
 	 * @param tile
 	 * @param player
 	 */
@@ -260,10 +266,10 @@ public class ManageEvents {
 			} else if (tempTavernObj.getOwner().getAmountOfTaverns() == 2) {
 				randomValue = (getRoll() * 20);
 			}
-			
+
 			control(player, randomValue);
 			if (player.isAlive() == true) {
-				JOptionPane.showMessageDialog(null, player.getName() + " paid " + randomValue + " GC to " 
+				JOptionPane.showMessageDialog(null, player.getName() + " paid " + randomValue + " GC to "
 						+ tempTavernObj.getOwner().getName());
 				//TODO Log tavern rent
 				/*westPanel.append(player.getName() + " paid " + randomValue + " GC to "
@@ -287,6 +293,9 @@ public class ManageEvents {
 				jailDialog(player);
 			} else {
 				JOptionPane.showMessageDialog(null, "You can not afford the bail");
+
+				SoundService.instance().playSoundFx(SoundFx.SOUND_PRISON);
+
 			}
 		} else if (player.getJailCounter() >= 2) {
 			player.setPlayerIsInJail(false);
@@ -310,6 +319,9 @@ public class ManageEvents {
 		player.setPositionInSpecificIndex(10);
 		board.setPlayer(player);
 		JOptionPane.showMessageDialog(null, player.getName() + " got in jail.");
+		SoundService.instance().playSoundFx(SoundFx.SOUND_PRISON2);
+		SoundService.instance().playSoundFx(SoundFx.SOUND_PRISON3);
+
 
 		//Log the event
 		gameHistoryLog.logJailEnterEvent(player);
@@ -320,6 +332,7 @@ public class ManageEvents {
 	 * @param player
 	 */
 	public void churchEvent(Player player) {
+		//TODO church sound
 		int taxPayout = 200*taxCounter;
 		player.increaseBalance(taxPayout);
 		player.increaseNetWorth(taxPayout);
@@ -401,14 +414,19 @@ public class ManageEvents {
 			player.setPlayerIsInJail(false);
 			gameHistoryLog.logJailExitEvent(player);
 			gameFlowPanel.activateRollDice();
+
+			SoundService.instance().playSoundFx(SoundFx.SOUND_CHEER);
+
 		} else {
 			//Stay in jail
+
+			SoundService.instance().playSoundFx(SoundFx.SOUND_PRISON);
 
 			//Log stay in jail
 			gameHistoryLog.logJailStayEvent(player);
 		}
 	}
-	
+
 	/**
 	 * Method for FortuneTeller, small chance for a secret event to trigger.
 	 * @param tile, tile the Model.player landed on.
@@ -421,6 +439,8 @@ public class ManageEvents {
 			new Thread(new SecretSleeper(tempCard, player));
 			eastPanel.addPlayerList(playerList);
 
+			SoundService.instance().playSoundFx(SoundFx.SOUND_WITCH);
+
 		} else {
 			fortune(tempCard, player);
 		}
@@ -428,7 +448,7 @@ public class ManageEvents {
 
 	/**
 	 * Method that either withdraws or adds gold coins to a player depending on the type of fortune.
-	 * @param tempCard, instance of FortuneTeller 
+	 * @param tempCard, instance of FortuneTeller
 	 * @param player, Model.player who landed on the tile
 	 */
 	public void fortune(FortuneTeller tempCard, Player player) {
@@ -443,6 +463,8 @@ public class ManageEvents {
 				player.decreaseBalace(pay);
 				player.decreaseNetWorth(pay);
 				msgGUI.newFortune(false, pay);
+
+				//TODO curse sound
 			}
 
 		} else {
@@ -452,9 +474,10 @@ public class ManageEvents {
 			player.increaseNetWorth(tempCard.getAmount());
 			//TODO: Log Fortune event
 			msgGUI.newFortune(true, tempCard.getAmount());
+			SoundService.instance().playSoundFx(SoundFx.SOUND_CHEER);
 		}
-	}	
-	
+	}
+
 	/**
 	 * This class is an easter egg. That gives the player 5 fortunes.
 	 * @author Sebastian viro ,Muhammad Abdulkhuder
@@ -465,7 +488,7 @@ public class ManageEvents {
 		private FortuneTeller tempCard;
 		private Player player;
 		private Clip clip;
-			
+
 		/**
 		 * @param tempCard
 		 * @param player
@@ -477,11 +500,11 @@ public class ManageEvents {
 			start();
 
 		}
-		
+
 		public void run() {
 			try {
 				for (int i = 0; i < 5; i++) {
-					File musicPath = new File("music/duraw.wav");				
+					File musicPath = new File("music/duraw.wav");
 					AudioInputStream ais = AudioSystem.getAudioInputStream(musicPath);
 					clip = AudioSystem.getClip();
 					clip.open(ais);

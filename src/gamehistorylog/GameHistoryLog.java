@@ -176,7 +176,7 @@ public class GameHistoryLog {
 	//HTML format helpers
 
 	private String htmlFormatGoldCoins(int goldCoinsAmount) {
-		String goldCoinImgPath = getClass().getResource("assets/coin.jpg").toString();
+		String goldCoinImgPath = "file:images/coin.jpg";
 		String ret = "<b>" + goldCoinsAmount + "</b>"+ "<img src=" + goldCoinImgPath + " height=11 width=11>" + " gold coins";
 
 		return ret;
