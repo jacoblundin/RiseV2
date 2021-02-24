@@ -111,4 +111,10 @@ public class PlayerList {
 		}	
 	}
 
+	@Override
+	public String toString() {
+		return "PlayerList{" +
+				"activePlayers=" + activePlayers +
+				'}';
+	}
 }

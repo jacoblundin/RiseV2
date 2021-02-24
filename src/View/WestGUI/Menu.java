@@ -9,6 +9,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import Controller.Main;
 import View.BoardGUI.Rules;
 import View.BoardGUI.GamePanels;
 import View.StartMenuGUI.StartingScreen;
@@ -73,7 +74,6 @@ public class Menu extends JPanel {
 			GamePanels gp = new GamePanels();
 			gp.Dispose();
 		});
-
 	}
 
 }

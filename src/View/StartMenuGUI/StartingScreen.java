@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.concurrent.CompletableFuture;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -35,8 +36,7 @@ public class StartingScreen extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private PlayerList playerList = new PlayerList();
-	private GamePanels mainWindow = new GamePanels();
-
+	GamePanels mainWindow = new GamePanels();
 	private JButton btnConfirm = new JButton("Confirm");
 	private JButton btnStartGame = new JButton("Start Game");
 	private JButton btnReset = new JButton("Reset");
@@ -82,6 +82,8 @@ public class StartingScreen extends JFrame {
 	private JComboBox<String> playerColors4 = new JComboBox<String>(colors3);
 	private JComboBox[] playerColors = new JComboBox[] { playerColors1, playerColors2, playerColors3, playerColors4 };
 
+	private CompletableFuture<PlayerList> retrievePlayerList;
+
 	/**
 	 * Mute button
 	 */
@@ -92,14 +94,11 @@ public class StartingScreen extends JFrame {
 	 */
 	private int amountOfPlayers;
 
-	/**
-	 * Used to start the program
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		StartingScreen su = new StartingScreen();
-		su.initializeGUI();
+	public StartingScreen(CompletableFuture<PlayerList> retrievePlayerList) {
+		this.retrievePlayerList = retrievePlayerList;
+	}
 
+	public StartingScreen() {
 	}
 
 	/**
@@ -331,6 +330,9 @@ public class StartingScreen extends JFrame {
 			mainWindow.startboard();
 			dispose();
 			Introduction intro = new Introduction();
+			if (retrievePlayerList != null) {
+				retrievePlayerList.complete(playerList);
+			}
 		}
 
 		/**

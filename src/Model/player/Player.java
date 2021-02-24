@@ -463,4 +463,10 @@ public class Player {
         return originalPlayerIndex;
     }
 
+    @Override
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }
