@@ -16,7 +16,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
+import Controller.Controller;
 import Controller.ManageEvents;
+import Model.Tiles.TileCollection;
 import View.GameFlowGUI.GameFlowPanel;
 import View.EastGUI.EastSidePanel;
 import View.WestGUI.Menu;
@@ -46,11 +48,11 @@ public class GamePanels extends JPanel {
     /**
      * adds the panels and sets the bounds
      */
-    public GamePanels(PlayerList playerList) {
+    public GamePanels(PlayerList playerList, TileCollection tileCollection) {
         this.playerList = playerList;
         this.eastSidePanel = new EastSidePanel(playerList);
         this.westPanel = new WestSidePanel();
-        this.board = new Board(playerList, westPanel);
+        this.board = new Board(playerList, westPanel, tileCollection);
         this.gameFlowPanel = new GameFlowPanel(board, playerList, westPanel, eastSidePanel);
 
         setBorder(new MatteBorder(2, 2, 2, 2, (Color) Color.BLACK));
@@ -116,9 +118,8 @@ public class GamePanels extends JPanel {
         return gameFlowPanel;
     }
 
-
-    public void setController(ManageEvents manageEvents) {
-        gameFlowPanel.setController(manageEvents);
-        eastSidePanel.setController(manageEvents);
+    public void setController(Controller controller) {
+        gameFlowPanel.setController(controller);
+        eastSidePanel.setController(controller);
     }
 }

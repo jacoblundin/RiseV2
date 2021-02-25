@@ -59,7 +59,8 @@ public class ManageEvents {
 	 * @param gameFlowPanel
 	 * @param eastPanel
 	 */
-	public ManageEvents(Board board, PlayerList playerList, WestSidePanel pnlWest, GameFlowPanel gameFlowPanel, EastSidePanel eastPanel) {
+	public ManageEvents(Board board, PlayerList playerList, WestSidePanel pnlWest, GameFlowPanel gameFlowPanel,
+						EastSidePanel eastPanel) {
 		this.gameFlowPanel = gameFlowPanel;
 		this.westPanel = pnlWest;
 		this.board = board;
@@ -388,7 +389,7 @@ public class ManageEvents {
 	 * @return roll of the gameFlowPanel.
 	 */
 	public int getRoll() {
-		return gameFlowPanel.getRoll();
+		return roll;
 	}
 
 	/**

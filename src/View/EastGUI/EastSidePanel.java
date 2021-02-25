@@ -5,7 +5,9 @@ import java.awt.Dimension;
 
 import javax.swing.*;
 
+import Controller.Controller;
 import Controller.ManageEvents;
+import Model.Tiles.Property;
 import Model.player.PlayerList;
 
 /**
@@ -18,9 +20,8 @@ public class EastSidePanel extends JPanel {
     private static final long serialVersionUID = 3397908521882247649L;
     private PlayerList playerList;
     private JTabbedPane tab;
-    private PlayerInfoPanel playerInfoPnl;
     private int currentPlayer = 0;
-    private ManageEvents manageEvents;
+    private Controller controller;
 
     /**
      * Draws the View.GUI
@@ -43,26 +44,22 @@ public class EastSidePanel extends JPanel {
     }
 
     /**
-     * Redraws the tabs without creating new objects.
-     */
-    public void redrawTabs() {
-        // todo: to fix the performance issues in bug 10.
-    }
-
-    /**
      * this method adds tabs according to the amount of players
      */
     public void addTabs() {
-        SwingUtilities.invokeLater(() -> {
-            tab.removeAll();
+        SwingUtilities.invokeLater(() -> tab.removeAll());
 
-            for (int i = 0; i < playerList.getLength(); i++) {
-                playerInfoPnl = new PlayerInfoPanel(playerList, i);
+        for (int i = 0; i < playerList.getLength(); i++) {
+            var index = i;
+            SwingUtilities.invokeLater(() -> {
+                PlayerInfoPanel playerInfoPnl = new PlayerInfoPanel(playerList, index, this);
                 playerInfoPnl.setOpaque(false);
-                tab.addTab("Player " + (i + 1), playerInfoPnl);
+                tab.addTab("Player " + (index + 1), playerInfoPnl);
                 tab.setOpaque(false);
-            }
+            });
+        }
 
+        SwingUtilities.invokeLater(() -> {
             tab.setSelectedIndex(currentPlayer);
             tab.setForeground(Color.white);
             tab.setBackground(new Color(157, 0, 0));
@@ -93,7 +90,19 @@ public class EastSidePanel extends JPanel {
         }
     }
 
-    public void setController(ManageEvents manageEvents) {
-        this.manageEvents = manageEvents;
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+
+    public void upgradeProperty(Property property) {
+        controller.upgradeProperty(property);
+    }
+
+    public void sellProperty(Property property) {
+        controller.sellProperty(property);
+    }
+
+    public void downgradeProperty(Property property) {
+        controller.downgradeProperty(property);
     }
 }

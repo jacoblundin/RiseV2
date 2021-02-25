@@ -17,26 +17,19 @@ import Model.Tiles.Tile;
 import Model.Tiles.TileCollection;
 import Model.Tiles.TileInfo;
 
-
-
-
 /**
  * @author Muhammad Abdulkhuder, Seth �berg, Rohan Samandari
  *
  */
 public class Board extends JPanel {
-	
-	private WestSidePanel pnlWest;
-	private TileInfo info = new TileInfo();
-	
-	private GUITile[] guiTiles = new GUITile[40]; //Creates empty tile objects with a background.  
-	private PlayerList playerList;
-	private Listener listener = new Listener();
-	
-	private TileCollection tileCollection = new TileCollection();
-		
 	private static final long serialVersionUID = 1L;
-	
+	private final WestSidePanel pnlWest;
+	private final TileInfo info = new TileInfo();
+	private final GUITile[] guiTiles = new GUITile[40]; //Creates empty tile objects with a background.
+	private final PlayerList playerList;
+	private final Listener listener = new Listener();
+	private final TileCollection tileCollection;
+
 	private JPanel p1 = new JPanel();
 	private JPanel p2 = new JPanel();
 	private JPanel p3 = new JPanel();
@@ -88,9 +81,10 @@ public class Board extends JPanel {
 	 * @param playerList, list of players
 	 * @param wp, WestSidePanel
 	 */
-	public Board(PlayerList playerList, WestSidePanel wp) {
+	public Board(PlayerList playerList, WestSidePanel wp, TileCollection tileCollection) {
 		this.playerList = playerList;
 		this.pnlWest = wp;
+		this.tileCollection = tileCollection;
 		initializeAllPanels();
 		initializeGUI();
 

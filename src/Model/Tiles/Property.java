@@ -95,18 +95,15 @@ public class Property implements Tile {
 	}
 	
 	public void increaseLevel() {
-		
 		int res = JOptionPane.showConfirmDialog(null, "Do you want to upgrade " + getName() + " for: " + getLevelPrice());
 		if (res == 0 && owner.getPlayerRank().nbrOfLevels() > levels && owner.getBalance()>= getLevelPrice()) {
 			this.levels += 1;
-
 			owner.decreaseBalace(getLevelPrice());
-
 		} else if (res == 0 && owner.getPlayerRank().nbrOfLevels() == levels){
-			JOptionPane.showMessageDialog(null, "You cannot upgrade the property futher at your current Model.player rank");
+			JOptionPane.showMessageDialog(null, "You cannot upgrade the property further at your current rank.");
 
 		} else if (owner.getBalance() < getLevelPrice()){
-			JOptionPane.showMessageDialog(null, "You do not have enough gold");
+			JOptionPane.showMessageDialog(null, "You do not have enough gold.");
 			}
 		}
 	

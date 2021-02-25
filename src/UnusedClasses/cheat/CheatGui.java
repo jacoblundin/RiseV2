@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Controller.Controller;
 import View.GameFlowGUI.GameFlowPanel;
 
 /**
@@ -18,19 +19,12 @@ import View.GameFlowGUI.GameFlowPanel;
  * @author Sebastian Viro, Muhammad Abdulkhuder
  */
 public class CheatGui extends JPanel implements ActionListener {
+	private final JTextField inputTF = new JTextField("");
+	private final JButton btnTeleport = new JButton("Teleport");
+	private final Controller controller;
 
-	private JTextField inputTF = new JTextField("");
-	private JButton btnTeleport = new JButton("Teleport");
-	private GameFlowPanel betterDice;
-	private int index;
-
-	/**
-	 * Constructor
-	 *
-	 * @param gameFlowPanel gameFlowPanel reference
-	 */
-	public CheatGui(GameFlowPanel gameFlowPanel) {
-		this.betterDice = gameFlowPanel;
+	public CheatGui(Controller controller) {
+	    this.controller = controller;
 		startGUI();
 	}
 
@@ -47,34 +41,14 @@ public class CheatGui extends JPanel implements ActionListener {
 		btnTeleport.addActionListener(this);
 	}
 
-	/**
-	 * This is what happens when a button is pressed
-	 */
 	public void actionPerformed(ActionEvent e) {
-
 		if (e.getSource() == btnTeleport) {
 			try {
-				setIndex(Integer.parseInt(inputTF.getText()));
-				betterDice.moveWCheat(getIndex());
-
+				var steps = Integer.parseInt(inputTF.getText());
+				controller.moveWCheat(steps);
 			} catch (NumberFormatException ex) {
 				ex.printStackTrace();
 			}
 		}
-
-	}
-
-	/**
-	 * @return index
-	 */
-	public int getIndex() {
-		return index;
-	}
-
-	/**
-	 * @param index
-	 */
-	public void setIndex(int index) {
-		this.index = index;
 	}
 }

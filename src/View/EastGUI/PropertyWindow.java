@@ -17,10 +17,12 @@ public class PropertyWindow extends JPanel {
     private PlayerList playerList;
     private JTabbedPane tab;
     private int playerAt;
+    private EastSidePanel eastSidePanel;
 
-    public PropertyWindow(PlayerList playerList, int playerAt) {
+    public PropertyWindow(PlayerList playerList, int playerAt, EastSidePanel eastSidePanel) {
         this.playerList = playerList;
         this.playerAt = playerAt;
+        this.eastSidePanel = eastSidePanel;
 
         setPreferredSize(new Dimension(330, 600));
         setOpaque(false);
@@ -45,12 +47,9 @@ public class PropertyWindow extends JPanel {
         int size = playerList.getPlayerFromIndex(playerAt).getProperties().size();
 
         for (int i = 0; i < size; i++) {
-            PlayerProperties playerProperties = new PlayerProperties(playerList, playerAt, i);
+            PlayerProperties playerProperties = new PlayerProperties(playerList, playerAt, i, eastSidePanel);
             tab.addTab("Property" + (i + 1), playerProperties);
             tab.setBackgroundAt(i, playerList.getPlayerFromIndex(playerAt).getProperty(i).getColor());
         }
-    }
-
-    public void setController(ManageEvents manageEvents) {
     }
 }
