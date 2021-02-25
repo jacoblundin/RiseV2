@@ -8,6 +8,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.JOptionPane;
 
+import View.GameFlowGUI.GameFlowPanel;
 import View.WestGUI.WestSidePanel;
 import View.BoardGUI.Board;
 import View.EastGUI.EastSidePanel;
@@ -116,7 +117,7 @@ public class ManageEvents {
 		if (tile instanceof FortuneTeller) {
 			fortuneTellerEvent(tile, player);
 		}
-		eastPanel.addPlayerList(playerList);
+		eastPanel.addTabs();
 	}
 
 	/**
@@ -131,8 +132,7 @@ public class ManageEvents {
 			playerList.switchToNextPlayer();
 			playerList.eliminatePlayer(player);
 			playerList.updatePlayerList();
-			eastPanel.addPlayerList(playerList.getList());
-			gameFlowPanel.setPlayerList(playerList.getList());
+            eastPanel.addTabs();
 			board.removePlayer(player);
 			deathGUI.addGui();
 		}
@@ -437,7 +437,8 @@ public class ManageEvents {
 		if (rand.nextInt(10) == 0) {
 			new SecretGui();
 			new Thread(new SecretSleeper(tempCard, player));
-			eastPanel.addPlayerList(playerList);
+			//eastPanel.addPlayerList(playerList);
+			eastPanel.addTabs();
 
 			SoundService.instance().playSoundFx(SoundFx.SOUND_WITCH);
 

@@ -30,7 +30,7 @@ public class Board extends JPanel {
 	private TileInfo info = new TileInfo();
 	
 	private GUITile[] guiTiles = new GUITile[40]; //Creates empty tile objects with a background.  
-	private PlayerList playerList = new PlayerList();
+	private PlayerList playerList;
 	private Listener listener = new Listener();
 	
 	private TileCollection tileCollection = new TileCollection();
@@ -85,52 +85,20 @@ public class Board extends JPanel {
 
 	/**
 	 * 
-	 * @param wp, WestSidePanel
-	 */
-	public Board(WestSidePanel wp) {
-		this.pnlWest = wp;
-		initializeAllPanels();	
-		initializeGUI(); 
-	}
-	
-	/**
-	 * 
-	 * @param playerList, list of players
-	 */
-	public Board(PlayerList playerList) {
-		initializeAllPanels();	
-		this.playerList = playerList; 
-		
-	}
-
-	/**
-	 * 
 	 * @param playerList, list of players
 	 * @param wp, WestSidePanel
 	 */
 	public Board(PlayerList playerList, WestSidePanel wp) {
-		initializeAllPanels();	
-		this.playerList = playerList;  
-		
-	}
-
-	/**
-	 * Sets the list of players.
-	 * @param playerList
-	 */
-	public void addPlayers(PlayerList playerList) {
 		this.playerList = playerList;
-	}
-	/**
-	 * Sets players
-	 */
-	public void setPlayers() {
-		
+		this.pnlWest = wp;
+		initializeAllPanels();
+		initializeGUI();
+
 		for(int i = 0; i < playerList.getLength(); i++) {
 			setPlayer(playerList.getPlayerFromIndex(i));
 		}
 	}
-	
+
 	/**
 	 * Initilizes all panels
 	 */
@@ -322,15 +290,6 @@ public class Board extends JPanel {
 		paintNewBoard(guiTiles); //Requires a array with all 40 Model.tileCollection.tiles to be sent to paintNewBoard.
 		
 	}
-	
-	/**
-	 * @param index index for a tile.
-	 * @return GUITile at given index.
-	 */
-	public GUITile getTileAtIndex(int index) {
-		return guiTiles[index];
-	}
-	
 	
 	/**
 	 * Tile objects are created with an int depending on their position on the View.GUI.board.

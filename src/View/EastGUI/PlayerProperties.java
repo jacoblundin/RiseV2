@@ -52,7 +52,6 @@ public class PlayerProperties extends JPanel implements ActionListener {
 	 * @param propertyAtI 
 	 */
 	public PlayerProperties(PlayerList playerList, int playerAtI, int propertyAtI) {
-
 		this.playerList = playerList;
 		this.playerAtI = playerAtI;
 		this.propertyAtI = propertyAtI;

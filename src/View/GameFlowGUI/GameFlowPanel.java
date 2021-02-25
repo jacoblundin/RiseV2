@@ -1,4 +1,4 @@
-package Controller;
+package View.GameFlowGUI;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -7,8 +7,8 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import Controller.ManageEvents;
 import Model.player.Player;
-import UnusedClasses.cheat.CheatGui;
 import View.BoardGUI.ShowPlayersTurn;
 import View.WestGUI.WestSidePanel;
 import View.BoardGUI.Board;
@@ -17,42 +17,22 @@ import Model.player.PlayerList;
 import dice.Dice;
 import gamehistorylog.GameHistoryLog;
 
-
 /**
  * @author Muhammad Abdulkhuder, Aevan Dino, Sebastian Viro, Seth Oberg
  */
 public class GameFlowPanel extends JPanel {
-
 	private static final long serialVersionUID = 1L;
 	private ShowPlayersTurn showPlayersTurn;
 	private Board board;
 	private PlayerList playerList;
 	private WestSidePanel westSidePnl;
 	private EastSidePanel eastSidePnl;
-
 	private Dice dice;
-
 	private Thread movePlayerThread;
 	private ManageEvents manageEvents;
-
 	private JButton btnEndTurn = new JButton("End Turn");
 	private JButton btnRollDice = new JButton("Roll Dice");
-
 	private int roll;
-
-	/**
-	 * @param playerList method used for updating the list of players
-	 */
-	public void addPlayerList(PlayerList playerList) {
-
-		this.playerList = playerList;
-
-		showPlayersTurn.uppdateGUI(playerList.getActivePlayer().getName(),
-				playerList.getActivePlayer().getPlayerColor());
-
-		manageEvents = new ManageEvents(board, playerList, westSidePnl, this, eastSidePnl);
-
-	}
 
 	/**
 	 * Constructor
@@ -67,11 +47,12 @@ public class GameFlowPanel extends JPanel {
 		this.playerList = playerList;
 		this.westSidePnl = westSidePanel;
 		this.eastSidePnl = eastSidePnl;
-
 		this.dice = new Dice();
 
 		initializePanel();
 
+		showPlayersTurn.updateGUI(playerList.getActivePlayer().getName(),
+				playerList.getActivePlayer().getPlayerColor());
 	}
 
 	/**
@@ -132,7 +113,7 @@ public class GameFlowPanel extends JPanel {
 
 		goEvent();
 
-		eastSidePnl.addPlayerList(playerList);
+		eastSidePnl.addTabs();
 
 	}
 
@@ -148,7 +129,7 @@ public class GameFlowPanel extends JPanel {
 
 		playerList.switchToNextPlayer();
 
-		showPlayersTurn.uppdateGUI(playerList.getActivePlayer().getName(),
+		showPlayersTurn.updateGUI(playerList.getActivePlayer().getName(),
 				playerList.getActivePlayer().getPlayerColor());
 
 		if (playerList.getActivePlayer().isPlayerInJail()) {
@@ -161,7 +142,7 @@ public class GameFlowPanel extends JPanel {
 			btnEndTurn.setEnabled(false);
 		}
 
-		eastSidePnl.addPlayerList(playerList);
+		eastSidePnl.addTabs();
 		eastSidePnl.setTab();
 	}
 
@@ -184,7 +165,7 @@ public class GameFlowPanel extends JPanel {
 		goEvent();
 		manageEvents.newEvent(board.getDestinationTile(playerList.getActivePlayer().getPosition()),
 				playerList.getActivePlayer());
-		eastSidePnl.addPlayerList(playerList);
+		eastSidePnl.addTabs();
 	}
 
 
@@ -194,21 +175,6 @@ public class GameFlowPanel extends JPanel {
 	public void activateRollDice() {
 		btnRollDice.setEnabled(true);
 		btnEndTurn.setEnabled(false);
-	}
-
-	/**
-	 * Ends the turn if player is eliminated
-	 */
-	public void endTurnIfPlayerEliminated() {
-		btnRollDice.setEnabled(true);
-		btnEndTurn.setEnabled(false);
-	}
-
-	/**
-	 * @param playerList
-	 */
-	public void setPlayerList(PlayerList playerList) {
-		this.playerList = playerList;
 	}
 
 	/**
@@ -223,6 +189,10 @@ public class GameFlowPanel extends JPanel {
 	 */
 	public void setRoll(int roll) {
 		this.roll = roll;
+	}
+
+	public void setController(ManageEvents manageEvents) {
+		this.manageEvents = manageEvents;
 	}
 
 	/**
@@ -255,7 +225,7 @@ public class GameFlowPanel extends JPanel {
 					manageEvents.newEvent(board.getDestinationTile(activePlayer.getPosition()),
 							activePlayer);
 
-					eastSidePnl.addPlayerList(playerList);
+					eastSidePnl.addTabs();
 					btnEndTurn.setEnabled(true);
 
 				}

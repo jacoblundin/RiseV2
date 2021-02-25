@@ -16,7 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
-import Controller.GameFlowPanel;
+import Controller.ManageEvents;
+import View.GameFlowGUI.GameFlowPanel;
 import View.EastGUI.EastSidePanel;
 import View.WestGUI.Menu;
 import View.WestGUI.WestSidePanel;
@@ -25,94 +26,99 @@ import Model.player.PlayerList;
 /**
  * This class combines most of the panels in the game and adds appropriate
  * references.
- * 
- * @author Abdulkhuder Muhammad
  *
+ * @author Abdulkhuder Muhammad
  */
 public class GamePanels extends JPanel {
+    private static final long serialVersionUID = 1L;
+    private EastSidePanel eastSidePanel;
+    private WestSidePanel westPanel;
+    private Board board;
+    private GameFlowPanel gameFlowPanel;
+    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    private PlayerList playerList;
+    private JFrame frame = new JFrame();
+    private JLabel lblPic = new JLabel();
+    private Menu m = new Menu();
+    private int width = (int) screenSize.getWidth();
+    private int height = (int) screenSize.getHeight();
 
-	private static final long serialVersionUID = 1L;
-	private EastSidePanel tPanel = new EastSidePanel();
-	private WestSidePanel westPanel = new WestSidePanel();
-	private Board board = new Board(westPanel);
-	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	private PlayerList playerList;
-	private GameFlowPanel gameFlowPanel = new GameFlowPanel(board, playerList, westPanel, tPanel);
-	private JFrame frame = new JFrame();
-	private JLabel lblPic = new JLabel();
-	private Menu m = new Menu();
-	private int width = (int) screenSize.getWidth();
-	private int height = (int) screenSize.getHeight();
+    /**
+     * adds the panels and sets the bounds
+     */
+    public GamePanels(PlayerList playerList) {
+        this.playerList = playerList;
+        this.eastSidePanel = new EastSidePanel(playerList);
+        this.westPanel = new WestSidePanel();
+        this.board = new Board(playerList, westPanel);
+        this.gameFlowPanel = new GameFlowPanel(board, playerList, westPanel, eastSidePanel);
 
-	/**
-	 * adds the panels and sets the bounds
-	 */
-	public GamePanels() {
-		setBorder(new MatteBorder(2, 2, 2, 2, (Color) Color.BLACK));
+        setBorder(new MatteBorder(2, 2, 2, 2, (Color) Color.BLACK));
+        setBackground(Color.DARK_GRAY);
+        setPreferredSize(new Dimension(width, height));
+        setLayout(null);
+        eastSidePanel.setOpaque(false);
+        eastSidePanel.setBounds(1095, 0, 345, 860);
+        add(eastSidePanel);
 
-		setBackground(Color.DARK_GRAY);
-		setPreferredSize(new Dimension(width, height));
+        westPanel.setBounds(0, 0, 345, 860);
+        add(westPanel);
 
-		setLayout(null);
-		tPanel.setOpaque(false);
-		tPanel.setBounds(1095, 0, 345, 860);
-		add(tPanel);
-		westPanel.setBounds(0, 0, 345, 860);
-		add(westPanel);
-		board.setBounds(346, 0, 750, 750);
-		add(board);
-		gameFlowPanel.setBounds(346, 751, 750, 109);
-		add(gameFlowPanel);
-		m.setBounds(0, 0, 50, 18);
-		add(m);
+        board.setBounds(346, 0, 750, 750);
+        add(board);
 
-		BufferedImage img = null;
-		try {
-			img = ImageIO.read(new File("images/back2jpg.jpg"));
+        gameFlowPanel.setBounds(346, 751, 750, 109);
+        add(gameFlowPanel);
+        m.setBounds(0, 0, 50, 18);
+        add(m);
 
-		} catch (IOException e) {
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File("images/back2jpg.jpg"));
 
-			e.printStackTrace();
-		}
+        } catch (IOException e) {
 
-		Image bimg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-		lblPic.setBounds(0, 0, width, height);
+            e.printStackTrace();
+        }
 
-		lblPic.setIcon(new ImageIcon(bimg));
-		add(lblPic);
+        Image bimg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        lblPic.setBounds(0, 0, width, height);
+        lblPic.setIcon(new ImageIcon(bimg));
+        add(lblPic);
+    }
 
-	}
+    /**
+     * This is where we call the frame
+     */
+    public void startBoard() {
+        frame = new JFrame("Change your fate");
+        frame.setPreferredSize(new Dimension(width + 18, height + 10));
+        frame.setLocation(-9, 0);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        frame.getContentPane().add(this);
+        frame.pack();
+    }
 
-	/**
-	 * This is where we call the frame
-	 */
-	public void startboard() {
-		frame = new JFrame("Change your fate");
-		frame.setPreferredSize(new Dimension(width + 18, height + 10));
-		frame.setLocation(-9, 0);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-		frame.getContentPane().add(this);
-		frame.pack();
-	}
+    public EastSidePanel getEastSidePanel() {
+        return eastSidePanel;
+    }
 
-	/**
-	 * @param playerList
-	 */
-	public void addPlayer(PlayerList playerList) {
+    public WestSidePanel getWestPanel() {
+        return westPanel;
+    }
 
-		board.addPlayers(playerList);
-		board.setPlayers();
-		tPanel.addPlayerList(playerList);
-		gameFlowPanel.addPlayerList(playerList);
+    public Board getBoard() {
+        return board;
+    }
 
-	}
+    public GameFlowPanel getGameFlowPanel() {
+        return gameFlowPanel;
+    }
 
-	/**
-	 * Disposes the frame
-	 */
-	public void Dispose() {
-		frame.dispose();
-	}
 
+    public void setController(ManageEvents manageEvents) {
+        gameFlowPanel.setController(manageEvents);
+        eastSidePanel.setController(manageEvents);
+    }
 }

@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 
+import Controller.ManageEvents;
 import Model.player.PlayerList;
 
 /**
@@ -48,5 +49,8 @@ public class PropertyWindow extends JPanel {
             tab.addTab("Property" + (i + 1), playerProperties);
             tab.setBackgroundAt(i, playerList.getPlayerFromIndex(playerAt).getProperty(i).getColor());
         }
+    }
+
+    public void setController(ManageEvents manageEvents) {
     }
 }

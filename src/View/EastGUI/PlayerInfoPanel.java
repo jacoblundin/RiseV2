@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import Controller.ManageEvents;
 import Model.player.PlayerList;
 
 /**
@@ -29,6 +30,7 @@ public class PlayerInfoPanel extends JPanel {
     private JPanel p4 = new JPanel();
     private PropertyWindow propertyWindow;
     private Font font = new Font("ALGERIAN", Font.PLAIN, 18);
+    private ManageEvents manageEvents;
 
     /**
      * @param playerList

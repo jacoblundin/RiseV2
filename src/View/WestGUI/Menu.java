@@ -71,8 +71,8 @@ public class Menu extends JPanel {
 		menuItemRestart.addActionListener((event) -> {
 			StartingScreen ss = new StartingScreen();
 			ss.initializeGUI();
-			GamePanels gp = new GamePanels();
-			gp.Dispose();
+//			GamePanels gp = new GamePanels();
+//			gp.Dispose();
 		});
 	}
 
