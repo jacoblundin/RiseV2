@@ -88,6 +88,8 @@ public class Board extends JPanel {
 		for(int i = 0; i < playerList.getLength(); i++) {
 			setPlayer(playerList.getPlayerFromIndex(i));
 		}
+
+		drawBorders();
 	}
 
 	/**
