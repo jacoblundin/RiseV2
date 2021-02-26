@@ -164,7 +164,7 @@ public class PlayerProperties extends JPanel implements ActionListener {
             do {
                 otherPlayerInt = (Integer
                         .parseInt(JOptionPane.showInputDialog(null,
-                                "Which Model.player do you want to trade with?\n 1 for Model.player 1 \n 2 for Model.player 2 and so on..."))
+                                "Which player do you want to trade with?\n 1 for player 1 \n 2 for player 2 and so on..."))
                         - 1);
 
 
@@ -215,8 +215,8 @@ public class PlayerProperties extends JPanel implements ActionListener {
                 if (type == 1 || type == 3) {
                     confirm = JOptionPane.showConfirmDialog(null,
                             otherPlayer.getName() + " Are you okay with this trade?" + "\n You are getting " + offer
-                                    + "Gold coins" + "\n and are trading away " + otherPlayersProperty.getName() + "\n for "
-                                    + activePlayerProperty.getName());
+                                    + "Gold coins" + "\n and are trading away " + activePlayerProperty.getName() + "\n for "
+                                    + otherPlayersProperty.getName());
 
                     if (confirm == 0) {
 
@@ -236,6 +236,7 @@ public class PlayerProperties extends JPanel implements ActionListener {
                         otherPlayer.addNewProperty(activePlayerProperty);
 
                         JOptionPane.showMessageDialog(null, "Trade Complete! Omedato gosaimasu!!!");
+
 
                     }
 
@@ -260,8 +261,9 @@ public class PlayerProperties extends JPanel implements ActionListener {
 
                     }
                 }
+                eastSidePanel.tradeProperty();
             } else {
-                JOptionPane.showMessageDialog(null, "Trade can not be done! The Model.player you picked does not own any properties!");
+                JOptionPane.showMessageDialog(null, "Trade can not be done! The player you picked does not own any properties!");
             }
         }
     }

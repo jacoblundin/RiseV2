@@ -48,8 +48,8 @@ public class ManageEvents {
 	private int roll;
 	private int taxCounter = 0;
 	private WestSidePanel westPanel;
-
 	private GameHistoryLog gameHistoryLog;
+	private Controller controller;
 
 	/**
 	 * Constructor initializes objects in the parameter. Creates Death -and MessageGUI.
@@ -60,7 +60,7 @@ public class ManageEvents {
 	 * @param eastPanel
 	 */
 	public ManageEvents(Board board, PlayerList playerList, WestSidePanel pnlWest, GameFlowPanel gameFlowPanel,
-						EastSidePanel eastPanel) {
+						EastSidePanel eastPanel, Controller controller) {
 		this.gameFlowPanel = gameFlowPanel;
 		this.westPanel = pnlWest;
 		this.board = board;
@@ -69,6 +69,7 @@ public class ManageEvents {
 		deathGUI = new DeathGUI();
 		msgGUI = new FortuneTellerGUI();
 		gameHistoryLog = GameHistoryLog.instance();
+		this.controller = controller;
 	}
 
 	/**
@@ -136,6 +137,7 @@ public class ManageEvents {
             eastPanel.addTabs();
 			board.removePlayer(player);
 			deathGUI.addGui();
+			controller.eliminatePlayer();
 		}
 	}
 
@@ -358,6 +360,7 @@ public class ManageEvents {
 			player.addNewProperty(property);
 			player.decreaseBalace(property.getPrice());
 			gameHistoryLog.logPropertyBuyEvent(player, property);
+			controller.buyProperty();
 		} else {
 			//Player did not purchase the property
 			//TODO: Should this be logged?
@@ -377,6 +380,7 @@ public class ManageEvents {
 			tavern.setOwner(player);
 			player.addNewTavern(tavern);
 			player.decreaseBalace(tavern.getPrice());
+			controller.buyProperty();
 			//TODO Log tavern purchase
 			//gameHistoryLog.logPropertyBuyEvent(player, tavern);
 		} else {

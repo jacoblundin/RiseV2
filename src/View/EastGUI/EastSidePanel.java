@@ -105,4 +105,9 @@ public class EastSidePanel extends JPanel {
     public void downgradeProperty(Property property) {
         controller.downgradeProperty(property);
     }
+
+    public void tradeProperty()
+    {
+        controller.tradeProperty();
+    }
 }

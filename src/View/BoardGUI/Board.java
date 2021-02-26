@@ -5,17 +5,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.List;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
+import Model.Tiles.*;
 import View.WestGUI.WestSidePanel;
 import Model.player.Player;
 import Model.player.PlayerList;
-import Model.Tiles.Tile;
-import Model.Tiles.TileCollection;
-import Model.Tiles.TileInfo;
 
 /**
  * @author Muhammad Abdulkhuder, Seth �berg, Rohan Samandari
@@ -284,7 +281,34 @@ public class Board extends JPanel {
 		paintNewBoard(guiTiles); //Requires a array with all 40 Model.tileCollection.tiles to be sent to paintNewBoard.
 		
 	}
-	
+
+	/**
+	 * Adds colored borders to tiles based on the owner.
+	 */
+	public void drawBorders() {
+		var nbrOfTiles = 40;
+        for (int i = 0; i < nbrOfTiles; i++) {
+        	var panel = panelarray[i];
+        	var tile = tileCollection.getTileAtIndex(i);
+        	if (tile instanceof Tavern) {
+        		var owner = ((Tavern) tile).getOwner();
+        		if (owner == null) {
+        			panel.setBorder(null);
+				} else {
+					var color = owner.getPlayerColor();
+					panel.setBorder(BorderFactory.createMatteBorder(2,2,2,2, color));
+				}
+			} else if (tile instanceof Property) {
+				var owner = ((Property) tile).getOwner();
+				if (owner == null) {
+					panel.setBorder(null);
+				} else {
+					var color = owner.getPlayerColor();
+					panel.setBorder(BorderFactory.createMatteBorder(2,2,2,2, color));
+				}
+			}
+		}
+	}
 	/**
 	 * Tile objects are created with an int depending on their position on the View.GUI.board.
 	 */

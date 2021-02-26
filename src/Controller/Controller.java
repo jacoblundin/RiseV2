@@ -26,7 +26,7 @@ public class Controller {
         this.westSidePanel = westPanel;
         this.gameFlowPanel = gameFlowPanel;
         this.eastSidePanel = eastSidePanel;
-        this.manageEvents = new ManageEvents(board, playerList, westPanel, gameFlowPanel, eastSidePanel);
+        this.manageEvents = new ManageEvents(board, playerList, westPanel, gameFlowPanel, eastSidePanel, this);
         this.dice = dice;
     }
 
@@ -77,6 +77,17 @@ public class Controller {
         var owner = property.getOwner();
         owner.sellProperty(property);
         redrawPlayerInfo();
+        board.drawBorders();
+    }
+
+    public void buyProperty()
+    {
+        board.drawBorders();
+    }
+
+    public void tradeProperty()
+    {
+        board.drawBorders();
     }
 
     public void redrawPlayerInfo() {
@@ -86,6 +97,11 @@ public class Controller {
     public void downgradeProperty(Property property) {
         property.decreaseLevel();
         redrawPlayerInfo();
+    }
+
+    public void eliminatePlayer()
+    {
+        board.drawBorders();
     }
 
 	public void goEvent() {

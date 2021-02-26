@@ -40,8 +40,8 @@ public class Main {
         gamePanels.setController(controller);
 
         // If you want the cheat GUI:
-//        GameFlowPanel gameFlowPanel = gamePanels.getGameFlowPanel();
-//        gameFlowPanel.setCheatGUI(new CheatGui(controller));
+        GameFlowPanel gameFlowPanel = gamePanels.getGameFlowPanel();
+        gameFlowPanel.setCheatGUI(new CheatGui(controller));
 
     }
 }
