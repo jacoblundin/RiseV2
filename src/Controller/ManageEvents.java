@@ -137,7 +137,7 @@ public class ManageEvents {
             eastPanel.addTabs();
 			board.removePlayer(player);
 			deathGUI.addGui();
-			controller.eliminatePlayer();
+			controller.drawBorderColors();
 		}
 	}
 
@@ -360,7 +360,7 @@ public class ManageEvents {
 			player.addNewProperty(property);
 			player.decreaseBalace(property.getPrice());
 			gameHistoryLog.logPropertyBuyEvent(player, property);
-			controller.buyProperty();
+			controller.drawBorderColors();
 		} else {
 			//Player did not purchase the property
 			//TODO: Should this be logged?
@@ -380,7 +380,7 @@ public class ManageEvents {
 			tavern.setOwner(player);
 			player.addNewTavern(tavern);
 			player.decreaseBalace(tavern.getPrice());
-			controller.buyProperty();
+			controller.drawBorderColors();
 			//TODO Log tavern purchase
 			//gameHistoryLog.logPropertyBuyEvent(player, tavern);
 		} else {

@@ -108,6 +108,6 @@ public class EastSidePanel extends JPanel {
 
     public void tradeProperty()
     {
-        controller.tradeProperty();
+        controller.drawBorderColors();
     }
 }

@@ -80,13 +80,7 @@ public class Controller {
         board.drawBorders();
     }
 
-    public void buyProperty()
-    {
-        board.drawBorders();
-    }
-
-    public void tradeProperty()
-    {
+    public void drawBorderColors() {
         board.drawBorders();
     }
 
@@ -97,11 +91,6 @@ public class Controller {
     public void downgradeProperty(Property property) {
         property.decreaseLevel();
         redrawPlayerInfo();
-    }
-
-    public void eliminatePlayer()
-    {
-        board.drawBorders();
     }
 
 	public void goEvent() {
