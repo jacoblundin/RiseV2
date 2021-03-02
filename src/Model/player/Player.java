@@ -287,7 +287,7 @@ public class Player {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
+                SoundService.instance().playSoundFx(SoundFx.SOUND_RANK);
                 GameHistoryLog.instance().logPlayerRankUpEvent(this);
                 break;
             case 0:
@@ -302,7 +302,7 @@ public class Player {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
+                SoundService.instance().playSoundFx(SoundFx.SOUND_RANK);
                 GameHistoryLog.instance().logPlayerRankDownEvent(this);
                 break;
         }

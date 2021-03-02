@@ -63,6 +63,13 @@ public enum SoundFx {
 		public String getSoundFilePath() {
 			return "sounds/RollDice.wav";
 		}
+	},
+
+	SOUND_RANK {
+		@Override
+		public String getSoundFilePath() {
+			return "sounds/MagicWand.wav";
+		}
 	};
 
 	public String getSoundFilePath() {
