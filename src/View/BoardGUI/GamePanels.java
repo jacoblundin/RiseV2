@@ -17,10 +17,10 @@ import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
 import Controller.Controller;
-import Controller.ManageEvents;
 import Model.Tiles.TileCollection;
 import View.GameFlowGUI.GameFlowPanel;
 import View.EastGUI.EastSidePanel;
+import View.StartMenuGUI.Introduction;
 import View.WestGUI.Menu;
 import View.WestGUI.WestSidePanel;
 import Model.player.PlayerList;
@@ -41,19 +41,22 @@ public class GamePanels extends JPanel {
     private PlayerList playerList;
     private JFrame frame = new JFrame();
     private JLabel lblPic = new JLabel();
-    private Menu m = new Menu();
+    private Menu menu;
     private int width = (int) screenSize.getWidth();
     private int height = (int) screenSize.getHeight();
+    private Introduction introduction;
 
     /**
      * adds the panels and sets the bounds
      */
-    public GamePanels(PlayerList playerList, TileCollection tileCollection) {
+    public GamePanels(PlayerList playerList, TileCollection tileCollection, Introduction introduction) {
         this.playerList = playerList;
         this.eastSidePanel = new EastSidePanel(playerList);
         this.westPanel = new WestSidePanel();
         this.board = new Board(playerList, westPanel, tileCollection);
         this.gameFlowPanel = new GameFlowPanel(board, playerList, westPanel, eastSidePanel);
+        this.introduction = introduction;
+        this.menu = new Menu(this, introduction);
 
         setBorder(new MatteBorder(2, 2, 2, 2, (Color) Color.BLACK));
         setBackground(Color.DARK_GRAY);
@@ -71,8 +74,8 @@ public class GamePanels extends JPanel {
 
         gameFlowPanel.setBounds(346, 751, 750, 109);
         add(gameFlowPanel);
-        m.setBounds(0, 0, 50, 18);
-        add(m);
+        menu.setBounds(0, 0, 50, 18);
+        add(menu);
 
         BufferedImage img = null;
         try {
@@ -121,5 +124,9 @@ public class GamePanels extends JPanel {
     public void setController(Controller controller) {
         gameFlowPanel.setController(controller);
         eastSidePanel.setController(controller);
+    }
+
+    public void destroyFrame() {
+        frame.dispose();
     }
 }
