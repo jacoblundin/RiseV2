@@ -33,7 +33,7 @@ public class BackgroundMusic {
 			clip.open(ais);
 
 			// Set the gain (between 0.0 and 1.0)
-			setVolume(clip, 0.08);
+			setVolume(clip, 0.05);
 
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
 			clip.stop();
