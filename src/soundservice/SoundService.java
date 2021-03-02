@@ -42,13 +42,11 @@ public class SoundService {
 		soundFxThread.playSoundFx(soundFx);
 	}
 
-	public void muteSoundFx() {
-
+	public void toggleSoundFx()
+	{
+		soundFxThread.setSoundFxOnOff();
 	}
 
-	public void unmuteSoundFx() {
-
-	}
 
 	//Background music methods
 

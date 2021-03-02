@@ -24,6 +24,7 @@ public class Menu extends JPanel {
 	private JMenuBar jMenuBar = new JMenuBar();
 
 	private JMenuItem menuItemMusic = new JMenuItem("Play/Pause Music");
+	private JMenuItem menuItemSoundEffects = new JMenuItem("Sound effects on/off");
 	private JMenuItem menuItemRules = new JMenuItem("Read Rules");
 	private JMenuItem menuItemRestart = new JMenuItem("Restart Game");
 	private JMenuItem menuItemExit = new JMenuItem("Exit");
@@ -42,6 +43,7 @@ public class Menu extends JPanel {
 		initActionListeners();
 
 		jMenu.add(menuItemMusic);
+		jMenu.add(menuItemSoundEffects);
 		jMenu.add(menuItemRules);
 		jMenu.add(menuItemRestart);
 		jMenu.add(menuItemExit);
@@ -62,6 +64,10 @@ public class Menu extends JPanel {
 
 		menuItemMusic.addActionListener((event) -> {
 			SoundService.instance().toggleBgMusic();
+		});
+
+		menuItemSoundEffects.addActionListener((event) -> {
+			SoundService.instance().toggleSoundFx();
 		});
 
 		menuItemRules.addActionListener((event) -> {

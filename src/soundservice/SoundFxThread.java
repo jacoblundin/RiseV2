@@ -10,6 +10,8 @@ public class SoundFxThread extends Thread {
 
 	private Buffer<SoundFx> soundBuffer;
 
+	private boolean soundFxOnOff = true;
+
 	public SoundFxThread() {
 		this.soundBuffer = new Buffer<>();
 	}
@@ -23,7 +25,9 @@ public class SoundFxThread extends Thread {
 			try {
 				sound = soundBuffer.get();
 
-				new Thread(new SoundFxConsumer(sound)).start();
+				if(soundFxOnOff) {
+					new Thread(new SoundFxConsumer(sound)).start();
+				}
 
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -39,6 +43,11 @@ public class SoundFxThread extends Thread {
 	 */
 	public void playSoundFx(SoundFx soundFx) {
 		this.soundBuffer.put(soundFx);
+	}
+
+	public void setSoundFxOnOff()
+	{
+		soundFxOnOff = !soundFxOnOff;
 	}
 
 	private class SoundFxConsumer implements Runnable {
