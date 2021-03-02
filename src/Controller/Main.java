@@ -71,44 +71,43 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
-        SoundService.instance().playBgMusic();
-        TileCollection tileCollection = null;
-        PlayerList playerList = null;
+    public static void main(String[] args) {
+        try {
+            SoundService.instance().playBgMusic();
+            TileCollection tileCollection = null;
+            PlayerList playerList = null;
 
-        if (args.length == 0) {
-            // Normal start loads the starting screen and lets you manually enter player information.
-            tileCollection = new TileCollection();
-            CompletableFuture<PlayerList> retrievePlayerList = new CompletableFuture<>();
-            StartingScreen su = new StartingScreen(retrievePlayerList);
-            su.initializeGUI();
-            // Blocks here until the user clicks on the start game button.
-            playerList = retrievePlayerList.get();
-        } else if (args.length == 1){
-            // Player state is loaded from JSON.
-            var playersFromJSON = loadPlayerData(args[0]);
-            PlayerAndTiles playerAndTiles = buildPlayerList(playersFromJSON);
-            tileCollection = playerAndTiles.tileCollection;
-            playerList = playerAndTiles.playerList;
-        } else {
-            // The program does not handle more than 1 argument. Closing to avoid confusion.
-            System.err.println("Too many command line arguments.");
-            System.exit(1);
-        }
+            if (args.length == 0) {
+                tileCollection = new TileCollection();
+                var retrievePlayerList = new CompletableFuture<PlayerList>();
+                var su = new StartingScreen(retrievePlayerList);
+                su.initializeGUI();
+                playerList = retrievePlayerList.get();
+            } else if (args.length == 1) {
+                var playersFromJSON = loadPlayerData(args[0]);
+                var playerAndTiles = buildPlayerList(playersFromJSON);
+                tileCollection = playerAndTiles.tileCollection;
+                playerList = playerAndTiles.playerList;
+            } else {
+                System.err.println("Too many command line arguments.");
+                System.exit(1);
+            }
 
-        GamePanels gamePanels = new GamePanels(playerList, tileCollection);
-        gamePanels.startBoard();
-        new Introduction();
+            var intro = new Introduction();
+            var gamePanels = new GamePanels(playerList, tileCollection, intro);
+            gamePanels.startBoard();
 
-        // Panels have now been initialized in the GamePanels object. Get them and put them in the controller.
-        Controller controller = new Controller(gamePanels.getBoard(), playerList, gamePanels.getWestPanel(),
-                gamePanels.getGameFlowPanel(), gamePanels.getEastSidePanel(), gamePanels.getGameFlowPanel().getDice());
+            var controller = new Controller(gamePanels.getBoard(), playerList, gamePanels.getWestPanel(),
+                    gamePanels.getGameFlowPanel(), gamePanels.getEastSidePanel(), gamePanels.getGameFlowPanel().getDice());
 
-        // Finally, set the controller in the panels.
-        gamePanels.setController(controller);
+            gamePanels.setController(controller);
 
-        // If you want the cheat GUI:
+            // If you want the cheat GUI:
 //        GameFlowPanel gameFlowPanel = gamePanels.getGameFlowPanel();
 //        gameFlowPanel.setCheatGUI(new CheatGui(controller));
+        } catch (ExecutionException | InterruptedException e) {
+            System.err.println("ExecutionException or InterruptedException when loading game. Not handled.");
+            System.exit(1);
+        }
     }
 }

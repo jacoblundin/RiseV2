@@ -92,4 +92,8 @@ public class Introduction extends JPanel {
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
 	}
+
+	public void destroyFrame() {
+    	frame.dispose();
+	}
 }
