@@ -72,5 +72,10 @@ public class SoundService {
 		backgroundMusic.toggleMusic();
 	}
 
+	public void changeVolume(double gain)
+	{
+		backgroundMusic.changeVolume(gain-0.02);
+		soundFxThread.changeVolume(gain);
+	}
 
 }

@@ -7,7 +7,8 @@ public class SoundFxThread extends Thread {
 
 	private Buffer<SoundFx> soundBuffer;
 
-	private boolean soundFxOnOff = true;
+	private boolean soundFxOn = true;
+	private double gain = 0.08;
 
 	public SoundFxThread() {
 		this.soundBuffer = new Buffer<>();
@@ -22,7 +23,7 @@ public class SoundFxThread extends Thread {
 			try {
 				sound = soundBuffer.get();
 
-				if(soundFxOnOff) {
+				if(soundFxOn) {
 					new Thread(new SoundFxConsumer(sound)).start();
 				}
 
@@ -44,7 +45,12 @@ public class SoundFxThread extends Thread {
 
 	public void setSoundFxOnOff()
 	{
-		soundFxOnOff = !soundFxOnOff;
+		soundFxOn = !soundFxOn;
+	}
+
+	public void changeVolume(double gain)
+	{
+		this.gain = gain;
 	}
 
 	private class SoundFxConsumer implements Runnable {
@@ -66,7 +72,7 @@ public class SoundFxThread extends Thread {
 				clip.open(audioInputStream);
 
 				// set the gain (between 0.0 and 1.0)
-				setVolume(clip, 0.08);
+				setVolume(clip, gain);
 
 				clip.start();
 			} catch (Exception ex) {

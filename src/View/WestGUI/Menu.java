@@ -6,10 +6,7 @@ import java.awt.Dimension;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import Controller.Controller;
 import Controller.Main;
@@ -29,6 +26,7 @@ public class Menu extends JPanel {
     private JMenuBar jMenuBar = new JMenuBar();
     private JMenuItem menuItemMusic = new JMenuItem("Play/Pause Music");
     private JMenuItem menuItemSoundEffects = new JMenuItem("Sound effects on/off");
+    private JMenuItem menuItemSetVolume = new JMenuItem("Set volume");
     private JMenuItem menuItemRules = new JMenuItem("Read Rules");
     private JMenuItem menuItemRestart = new JMenuItem("Restart Game");
     private JMenuItem menuItemExit = new JMenuItem("Exit");
@@ -54,6 +52,7 @@ public class Menu extends JPanel {
 
         jMenu.add(menuItemMusic);
         jMenu.add(menuItemSoundEffects);
+        jMenu.add(menuItemSetVolume);
         jMenu.add(menuItemRules);
         jMenu.add(menuItemRestart);
         jMenu.add(menuItemExit);
@@ -78,6 +77,16 @@ public class Menu extends JPanel {
 
         menuItemSoundEffects.addActionListener((event) -> {
             SoundService.instance().toggleSoundFx();
+        });
+
+        menuItemSetVolume.addActionListener((event) -> {
+
+            double gain = Double.parseDouble(JOptionPane.showInputDialog(null,"Set volume by writing a number between 1 and 10:", 5));
+            if(gain<=10 || gain>=1)
+            {
+            gain = gain/100;
+            SoundService.instance().changeVolume(gain);
+            }
         });
 
         menuItemRules.addActionListener((event) -> {

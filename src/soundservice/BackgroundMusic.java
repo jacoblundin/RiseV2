@@ -13,6 +13,7 @@ public class BackgroundMusic {
 
 	private Clip clip;
 	private int musicPausedAt;
+	private double gain;
 
 	public BackgroundMusic() {
 		clip = null;
@@ -33,7 +34,7 @@ public class BackgroundMusic {
 			clip.open(ais);
 
 			// Set the gain (between 0.0 and 1.0)
-			setVolume(clip, 0.05);
+			setVolume(0.05);
 
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
 			clip.stop();
@@ -79,11 +80,17 @@ public class BackgroundMusic {
 	/**
 	 * Sets the volume of the sound effects
  	 */
-	public void setVolume(Clip clip, double gain)
+	public void setVolume(double gain)
 	{
 		FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 		float dB = (float) (Math.log(gain) / Math.log(10.0) * 20.0);
 		gainControl.setValue(dB);
+	}
+
+	public void changeVolume(double gain)
+	{
+		this.gain = gain;
+		setVolume(gain);
 	}
 
 }
