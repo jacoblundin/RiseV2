@@ -4,11 +4,14 @@ import Model.Tiles.Property;
 import Model.player.Player;
 import Model.player.PlayerList;
 import View.BoardGUI.Board;
+import View.Duel.Duel;
 import View.EastGUI.EastSidePanel;
 import View.GameFlowGUI.GameFlowPanel;
 import View.WestGUI.WestSidePanel;
 import dice.Dice;
 import gamehistorylog.GameHistoryLog;
+
+import javax.swing.*;
 
 public class Controller {
     private final Board board;
@@ -39,7 +42,7 @@ public class Controller {
         Player activePlayer = playerList.getActivePlayer();
         activePlayer.checkPlayerRank();
         manageEvents.setRoll(roll);
-        Thread movePlayerThread = new Thread(new PlayerMover(roll));
+        Thread movePlayerThread = new Thread(new PlayerMover(roll, this));
         movePlayerThread.start();
         redrawPlayerInfo();
     }
@@ -122,14 +125,22 @@ public class Controller {
         gameFlowPanel.setEndTurnButton(true);
     }
 
+    public void duelWinner(Player winner, Player loser)
+    {
+        winner.increaseBalance(500);
+        loser.decreaseBalace(500);
+    }
+
     private class PlayerMover implements Runnable {
         //TODO: Needs refactoring, this should only graphically move the players piece.
         // But it handles more than just the view, which is unnecessary.
         int roll;
         Player activePlayer;
+        Controller controller;
 
-        public PlayerMover(int roll) {
+        public PlayerMover(int roll, Controller controller) {
             this.roll = roll;
+            this.controller = controller;
             this.activePlayer = playerList.getActivePlayer();
         }
 
@@ -159,6 +170,45 @@ public class Controller {
                 }
 
             }
+
+            checkDuel();
+        }
+
+        /**
+         * Checks if two players are on the same tile and should start a duel.
+         */
+        private void checkDuel()
+        {
+            Player[] playersOnTile = null;
+            Player player = null;
+
+            for (int i = 0; i < playerList.getLength() ; i++)
+            {
+                player = (Player) playerList.getActivePlayers().get(i);
+                int positionOfPlayer = player.getPosition();
+                int index = 0;
+
+                if(activePlayer.getPosition() == positionOfPlayer && !activePlayer.getName().equals(player.getName()))
+                {
+                        playersOnTile[index] = player;
+                }
+            }
+
+            if(playersOnTile.length > 1)
+            {
+                int playerNbr = Integer.parseInt(JOptionPane.showInputDialog("Which player would you like to meet in a duel? Write their number:"));
+                for(int i = 0; i<playersOnTile.length ; i++)
+                {
+                    if(playerNbr == playersOnTile[i].getPlayerIndex())
+                    {
+                        player = playersOnTile[i];
+                    }
+                }
+            }
+            else if(playersOnTile.length == 1){
+                Duel duel = new Duel(activePlayer, player, controller);
+            }
+
         }
     }
 }

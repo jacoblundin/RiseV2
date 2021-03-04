@@ -57,6 +57,11 @@ public class PlayerList {
 	public PlayerList getList() {
 		return this;
 	}
+
+	public LinkedList getActivePlayers()
+	{
+		return activePlayers;
+	}
 	
 	/**
 	 * @param index get specific Model.player
