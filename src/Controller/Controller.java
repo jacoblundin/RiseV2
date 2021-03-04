@@ -180,6 +180,35 @@ public class Controller {
          */
         private void checkDuel()
         {
+
+            /*
+            ArrayList playersOnTile = new ArrayList() är lite problematiskt.
+
+            ArrayList är en "generisk" klass vilket innebär att man kan specificera vilken typ av objekt som
+            kan placeras i listan. Man kan t ex skriva ArrayList<String> foo = new ArrayList<>(); för att skapa
+            en ArrayList som kompilatorn garanterar att man enbart kan stoppa in strängar i.
+
+            Generiska klasser som ArrayList kan dock användas "raw" vilket du gjort här. Då specificerar man inte
+            typen och från kompilatorns perspektiv så är det Object man jobbar med när man lägger till/tar bort.
+            Denna möjlighet finns eftersom generiska klasser inte fanns från början utan lades till vid något senare
+            tillfälle (runt 2005 tror jag). ArrayList skulle alltså kunna användas i en väldigt tidig javaversion
+            som inte har generics detta sätt.
+
+            Det praktiska problem du får i just denna kod är att kompilatorn inte fattar att det är Player-objekt
+            som stoppats in och du måste därför casta till Player längre ner i koden när du använder get-metoden. Ett
+            ännu större problem, som dock inte finns här, är att man kan råka stoppa in något som inte är Player och
+            sen försöker casta till Player när man tar ut det: crash vid runtime.
+
+            Det rimliga är därför att ändra till något av följande:
+            a) ArrayList<Player> playersOnTile = new ArrayList<>(); // basic lösning.
+            b) var playersOnTile = new ArrayList<Player>();         // variant med local type inference. Notera att typen måste specificeras på högersidan här.
+            c) List<Player> playersOnTile = new ArrayList<>();      // List-interface istället för att hårdkoda klassen. Mer relevant när listan inte är en lokal variabel.
+
+            Variant c är nog det som traditionellt skulle ansetts vara det bästa. Jag föredrar variant b så länge man
+            kan köra på relativt ny Java-version som stödjer var.
+
+
+             */
             ArrayList playersOnTile = new ArrayList();
             Player player = null;
 
