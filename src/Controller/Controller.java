@@ -192,6 +192,7 @@ public class Controller {
                 if(activePlayer.getPosition() == positionOfPlayer && !activePlayer.getName().equals(player.getName()))
                 {
                         playersOnTile.add(player);
+                    System.out.println("Player added to playersOnTile: " + player.getName());
                 }
             }
 
@@ -208,6 +209,7 @@ public class Controller {
                 }
             }
             else if(!playersOnTile.isEmpty() && playersOnTile.size() == 1){
+                player = (Player)playersOnTile.get(0);
                 Duel duel = new Duel(activePlayer, player, controller);
             }
 
