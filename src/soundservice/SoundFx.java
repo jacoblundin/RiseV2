@@ -1,100 +1,27 @@
 package soundservice;
 
 public enum SoundFx {
+    SOUND_COIN("sounds/CoinDrop.wav"),
+    SOUND_WITCH("sounds/cackle3.wav"),
+    SOUND_WORK("sounds/Scissor_Snip.wav"),
+    SOUND_MONEY("sounds/Coins1.wav"),
+    SOUND_PRISON("sounds/punches.wav"),
+    SOUND_PRISON2("sounds/Cry+2.wav"),
+    SOUND_PRISON3("sounds/gateclosing.wav"),
+    SOUND_CHEER("sounds/cheerPrison.wav"),
+    SOUND_DICE("sounds/RollDice.wav"),
+    SOUND_RANK("sounds/MagicWand.wav"),
+    SOUND_DEFEND("sounds/defend_self.wav"),
+    SOUND_WAR_NOT_OVER("sounds/war_not_over.wav"),
+    SOUND_AWKWARD("sounds/awkward.wav");
 
-    SOUND_COIN {
-        @Override
-        public String getSoundFilePath() {
-            return "sounds/CoinDrop.wav";
-        }
-    },
+    private final String filePath;
 
-    SOUND_WITCH {
-        @Override
-        public String getSoundFilePath() {
-            return "sounds/cackle3.wav";
-        }
-    },
-
-    SOUND_WORK {
-        @Override
-        public String getSoundFilePath() {
-            return "sounds/Scissor_Snip.wav";
-        }
-    },
-
-    SOUND_MONEY {
-        @Override
-        public String getSoundFilePath() {
-            return "sounds/Coins1.wav";
-        }
-    },
-
-    SOUND_PRISON {
-        @Override
-        public String getSoundFilePath() {
-            return "sounds/punches.wav";
-        }
-    },
-
-    SOUND_PRISON2 {
-        @Override
-        public String getSoundFilePath() {
-            return "sounds/Cry+2.wav";
-        }
-    },
-
-    SOUND_PRISON3 {
-        @Override
-        public String getSoundFilePath() {
-            return "sounds/gateclosing.wav";
-        }
-    },
-
-    SOUND_CHEER {
-        @Override
-        public String getSoundFilePath() {
-            return "sounds/cheerPrison.wav";
-        }
-    },
-
-    SOUND_DICE {
-        @Override
-        public String getSoundFilePath() {
-            return "sounds/RollDice.wav";
-        }
-    },
-
-    SOUND_RANK {
-        @Override
-        public String getSoundFilePath() {
-            return "sounds/MagicWand.wav";
-        }
-    },
-
-    SOUND_DEFEND {
-        @Override
-        public String getSoundFilePath() {
-            return "sounds/defend_self.wav";
-        }
-    },
-
-    SOUND_WAR_NOT_OVER {
-        @Override
-        public String getSoundFilePath() {
-            return "sounds/war_not_over.wav";
-        }
-
-    },
-
-    SOUND_AWKWARD {
-        @Override
-        public String getSoundFilePath() {
-            return "sounds/awkward.wav";
-        }
-    };
+    SoundFx(String filePath) {
+        this.filePath = filePath;
+    }
 
     public String getSoundFilePath() {
-        return "";
+        return filePath;
     }
 }
