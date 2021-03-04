@@ -12,6 +12,8 @@ import dice.Dice;
 import gamehistorylog.GameHistoryLog;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
     private final Board board;
@@ -171,7 +173,6 @@ public class Controller {
                 }
 
             }
-
         }
 
         /**
@@ -179,7 +180,7 @@ public class Controller {
          */
         private void checkDuel()
         {
-            Player[] playersOnTile = null;
+            ArrayList playersOnTile = new ArrayList();
             Player player = null;
 
             for (int i = 0; i < playerList.getLength() ; i++)
@@ -190,22 +191,23 @@ public class Controller {
 
                 if(activePlayer.getPosition() == positionOfPlayer && !activePlayer.getName().equals(player.getName()))
                 {
-                        playersOnTile[index] = player;
+                        playersOnTile.add(player);
                 }
             }
 
-            if(playersOnTile.length > 1)
+            if(!playersOnTile.isEmpty() && playersOnTile.size() > 1)
             {
                 int playerNbr = Integer.parseInt(JOptionPane.showInputDialog("Which player would you like to meet in a duel? Write their number:"));
-                for(int i = 0; i<playersOnTile.length ; i++)
+                for(int i = 0; i<playersOnTile.size() ; i++)
                 {
-                    if(playerNbr == playersOnTile[i].getPlayerIndex())
+                    Player playerCheck = (Player)playersOnTile.get(i);
+                    if(playerNbr == playerCheck.getPlayerIndex())
                     {
-                        player = playersOnTile[i];
+                        Duel duel = new Duel(activePlayer, playerCheck, controller);
                     }
                 }
             }
-            else if(playersOnTile.length == 1){
+            else if(!playersOnTile.isEmpty() && playersOnTile.size() == 1){
                 Duel duel = new Duel(activePlayer, player, controller);
             }
 
