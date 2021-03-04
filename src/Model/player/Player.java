@@ -288,7 +288,7 @@ public class Player {
                     e.printStackTrace();
                 }
                 SoundService.instance().playSoundFx(SoundFx.SOUND_RANK);
-                JOptionPane.showMessageDialog(null, "You ranked up! You may now upgrade your buildings\n" +
+                JOptionPane.showMessageDialog(null, name + ", you ranked up! You may now upgrade your buildings\n" +
                         "to a higher level and you earn more from your work.");
                 GameHistoryLog.instance().logPlayerRankUpEvent(this);
                 break;
@@ -305,7 +305,7 @@ public class Player {
                     e.printStackTrace();
                 }
                 SoundService.instance().playSoundFx(SoundFx.SOUND_RANK);
-                JOptionPane.showMessageDialog(null, "You fell in rank."
+                JOptionPane.showMessageDialog(null, name + ", you fell in rank."
                 );
                 GameHistoryLog.instance().logPlayerRankDownEvent(this);
                 break;
