@@ -9,6 +9,8 @@ import java.util.Map;
 import Controller.Controller;
 import Model.player.Player;
 import Model.player.PlayerList;
+import soundservice.SoundFx;
+import soundservice.SoundService;
 
 public class Duel extends JFrame {
     private enum Weapon {
@@ -91,6 +93,9 @@ public class Duel extends JFrame {
         this.setContentPane(panel1);
         this.pack();
         this.setVisible(true);
+
+        SoundService.instance().playSoundFx(SoundFx.SOUND_DEFEND);
+
     }
 
     private void initializeComponents() {
@@ -216,6 +221,7 @@ public class Duel extends JFrame {
 
         SwingUtilities.invokeLater(() -> {
             try {
+                SoundService.instance().playSoundFx(SoundFx.SOUND_WAR_NOT_OVER);
                 Thread.sleep(3000);
                 this.dispose();
                 controller.duelWinner(winner, loser);
@@ -230,7 +236,8 @@ public class Duel extends JFrame {
 
         SwingUtilities.invokeLater(() -> {
             try {
-                Thread.sleep(2000);
+                SoundService.instance().playSoundFx(SoundFx.SOUND_AWKWARD);
+                Thread.sleep(3000);
                 restartGame();
             } catch (InterruptedException ignore) {
             }

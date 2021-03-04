@@ -1,9 +1,6 @@
 package soundservice;
 
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.*;
 import java.io.File;
 
 public class SoundFxThread extends Thread {
@@ -61,7 +58,10 @@ public class SoundFxThread extends Thread {
 		@Override
 		public void run() {
 			try {
-				AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(filePath));
+				AudioInputStream  in = AudioSystem.getAudioInputStream(new File(filePath));
+				AudioFormat af = new AudioFormat(44100, 16, 1, true, false);
+				AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(af, in);
+
 				Clip clip = AudioSystem.getClip();
 				clip.open(audioInputStream);
 

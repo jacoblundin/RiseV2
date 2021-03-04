@@ -287,9 +287,9 @@ public class Player {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                JOptionPane.showMessageDialog(null, "You ranked up! You may now upgrade your buildings" +
-                        "to a higher level and you earn more from your work.");
                 SoundService.instance().playSoundFx(SoundFx.SOUND_RANK);
+                JOptionPane.showMessageDialog(null, "You ranked up! You may now upgrade your buildings\n" +
+                        "to a higher level and you earn more from your work.");
                 GameHistoryLog.instance().logPlayerRankUpEvent(this);
                 break;
             case 0:
@@ -304,9 +304,9 @@ public class Player {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                SoundService.instance().playSoundFx(SoundFx.SOUND_RANK);
                 JOptionPane.showMessageDialog(null, "You fell in rank."
                 );
-                SoundService.instance().playSoundFx(SoundFx.SOUND_RANK);
                 GameHistoryLog.instance().logPlayerRankDownEvent(this);
                 break;
         }

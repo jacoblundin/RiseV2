@@ -160,6 +160,7 @@ public class Controller {
 
                     goEvent();
                     redrawPlayerInfo();
+                    checkDuel();
                     gameFlowPanel.setEndTurnButton(true);
                 }
 
@@ -171,7 +172,6 @@ public class Controller {
 
             }
 
-            checkDuel();
         }
 
         /**
