@@ -13,6 +13,7 @@ import gamehistorylog.GameHistoryLog;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
     private final Board board;
