@@ -120,7 +120,9 @@ public class ManageEvents {
 		if (tile instanceof FortuneTeller) {
 			fortuneTellerEvent(tile, player);
 		}
-		eastPanel.addTabs();
+
+		controller.updatePlayerRanks();
+		controller.redrawPlayerInfo();
 	}
 
 	/**
@@ -129,7 +131,6 @@ public class ManageEvents {
 	 * should be removed from the game
 	 */
 	public void control(Player player, int amount) {
-
 		if (player.getBalance() < amount) {
 			player.setIsAlive(false);
 			playerList.switchToNextPlayer();
@@ -149,47 +150,57 @@ public class ManageEvents {
 	 * @param player
 	 */
 	public void propertyEvent(Tile tile, Player player) {
-		Property tempProperty = (Property) tile;
-		int tempInt = 0;
+		Property property = (Property) tile;
 
-		if (tempProperty.getPurchasable()) {
-			if (player.getBalance() < tempProperty.getPrice()) {
+		if (property.getPurchasable()) {
+			if (player.getBalance() < property.getPrice()) {
 				JOptionPane.showMessageDialog(null, "Not enough funds to purchase this property");
 			} else {
-				propertyDialog(tempProperty, player);
+				propertyDialog(property, player);
 			}
 		} else {
-
-			//TODO Is this if statement necessary? The if and else bodies seem to do the same thing
-			if (tempProperty.getLevel() == 0) {
-				tempInt = tempProperty.getDefaultRent(); //TODO This is the only difference, but this should be possible to change
-
-				control(player, tempInt);
-				if (player.isAlive() == true) {
-					JOptionPane.showMessageDialog(null, player.getName() + " paid " + tempProperty.getTotalRent() + " GC to "
-							+ tempProperty.getOwner().getName());
-
-					//Log rent event
-					gameHistoryLog.logPropertyRentEvent(player, tempProperty);
-
-					player.decreaseBalace(tempInt);
-					player.decreaseNetWorth(tempInt);
-					tempProperty.getOwner().increaseBalance(tempInt);
-				}
-			} else {
-				tempInt = tempProperty.getTotalRent();
-				control(player, tempInt);
-				if (player.isAlive() == true) {
-					JOptionPane.showMessageDialog(null, player.getName() + " paid " + tempProperty.getTotalRent() + " GC to "
-							+ tempProperty.getOwner().getName());
-
-					//Log rent event
-					gameHistoryLog.logPropertyRentEvent(player, tempProperty);
-
-					player.decreaseBalace(tempInt);
-					tempProperty.getOwner().increaseBalance(tempInt);
-				}
+		    int rent = property.getTotalRent();
+			control(player, rent);
+			if (player.isAlive()) {
+				var owner = property.getOwner();
+				JOptionPane.showMessageDialog(null, player.getName() + " paid " + rent + " GC to "
+						+ owner.getName());
+				gameHistoryLog.logPropertyRentEvent(player, property);
+				player.decreaseBalance(rent);
+				player.decreaseNetWorth(rent);
+				owner.increaseBalance(rent);
+				owner.increaseNetWorth(rent);
 			}
+//			//TODO Is this if statement necessary? The if and else bodies seem to do the same thing
+//			if (tempProperty.getLevel() == 0) {
+//				tempInt = tempProperty.getDefaultRent(); //TODO This is the only difference, but this should be possible to change
+//
+//				control(player, tempInt);
+//				if (player.isAlive() == true) {
+//					JOptionPane.showMessageDialog(null, player.getName() + " paid " + tempProperty.getTotalRent() + " GC to "
+//							+ tempProperty.getOwner().getName());
+//
+//					//Log rent event
+//					gameHistoryLog.logPropertyRentEvent(player, tempProperty);
+//
+//					player.decreaseBalace(tempInt);
+//					player.decreaseNetWorth(tempInt);
+//					tempProperty.getOwner().increaseBalance(tempInt);
+//				}
+//			} else {
+//				tempInt = tempProperty.getTotalRent();
+//				control(player, tempInt);
+//				if (player.isAlive() == true) {
+//					JOptionPane.showMessageDialog(null, player.getName() + " paid " + tempProperty.getTotalRent() + " GC to "
+//							+ tempProperty.getOwner().getName());
+//
+//					//Log rent event
+//					gameHistoryLog.logPropertyRentEvent(player, tempProperty);
+//
+//					player.decreaseBalace(tempInt);
+//					tempProperty.getOwner().increaseBalance(tempInt);
+//				}
+//			}
 		}
 	}
 
@@ -226,12 +237,10 @@ public class ManageEvents {
 		control(player, chargePlayer);
 
 		if (player.isAlive()) {
-
-			//Log tax event
 			gameHistoryLog.logTaxEvent(player, 200);
 
 			JOptionPane.showMessageDialog(null, "You paid 200 gold in tax to the Church");
-			player.decreaseBalace(chargePlayer);
+			player.decreaseBalance(chargePlayer);
 			player.decreaseNetWorth(chargePlayer);
 			taxCounter++;
 
@@ -280,7 +289,7 @@ public class ManageEvents {
 						+ tempTavernObj.getOwner().getName() + "\n");*/
 				tempTavernObj.getOwner().increaseBalance(randomValue);
 				tempTavernObj.getOwner().increaseNetWorth(randomValue);
-				player.decreaseBalace(randomValue);
+				player.decreaseBalance(randomValue);
 			}
 		}
 	}
@@ -291,23 +300,18 @@ public class ManageEvents {
 	 * @param player in jail
 	 */
 	public void jailEvent(Tile tile, Player player) {
-		if (player.isPlayerInJail() == true && (player.getJailCounter()) < 2) {
+		if (player.isPlayerInJail() && (player.getJailCounter()) < 2) {
 			player.increaseJailCounter();
 			if (player.getBalance() > (player.getJailCounter() * 50)) {
 				jailDialog(player);
 			} else {
 				JOptionPane.showMessageDialog(null, "You can not afford the bail");
-
 				SoundService.instance().playSoundFx(SoundFx.SOUND_PRISON);
-
 			}
 		} else if (player.getJailCounter() >= 2) {
 			player.setPlayerIsInJail(false);
 			player.setJailCounter(0);
-
-			//Log jail exit event
 			gameHistoryLog.logJailExitEvent(player);
-
 			gameFlowPanel.activateRollDice();
 		}
 	}
@@ -325,9 +329,6 @@ public class ManageEvents {
 		JOptionPane.showMessageDialog(null, player.getName() + " got in jail.");
 		SoundService.instance().playSoundFx(SoundFx.SOUND_PRISON2);
 		SoundService.instance().playSoundFx(SoundFx.SOUND_PRISON3);
-
-
-		//Log the event
 		gameHistoryLog.logJailEnterEvent(player);
 	}
 
@@ -359,7 +360,7 @@ public class ManageEvents {
 		if (yesOrNo == 0 && (property.getPrice() <= player.getBalance())) {
 			property.setOwner(player);
 			player.addNewProperty(property);
-			player.decreaseBalace(property.getPrice());
+			player.decreaseBalance(property.getPrice());
 			gameHistoryLog.logPropertyBuyEvent(player, property);
 			controller.drawBorderColors();
 		} else {
@@ -380,7 +381,7 @@ public class ManageEvents {
 		if (yesOrNo == 0 && (tavern.getPrice() <= player.getBalance())) {
 			tavern.setOwner(player);
 			player.addNewTavern(tavern);
-			player.decreaseBalace(tavern.getPrice());
+			player.decreaseBalance(tavern.getPrice());
 			controller.drawBorderColors();
 			//TODO Log tavern purchase
 			//gameHistoryLog.logPropertyBuyEvent(player, tavern);
@@ -390,17 +391,10 @@ public class ManageEvents {
 		}
 	}
 
-	/**
-	 * @return roll of the gameFlowPanel.
-	 */
 	public int getRoll() {
 		return roll;
 	}
 
-	/**
-	 * Sets the roll of the gameFlowPanel.
-	 * @param roll combined value of the dice roll.
-	 */
 	public void setRoll(int roll) {
 		this.roll = roll;
 	}
@@ -467,7 +461,7 @@ public class ManageEvents {
 			control(player, pay);
 			if (player.isAlive()) {
 				//TODO: Log Fortune event
-				player.decreaseBalace(pay);
+				player.decreaseBalance(pay);
 				player.decreaseNetWorth(pay);
 				msgGUI.newFortune(false, pay);
 

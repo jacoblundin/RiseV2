@@ -13,7 +13,6 @@ import gamehistorylog.GameHistoryLog;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Controller {
     private final Board board;
@@ -130,7 +129,16 @@ public class Controller {
     public void duelWinner(Player winner, Player loser)
     {
         winner.increaseBalance(500);
-        loser.decreaseBalace(500);
+        loser.decreaseBalance(500);
+    }
+
+    public void updatePlayerRanks() {
+        for (var player : playerList.getActivePlayers()) {
+            SwingUtilities.invokeLater(() -> {
+                player.checkPlayerRank();
+                board.setPlayer(player);
+            });
+        }
     }
 
     private class PlayerMover implements Runnable {

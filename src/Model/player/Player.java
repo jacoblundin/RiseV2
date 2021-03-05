@@ -21,10 +21,8 @@ import soundservice.SoundService;
  * @author AevanDino, Seth �berg, Muhammad Hasan, Sebastian Viro
  */
 public class Player {
-
     private String name;
     private Boolean isAlive;
-
     private ImageIcon playerIcon;
     private int counter;
     private int playerIndex;
@@ -32,18 +30,13 @@ public class Player {
     private int playerJailCounter = 0;
     private boolean playerIsInJail = false;
     private Color playerColor;
-
     private PlayerRanks playerRank;
-
     private int balance;
     private int netWorth;
     private boolean playerPassedgo = false;
-
     private ArrayList<Property> propertiesOwned;
     private ArrayList<Tile> tilesOwned;
-
     private ArrayList<Tavern> tavernsOwned;
-
     private WestSidePanel westSidePanel;
 
     /**
@@ -74,11 +67,7 @@ public class Player {
         counter = 0;
 
         //Generate the boardPiece
-        try {
-            this.playerIcon = BoardPiece.newPiece(this.playerRank, this.playerColor);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.playerIcon = BoardPiece.newPiece(this.playerRank, this.playerColor);
     }
 
     /**
@@ -178,9 +167,7 @@ public class Player {
      * @param amountOfStepsToMove
      */
     public void setPosition(int amountOfStepsToMove) {
-
         for (int i = 0; i < amountOfStepsToMove; i++) {
-
             if (counter < 39) {
                 counter++;
             } else {
@@ -228,7 +215,7 @@ public class Player {
     /**
      * @param decrease amount to decrease players balance by
      */
-    public void decreaseBalace(int decrease) {
+    public void decreaseBalance(int decrease) {
         this.balance -= decrease;
         SoundService.instance().playSoundFx(SoundFx.SOUND_MONEY);
         checkPlayerRank();
@@ -276,17 +263,11 @@ public class Player {
      * @param playerRank set the rank of this Model.player
      */
     public void setPlayerRank(PlayerRanks playerRank) {
-        //Compare the current rank with the new rank
         switch (this.playerRank.compareTo(playerRank)) {
             case -1:
                 //Rank up
                 this.playerRank = playerRank;
-
-                try {
-                    this.playerIcon = BoardPiece.newPiece(playerRank, this.playerColor);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                this.playerIcon = BoardPiece.newPiece(playerRank, this.playerColor);
                 SoundService.instance().playSoundFx(SoundFx.SOUND_RANK);
                 JOptionPane.showMessageDialog(null, name + ", you ranked up! You may now upgrade your buildings\n" +
                         "to a higher level and you earn more from your work.");
@@ -298,12 +279,7 @@ public class Player {
             case 1:
                 //Rank down
                 this.playerRank = playerRank;
-
-                try {
-                    this.playerIcon = BoardPiece.newPiece(playerRank, this.playerColor);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                this.playerIcon = BoardPiece.newPiece(playerRank, this.playerColor);
                 SoundService.instance().playSoundFx(SoundFx.SOUND_RANK);
                 JOptionPane.showMessageDialog(null, name + ", you fell in rank."
                 );
@@ -423,21 +399,15 @@ public class Player {
     }
 
     public void checkPlayerRank() {
-
         if (this.netWorth <= 2000) {
-            //Peasant
             setPlayerRank(PlayerRanks.PEASANT);
         } else if (this.netWorth < 4000) {
-            //Knight
             setPlayerRank(PlayerRanks.KNIGHT);
         } else if (this.netWorth < 7500) {
-            //Lord
             setPlayerRank(PlayerRanks.LORD);
         } else if (this.netWorth >= 7500) {
-            //King
             setPlayerRank(PlayerRanks.KINGS);
         }
-
     }
 
     /**
