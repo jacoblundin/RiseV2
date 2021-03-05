@@ -131,6 +131,7 @@ public class Controller {
     {
         winner.increaseBalance(500);
         loser.decreaseBalance(500);
+        updatePlayerRanks();
     }
 
     public void updatePlayerRanks() {
