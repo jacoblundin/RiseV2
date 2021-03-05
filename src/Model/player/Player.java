@@ -244,14 +244,6 @@ public class Player {
         this.isAlive = playerIsAlive;
     }
 
-    public String isAliveString() {
-
-        if (isAlive == true) {
-            return "This Model.player is alive and well";
-        } else
-            return "The plauge has taken another soul";
-    }
-
     /**
      * @return playerRank the rank of the Model.player
      */

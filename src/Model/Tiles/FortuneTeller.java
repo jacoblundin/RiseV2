@@ -87,8 +87,8 @@ public class FortuneTeller implements Tile {
 	@Override
 	public String getTileInfo() {
 		return "There are two types of cards, blessings and curses." +
-				"\nBlessing affect the Model.player in a positive way." +
-				"\nCurses affect the Model.player in a negative way.";
+				"\nBlessing affect the player in a positive way." +
+				"\nCurses affect the player in a negative way.";
 	}
 
 	@Override
