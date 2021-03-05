@@ -98,22 +98,22 @@ public class Controller {
         redrawPlayerInfo();
     }
 
-	public void goEvent() {
-		Player activePlayer = playerList.getActivePlayer();
-		int payout = 200;
+    public void goEvent() {
+        Player activePlayer = playerList.getActivePlayer();
+        int payout = 200;
 
-		if (activePlayer.passedGo()) {
+        if (activePlayer.passedGo()) {
 
-			activePlayer.increaseBalance(200);
-			activePlayer.increaseNetWorth(200);
+            activePlayer.increaseBalance(200);
+            activePlayer.increaseNetWorth(200);
 
-			//Log the pass go event
-			GameHistoryLog.instance().logPassGoEvent(activePlayer, payout);
-			activePlayer.resetPassedGo();
-		}
-	}
+            //Log the pass go event
+            GameHistoryLog.instance().logPassGoEvent(activePlayer, payout);
+            activePlayer.resetPassedGo();
+        }
+    }
 
-	/* Move the player i steps */
+    /* Move the player i steps */
     public void moveWCheat(int i) {
         playerList.getActivePlayer().checkPlayerRank();
         board.removePlayer(playerList.getActivePlayer());
@@ -127,10 +127,11 @@ public class Controller {
         gameFlowPanel.setEndTurnButton(true);
     }
 
-    public void duelWinner(Player winner, Player loser)
-    {
+    public void duelWinner(Player winner, Player loser) {
         winner.increaseBalance(500);
+        winner.increaseNetWorth(500);
         loser.decreaseBalance(500);
+        loser.decreaseNetWorth(500);
         updatePlayerRanks();
     }
 
@@ -163,7 +164,6 @@ public class Controller {
                 board.setPlayer(activePlayer);
 
                 if (i == (roll - 1)) {
-                    //Log dice roll event
                     GameHistoryLog.instance().logDiceRollEvent(activePlayer, board.getDestinationTile(activePlayer.getPosition()), roll);
 
                     //Create the event the landing tile
@@ -181,40 +181,34 @@ public class Controller {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
             }
         }
 
         /**
          * Checks if two players are on the same tile and should start a duel.
          */
-        private void checkDuel()
-        {
+        private void checkDuel() {
             List<Player> playersOnTile = new ArrayList<Player>();
             Player player = null;
 
-            for (int i = 0; i < playerList.getLength() ; i++)
-            {
-                player = (Player) playerList.getActivePlayers().get(i);
+            for (int i = 0; i < playerList.getLength(); i++) {
+                player = playerList.getActivePlayers().get(i);
                 int positionOfPlayer = player.getPosition();
 
-                if(activePlayer.getPosition() == positionOfPlayer && !activePlayer.getName().equals(player.getName()))
-                {
-                        playersOnTile.add(player);
+                if (activePlayer.getPosition() == positionOfPlayer && !activePlayer.getName().equals(player.getName())) {
+                    playersOnTile.add(player);
                     System.out.println("Player added to playersOnTile: " + player.getName());
                 }
             }
 
-            if(!playersOnTile.isEmpty() && playersOnTile.size() > 1)
-            {
+            if (!playersOnTile.isEmpty() && playersOnTile.size() > 1) {
                 int playerNbr = Integer.parseInt(JOptionPane.showInputDialog("Which player would you like to meet in a duel? Write their number:"));
                 for (Player playerCheck : playersOnTile) {
                     if (playerNbr == playerCheck.getPlayerIndex()) {
                         Duel duel = new Duel(activePlayer, playerCheck, controller);
                     }
                 }
-            }
-            else if(playersOnTile.size() == 1){
+            } else if (playersOnTile.size() == 1) {
                 player = playersOnTile.get(0);
                 Duel duel = new Duel(activePlayer, player, controller);
             }
