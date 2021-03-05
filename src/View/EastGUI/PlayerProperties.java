@@ -223,7 +223,7 @@ public class PlayerProperties extends JPanel implements ActionListener {
                         activePlayer.removeProperty(activePlayerProperty);
                         otherPlayer.removeProperty(otherPlayersProperty);
 
-                        activePlayer.decreaseBalace(offer);
+                        activePlayer.decreaseBalance(offer);
                         activePlayer.decreaseNetWorth(offer);
 
                         otherPlayer.increaseBalance(offer);
@@ -252,7 +252,7 @@ public class PlayerProperties extends JPanel implements ActionListener {
                         activePlayerProperty.setOwner(otherPlayer);
                         activePlayer.addNewProperty(otherPlayersProperty);
 
-                        activePlayer.decreaseBalace(offer);
+                        activePlayer.decreaseBalance(offer);
                         activePlayer.decreaseNetWorth(offer);
 
                         otherPlayer.increaseBalance(offer);
