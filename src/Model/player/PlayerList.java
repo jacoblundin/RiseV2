@@ -1,5 +1,6 @@
 package Model.player;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,28 +17,13 @@ import View.EastGUI.EastSidePanel;
  */
 
 public class PlayerList {
-    private LinkedList<Player> activePlayers = new LinkedList<>();
+    private List<Player> activePlayers = new ArrayList<>();
     private ColorIconMap colorIcons = new ColorIconMap();
     private StringColorMap colorMap = new StringColorMap();
-
     private ImageIcon playerIcon = new ImageIcon();
     private int currentPlayer = 0;
     private int playerListLength = 0;
 
-
-    /**
-     * Constructor that sets the active Model.player to 0 immediately at the start of a game
-     *
-     * @param p
-     */
-    public PlayerList(EastSidePanel p) {
-        currentPlayer = 0;
-
-    }
-
-    /**
-     * Constructor that sets the active Model.player to 0 immediately at the start of a game
-     */
     public PlayerList() {
         currentPlayer = 0;
     }
@@ -52,13 +38,6 @@ public class PlayerList {
         playerIcon = colorIcons.getColorFromMap(icon);
         activePlayers.add(new Player(name, playerIcon, colorMap.getColorFromMap(icon), playerListLength));
         playerListLength++;
-    }
-
-    /**
-     * @return list with all players
-     */
-    public PlayerList getList() {
-        return this;
     }
 
     public List<Player> getActivePlayers() {
@@ -99,7 +78,6 @@ public class PlayerList {
      * Update amount of players after a Model.player has been removed
      */
     public void updatePlayerList() {
-
         for (int i = 0; i < activePlayers.size(); i++) {
             activePlayers.get(i).setPlayerIndex(i);
         }
@@ -109,7 +87,6 @@ public class PlayerList {
      * Used to switch to the current Model.player to the next one
      */
     public void switchToNextPlayer() {
-
         if (currentPlayer < (activePlayers.size() - 1)) {
             currentPlayer = currentPlayer + 1;
         } else {
