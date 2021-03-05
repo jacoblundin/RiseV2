@@ -34,13 +34,12 @@ public class Introduction extends JPanel {
 	 * Constructor that calls upon method which draws gui
 	 */
 	public Introduction() {
-		startGUI();
 	}
 
 	/**
 	 * Creates gui
 	 */
-	private void startGUI() {
+	public void startGUI() {
 		setPreferredSize(new Dimension(600, 350));
 		lblTitel.setBounds(87, -20, 411, 86);
 		taText.setAlignmentX(Component.RIGHT_ALIGNMENT);
