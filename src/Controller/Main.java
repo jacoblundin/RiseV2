@@ -13,6 +13,7 @@ import View.GameFlowGUI.GameFlowPanel;
 import View.StartMenuGUI.Introduction;
 import View.StartMenuGUI.StartingScreen;
 import com.google.gson.Gson;
+import gamehistorylog.GameHistoryLog;
 import soundservice.SoundService;
 
 import java.io.IOException;
@@ -74,6 +75,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             SoundService.instance().playBgMusic();
+            GameHistoryLog.resetLog();
             TileCollection tileCollection = null;
             PlayerList playerList = null;
 
