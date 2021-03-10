@@ -16,7 +16,8 @@ public enum SoundFx {
     SOUND_VICTORY("sounds/Victory.wav"),
     SOUND_FORTUNE_BLESSING("sounds/Cheer.wav"),
     SOUND_FORTUNE_CURSE("sounds/Witch.wav"),
-    SOUND_CHURCHBELLS("sounds/ChurchBells.wav");
+    SOUND_CHURCHTAX("sounds/ChurchBells.wav"),
+    SOUND_SUNDAYCHURCH("sounds/Choir.wav");
 
     private final String filePath;
 

@@ -205,6 +205,7 @@ public class ManageEvents {
         control(player, chargePlayer);
 
         if (player.isAlive()) {
+            SoundService.instance().playSoundFx(SoundFx.SOUND_CHURCHTAX);
             gameHistoryLog.logTaxEvent(player, 200);
             JOptionPane.showMessageDialog(null, "You paid 200 gold in tax to the Church");
             player.decreaseBalance(chargePlayer);
@@ -308,7 +309,7 @@ public class ManageEvents {
      * @param player
      */
     public void churchEvent(Player player) {
-        SoundService.instance().playSoundFx(SoundFx.SOUND_CHURCHBELLS);
+        SoundService.instance().playSoundFx(SoundFx.SOUND_SUNDAYCHURCH);
         int taxPayout = 200 * taxCounter;
         player.increaseBalance(taxPayout);
         player.increaseNetWorth(taxPayout);

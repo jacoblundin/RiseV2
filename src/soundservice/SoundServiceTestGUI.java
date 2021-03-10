@@ -64,7 +64,7 @@ public class SoundServiceTestGUI extends JPanel {
 
 		btnDice.addActionListener(e -> { SoundService.instance().playSoundFx(SoundFx.SOUND_DICE); });
 
-		btnFortuneCurse.addActionListener(e -> { SoundService.instance().playSoundFx(SoundFx.SOUND_CHURCHBELLS); });
+		btnFortuneCurse.addActionListener(e -> { SoundService.instance().playSoundFx(SoundFx.SOUND_CHURCHTAX); });
 
 		btnStartBgMusic.addActionListener(e -> { SoundService.instance().playBgMusic(); });
 
