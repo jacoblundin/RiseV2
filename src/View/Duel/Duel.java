@@ -213,8 +213,6 @@ public class Duel extends JFrame {
     }
 
     private void winner(Player winner, Player loser) {
-        System.out.println("won: " + winner.getName() + " lost: " + loser.getName());
-
         winnerLabel.setVisible(true);
         winnerLabel.setText(winner.getName() + "\n" + " won!");
 

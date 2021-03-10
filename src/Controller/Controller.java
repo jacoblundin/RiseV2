@@ -108,7 +108,6 @@ public class Controller {
         }
     }
 
-    /* Move the player i steps */
     public void moveWCheat(int i) {
         playerList.getActivePlayer().checkPlayerRank();
         board.removePlayer(playerList.getActivePlayer());

@@ -8,7 +8,6 @@ import Model.player.PlayerFromJSON;
 import Model.player.PlayerList;
 import Model.player.PlayerRanks;
 import View.BoardGUI.GamePanels;
-import View.GameFlowGUI.GameFlowPanel;
 import View.StartMenuGUI.Introduction;
 import View.StartMenuGUI.StartingScreen;
 import com.google.gson.Gson;

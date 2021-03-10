@@ -12,7 +12,6 @@ public class Tax implements Tile {
 	private String info;
 	private ImageIcon img = new ImageIcon("tilePics/tax.png");
 
-	//Class variables
 	private Player player;
 	private SundayChurch church;
 	private int baseTax = 200;
@@ -25,7 +24,6 @@ public class Tax implements Tile {
 		return this.baseTax;
 	}
 
-	//Tile methods
 	public String getName() {
 		return this.name;
 	}

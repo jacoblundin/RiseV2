@@ -3,19 +3,11 @@ package View.WestGUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-
 import javax.swing.*;
-
-import Controller.Controller;
 import Controller.Main;
-import Model.Tiles.TileCollection;
-import Model.player.PlayerList;
 import View.BoardGUI.Rules;
 import View.BoardGUI.GamePanels;
 import View.StartMenuGUI.Introduction;
-import View.StartMenuGUI.StartingScreen;
 import soundservice.SoundService;
 
 /**

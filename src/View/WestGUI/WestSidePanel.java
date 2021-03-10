@@ -2,13 +2,11 @@ package View.WestGUI;
 
 import gamehistorylog.GameHistoryLog;
 import gamehistorylog.GameHistoryPanel;
-
 import java.awt.BorderLayout;
 import java.awt.*;
 import javax.swing.BorderFactory;
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.text.DefaultCaret;
 
 /**
  * WestPanel which shows Info about each Tile and The game history.

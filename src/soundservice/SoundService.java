@@ -25,8 +25,6 @@ public class SoundService {
 		backgroundMusic = new BackgroundMusic();
 	}
 
-	//SoundFx methods
-
 	/**
 	 * Call this method to play a sound effect.
 	 *
