@@ -308,7 +308,7 @@ public class ManageEvents {
      * @param player
      */
     public void churchEvent(Player player) {
-        //TODO church sound
+        SoundService.instance().playSoundFx(SoundFx.SOUND_CHURCHBELLS);
         int taxPayout = 200 * taxCounter;
         player.increaseBalance(taxPayout);
         player.increaseNetWorth(taxPayout);
@@ -400,7 +400,6 @@ public class ManageEvents {
             new SecretGui();
             new Thread(new SecretSleeper(tempCard, player));
             eastPanel.addTabs();
-            SoundService.instance().playSoundFx(SoundFx.SOUND_WITCH);
         } else {
             fortune(tempCard, player);
         }
@@ -424,7 +423,7 @@ public class ManageEvents {
                 player.decreaseBalance(pay);
                 player.decreaseNetWorth(pay);
                 msgGUI.newFortune(false, pay);
-                //TODO curse sound
+                SoundService.instance().playSoundFx(SoundFx.SOUND_FORTUNE_CURSE);
             }
         } else {
             tempCard.setIsBlessing(true);
@@ -433,7 +432,7 @@ public class ManageEvents {
             player.increaseNetWorth(tempCard.getAmount());
             //TODO: Log Fortune event
             msgGUI.newFortune(true, tempCard.getAmount());
-            SoundService.instance().playSoundFx(SoundFx.SOUND_CHEER);
+            SoundService.instance().playSoundFx(SoundFx.SOUND_FORTUNE_BLESSING);
         }
     }
 

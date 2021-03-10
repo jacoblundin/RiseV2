@@ -2,7 +2,6 @@ package soundservice;
 
 public enum SoundFx {
     SOUND_COIN("sounds/CoinDrop.wav"),
-    SOUND_WITCH("sounds/cackle3.wav"),
     SOUND_WORK("sounds/Scissor_Snip.wav"),
     SOUND_MONEY("sounds/Coins1.wav"),
     SOUND_PRISON("sounds/punches.wav"),
@@ -16,7 +15,7 @@ public enum SoundFx {
     SOUND_AWKWARD("sounds/awkward.wav"),
     SOUND_VICTORY("sounds/Victory.wav"),
     SOUND_FORTUNE_BLESSING("sounds/Cheer.wav"),
-    SOUND_FORTUNE_CURSE("sounds/WitchLaugh.wav"),
+    SOUND_FORTUNE_CURSE("sounds/Witch.wav"),
     SOUND_CHURCHBELLS("sounds/ChurchBells.wav");
 
     private final String filePath;

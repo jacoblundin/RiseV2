@@ -47,12 +47,6 @@ public class WinGui extends JPanel {
 	}
 
 	private void victory() {
-		SwingUtilities.invokeLater(() -> {
-			try {
-				SoundService.instance().playSoundFx(SoundFx.SOUND_AWKWARD);
-				Thread.sleep(3000);
-			} catch (InterruptedException ignore) {
-			}
-		});
+		SoundService.instance().playSoundFx(SoundFx.SOUND_VICTORY);
 	}
 }
