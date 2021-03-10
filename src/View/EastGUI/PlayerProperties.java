@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,7 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
-
 import Model.player.Player;
 import Model.player.PlayerList;
 import Model.Tiles.Property;
@@ -28,7 +26,6 @@ import Model.Tiles.Property;
  * @author Muhammad Abdulkhuder Aevan Dino sebastian Viro.
  */
 public class PlayerProperties extends JPanel implements ActionListener {
-
     private static final long serialVersionUID = 1L;
     private JLabel lblName = new JLabel("Name");
     private JLabel lblPicture = new JLabel("");
@@ -58,7 +55,6 @@ public class PlayerProperties extends JPanel implements ActionListener {
         this.eastSidePanel = eastSidePanel;
 
         setBorder(null);
-
         setOpaque(false);
         setBackground(Color.DARK_GRAY);
         setPreferredSize(new Dimension(330, 607));
@@ -140,7 +136,6 @@ public class PlayerProperties extends JPanel implements ActionListener {
         btnDowngrade.addActionListener(this);
         btnSell.addActionListener(this);
         btnTrade.addActionListener(this);
-
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -166,21 +161,16 @@ public class PlayerProperties extends JPanel implements ActionListener {
                         .parseInt(JOptionPane.showInputDialog(null,
                                 "Which player do you want to trade with?\n 1 for player 1 \n 2 for player 2 and so on..."))
                         - 1);
-
-
             } while (otherPlayerInt == playerList.getActivePlayer().getPlayerIndex() || otherPlayerInt > playerList.getLength() - 1);
 
             Player activePlayer = playerList.getActivePlayer();
             Player otherPlayer = playerList.getPlayerFromIndex(otherPlayerInt);
 
             if (otherPlayer.getProperties().size() > 0) {
-
-
                 do {
                     type = (Integer.parseInt(JOptionPane.showInputDialog(null,
                             "Pick a trade type\n 1 = Property for property \n 2 = Money for property\n 3 = Both")));
                 } while (type < 0 || type > 3);
-
 
                 if (type == 1 || type == 3) {
 
@@ -189,7 +179,6 @@ public class PlayerProperties extends JPanel implements ActionListener {
                                 "Which property do you want to give away \n 1 for property 1 \n 2 for property 2 and so on..."))
                                 - 1);
                     } while (whichPropertyToGive > activePlayer.getProperties().size());
-
                 }
 
                 if (type == 2 || type == 3) {
@@ -197,7 +186,6 @@ public class PlayerProperties extends JPanel implements ActionListener {
                         offer = (Integer.parseInt(JOptionPane.showInputDialog(null,
                                 "How much do you offer " + otherPlayer.getName() + "?")));
                     } while (offer > activePlayer.getBalance());
-
                 }
 
                 do {
@@ -207,10 +195,8 @@ public class PlayerProperties extends JPanel implements ActionListener {
 
 
                 Property activePlayerProperty = playerList.getActivePlayer().getPropertyAt(whichPropertyToGive);
-
                 Property otherPlayersProperty = playerList.getPlayerFromIndex(otherPlayerInt)
                         .getPropertyAt(whichPropertyYouWant);
-
 
                 if (type == 1 || type == 3) {
                     confirm = JOptionPane.showConfirmDialog(null,
@@ -236,10 +222,7 @@ public class PlayerProperties extends JPanel implements ActionListener {
                         otherPlayer.addNewProperty(activePlayerProperty);
 
                         JOptionPane.showMessageDialog(null, "Trade Complete! Omedato gosaimasu!!!");
-
-
                     }
-
                 }
 
                 if (type == 2) {
@@ -258,7 +241,6 @@ public class PlayerProperties extends JPanel implements ActionListener {
                         otherPlayer.increaseBalance(offer);
                         otherPlayer.increaseNetWorth(offer);
                         JOptionPane.showMessageDialog(null, "Trade Complete! Omedato gosaimasu!!!");
-
                     }
                 }
                 eastSidePanel.tradeProperty();

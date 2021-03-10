@@ -3,10 +3,8 @@ package View.GameFlowGUI;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
-
 import Controller.Controller;
 import UnusedClasses.cheat.CheatGui;
 import View.BoardGUI.ShowPlayersTurn;

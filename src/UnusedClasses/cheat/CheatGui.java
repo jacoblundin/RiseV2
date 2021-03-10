@@ -4,11 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import Controller.Controller;
 import View.GameFlowGUI.GameFlowPanel;
 
@@ -34,7 +32,6 @@ public class CheatGui extends JPanel implements ActionListener {
 	private void startGUI() {
 		setPreferredSize(new Dimension(100, 100));
 		setLayout(new BorderLayout());
-
 		btnTeleport.setPreferredSize(new Dimension(300, 50));
 		add(inputTF, BorderLayout.CENTER);
 		add(btnTeleport, BorderLayout.SOUTH);

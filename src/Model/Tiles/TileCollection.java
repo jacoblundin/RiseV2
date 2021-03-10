@@ -1,9 +1,7 @@
 package Model.Tiles;
 
 import java.awt.Color;
-
 import javax.swing.ImageIcon;
-
 
 /** 
  * Informtion about each Model.tileCollection.tiles.
@@ -12,11 +10,9 @@ import javax.swing.ImageIcon;
  */
 
 public class TileCollection {
-
 	private Tile[] tileArray = new Tile[40];
 
 	public TileCollection() {
-
 		Work workTile = new Work();
 		SundayChurch churchTile = new SundayChurch();
 		Tax taxTile = new Tax(churchTile);
@@ -60,14 +56,10 @@ public class TileCollection {
 		tileArray[36] = new FortuneTeller();
 		tileArray[37] = new Property("Church", 350, 35, 300, new Color(4,74,159, 255),200, new ImageIcon("tilePics/churchp.png"));
 		tileArray[38] = taxTile;
-		tileArray[39] = new Property("The Castle", 400, 50, 400, new Color(4,74,159, 255),200, new ImageIcon("tilePics/castle.png"));		
-
+		tileArray[39] = new Property("The Castle", 400, 50, 400, new Color(4,74,159, 255),200, new ImageIcon("tilePics/castle.png"));
 	}
-	
 	 
 	public Tile getTileAtIndex(int index) {
 		return tileArray[index];
 	}
-	
-	
 }

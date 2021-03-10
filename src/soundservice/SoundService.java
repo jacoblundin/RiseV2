@@ -8,27 +8,21 @@ package soundservice;
  * likely be accessed from widely different scopes.
  */
 public class SoundService {
-
 	private SoundFxThread soundFxThread;
 	private BackgroundMusic backgroundMusic;
-
 	private static SoundService instance;
 
 	public static SoundService instance() {
-
 		if (instance == null) {
 			instance = new SoundService();
 		}
-
 		return instance;
 	}
 
 	private SoundService(){
 		soundFxThread = new SoundFxThread();
 		soundFxThread.start();
-
 		backgroundMusic = new BackgroundMusic();
-
 	}
 
 	//SoundFx methods
@@ -47,8 +41,6 @@ public class SoundService {
 		soundFxThread.setSoundFxOnOff();
 	}
 
-
-	//Background music methods
 
 	/**
 	 * Call this method to start/resume the background music
@@ -77,5 +69,4 @@ public class SoundService {
 		backgroundMusic.changeVolume(gain-0.02);
 		soundFxThread.changeVolume(gain);
 	}
-
 }

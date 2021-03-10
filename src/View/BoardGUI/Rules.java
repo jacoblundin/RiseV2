@@ -86,5 +86,4 @@ public class Rules extends JPanel {
 	public void showRules() {
 		createAndShowFrame();
 	}
-
 }

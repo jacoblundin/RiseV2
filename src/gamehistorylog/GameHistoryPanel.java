@@ -7,10 +7,8 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultCaret;
-import javax.swing.text.Document;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
-import javax.swing.text.html.StyleSheet;
 
 /**
  * GameHistoryPanel is a JPanel which contains the game history log.
@@ -19,7 +17,6 @@ import javax.swing.text.html.StyleSheet;
  * The JTextPane's content type is set to HTML. This is the pane that shows the log entries. The pane is also scrollable.
  */
 public class GameHistoryPanel extends JPanel {
-
 	private static final long serialVersionUID = 1L;
 	private JLabel lblHistoryTitle;
 	private JPanel pnlHistory;
@@ -29,17 +26,13 @@ public class GameHistoryPanel extends JPanel {
 	private HTMLDocument gameHistoryDocument;
 	private HTMLEditorKit gameHistoryEditorKit;
 	private JScrollPane scroller = new JScrollPane(taGameHistory);
-
 	private DefaultCaret caret = (DefaultCaret) taGameHistory.getCaret();
-
 	private Border border = BorderFactory.createLineBorder(Color.DARK_GRAY);
 
 	public GameHistoryPanel() {
-
 		setOpaque(false);
 		setPreferredSize(new Dimension(345, 860));
 		setBackground(Color.yellow);
-
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 
 		/**
@@ -79,7 +72,6 @@ public class GameHistoryPanel extends JPanel {
 	 * Append an event / action log entry to the log text pane.
 	 */
 	public void append(String msg) {
-
 		try {
 			gameHistoryEditorKit.insertHTML(gameHistoryDocument, gameHistoryDocument.getLength(), msg, 0, 0, null);
 		} catch (BadLocationException | IOException e) {

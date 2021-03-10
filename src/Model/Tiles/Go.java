@@ -10,14 +10,10 @@ import javax.swing.ImageIcon;
  * @author AevanDino, SebastianViro
  */
 public class Go implements Tile {
-
-	//Tile variables
 	private String name = "Go";
 	private Color color = Color.DARK_GRAY;
 	private String info;
 	private ImageIcon img = new ImageIcon("tilePics/Go.png");
-
-	//Class variables
 	private int goldReward = 200;
 
 	public Go() {}
@@ -25,9 +21,6 @@ public class Go implements Tile {
 	public int getGoldReward() {
 		return goldReward;
 	}
-
-
-	//Tile methods
 
 	@Override
 	public String getName() {

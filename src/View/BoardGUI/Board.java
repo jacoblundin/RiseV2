@@ -6,9 +6,7 @@ import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
-
 import javax.swing.*;
-
 import Model.Tiles.*;
 import View.WestGUI.WestSidePanel;
 import Model.player.Player;
@@ -26,7 +24,6 @@ public class Board extends JPanel {
 	private final PlayerList playerList;
 	private final Listener listener = new Listener();
 	private final TileCollection tileCollection;
-
 	private JPanel p1 = new JPanel();
 	private JPanel p2 = new JPanel();
 	private JPanel p3 = new JPanel();
@@ -67,7 +64,6 @@ public class Board extends JPanel {
 	private JPanel p38 = new JPanel();
 	private JPanel p39 = new JPanel();
 	private JPanel p40 = new JPanel();
-
 	private JPanel[] panelarray = { p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20,
 			p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34, p35, p36, p37, p38, p39, p40 };
 
@@ -88,7 +84,6 @@ public class Board extends JPanel {
 		for(int i = 0; i < playerList.getLength(); i++) {
 			setPlayer(playerList.getPlayerFromIndex(i));
 		}
-
 		drawBorders();
 	}
 
@@ -399,7 +394,6 @@ public class Board extends JPanel {
 		 * Method for when hovering over Model.tileCollection.tiles.
 		 */
 		public void mouseEntered(MouseEvent e) {
-			//TODO Refactor this
 			for (int i=0; i<panelarray.length; i++) {
 				if (e.getSource()==panelarray[i]) {
 					if (i == 0 || i == 2 || i == 4 || i == 5 ||i == 7 || 

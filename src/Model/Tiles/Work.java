@@ -10,16 +10,12 @@ import Model.player.Player;
  * @author Muhammad abdulkhuder, AevanDino, Sebastian Viro, .
  */
 public class Work implements Tile {
-	//Tile variables
 	private String name = "Work";
 	private Color color = Color.DARK_GRAY;
 	private String info;
 	private ImageIcon img = new ImageIcon("tilePics/Work.png");
-
-	//Class variables
 	private Player player;
 	private int roll;
-
 
 	public void payPlayer(int nbrOfDots) {
 		setRoll(nbrOfDots);
@@ -42,9 +38,6 @@ public class Work implements Tile {
 	public void setRoll(int roll) {
 		this.roll = roll;
 	}
-
-
-	//Tile methods
 
 	@Override
 	public String getName() {
@@ -70,5 +63,4 @@ public class Work implements Tile {
 	public ImageIcon getPicture() {
 		return this.img;
 	}
-
 }

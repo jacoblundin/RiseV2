@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.net.URL;
 
 public class BoardPiece {
-
     private static final String peasantImgPath = "file:images/peasantPiece.png";
     private static final String knightImgPath = "file:images/knightPiece.png";
     private static final String lordImgPath = "file:images/lordPiece.png";
@@ -17,7 +16,6 @@ public class BoardPiece {
     public static ImageIcon newPiece(PlayerRanks rank, Color color) {
         try {
             String baseImagePath;
-
             switch (rank) {
                 case PEASANT:
                     baseImagePath = peasantImgPath;
@@ -45,7 +43,6 @@ public class BoardPiece {
             g.setColor(color);
             g.fillRect(0, 0, w, h);
             g.dispose();
-
             return new ImageIcon(dyed);
         } catch (IOException e) {
             // This exception cannot be handled by the client of this class. It's a bug in the code to

@@ -3,12 +3,10 @@ package View.EastGUI;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
 import Controller.ManageEvents;
 import Model.player.PlayerList;
 
@@ -42,14 +40,12 @@ public class PlayerInfoPanel extends JPanel {
         setPreferredSize(new Dimension(345, 860));
         p1.setBounds(10, 5, 330, 50);
         setBackground(Color.DARK_GRAY);
-
         p1.setBackground(playerList.getPlayerFromIndex(playerNbr).getPlayerColor());
         p1.setBorder(BorderFactory.createLineBorder(Color.black));
         p2.setBounds(10, 55, 330, 50);
         p2.setBorder(BorderFactory.createLineBorder(Color.black));
         p3.setBounds(10, 105, 330, 50);
         p3.setBorder(BorderFactory.createLineBorder(Color.black));
-
         p4.setBounds(10, 154, 330, 50);
         p4.setBorder(BorderFactory.createLineBorder(Color.black));
         setLayout(null);

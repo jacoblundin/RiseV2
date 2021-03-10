@@ -10,7 +10,6 @@ import View.GameFlowGUI.GameFlowPanel;
 import View.WestGUI.WestSidePanel;
 import dice.Dice;
 import gamehistorylog.GameHistoryLog;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,13 +48,13 @@ public class Controller {
         redrawPlayerInfo();
     }
 
+    /*
+     * When a player ends their turn
+     * If the next player is in jail they will not have the ability to roll the
+     * dice and will only have the ability to end their turn if they have not paid the bail
+     * If the player is not in jail they can roll the dice
+     */
     public void endTurn() {
-        /*
-         * When a player ends their turn
-         * If the next player is in jail they will not have the ability to roll the
-         * dice and will only have the ability to end their turn if they have not paid the bail
-         * If the player is not in jail they can roll the dice
-         */
         playerList.switchToNextPlayer();
         gameFlowPanel.updateShowPlayersTurn();
 
@@ -68,7 +67,6 @@ public class Controller {
             gameFlowPanel.setRollButton(true);
             gameFlowPanel.setEndTurnButton(false);
         }
-
         redrawPlayerInfo();
         eastSidePanel.setTab();
     }
@@ -103,11 +101,8 @@ public class Controller {
         int payout = 200;
 
         if (activePlayer.passedGo()) {
-
             activePlayer.increaseBalance(200);
             activePlayer.increaseNetWorth(200);
-
-            //Log the pass go event
             GameHistoryLog.instance().logPassGoEvent(activePlayer, payout);
             activePlayer.resetPassedGo();
         }
@@ -212,7 +207,6 @@ public class Controller {
                 player = playersOnTile.get(0);
                 Duel duel = new Duel(activePlayer, player, controller);
             }
-
         }
     }
 }

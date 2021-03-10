@@ -37,5 +37,4 @@ public class ColorIconMap {
 	public ImageIcon getColorFromMap(String chosenColor) {
 		return colorMap.get(chosenColor);
 	}
-
 }

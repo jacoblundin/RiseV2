@@ -10,7 +10,6 @@ import java.io.File;
  * This class handles the background music.
  */
 public class BackgroundMusic {
-
 	private Clip clip;
 	private int musicPausedAt;
 	private double gain;
@@ -18,7 +17,6 @@ public class BackgroundMusic {
 	public BackgroundMusic() {
 		clip = null;
 		musicPausedAt = 0;
-
 		initClip();
 	}
 
@@ -35,7 +33,6 @@ public class BackgroundMusic {
 
 			// Set the gain (between 0.0 and 1.0)
 			setVolume(0.05);
-
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
 			clip.stop();
 		} catch (Exception e) {
@@ -92,5 +89,4 @@ public class BackgroundMusic {
 		this.gain = gain;
 		setVolume(gain);
 	}
-
 }

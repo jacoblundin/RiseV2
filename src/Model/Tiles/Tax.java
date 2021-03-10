@@ -7,8 +7,6 @@ import javax.swing.ImageIcon;
 import Model.player.Player;
 
 public class Tax implements Tile {
-
-	//Tile variables
 	private String name = "Church Tax";
 	private Color color = Color.DARK_GRAY;
 	private String info;

@@ -18,14 +18,12 @@ import javax.swing.SwingConstants;
  *
  */
 public class FortuneTellerGUI extends JPanel {
-
 	private static final long serialVersionUID = 1L;
 	private JPanel centerPanel = new JPanel();
     private JPanel outerPanel = new JPanel();
     private JLabel type = new JLabel();
     private JTextPane dis = new JTextPane();
     private JFrame frame;
-    
     private Font fontType = new Font("ALGERIAN", Font.BOLD, 30);
     private Font fontDis = new Font("ALGERIAN", Font.BOLD, 20);
     private Thread thread;
@@ -53,7 +51,6 @@ public class FortuneTellerGUI extends JPanel {
         dis.setFont(fontDis);
         dis.setForeground(Color.WHITE);
         dis.setEditable(false);
-
 
         centerPanel.add(type,BorderLayout.NORTH);
         centerPanel.add(dis,BorderLayout.CENTER);
@@ -108,7 +105,7 @@ public class FortuneTellerGUI extends JPanel {
     	
     	public void run() {
     		try { 
-    			Thread.sleep(3000);
+    			Thread.sleep(3500);
     		} catch (Exception e) {
     			e.printStackTrace();
     		} finally {
@@ -116,5 +113,4 @@ public class FortuneTellerGUI extends JPanel {
 			}
     	}
     }
-    
 }

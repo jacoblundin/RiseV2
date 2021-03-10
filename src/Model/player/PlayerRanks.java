@@ -1,6 +1,5 @@
 package Model.player;
 
-
 /** 
  * Enum class used to deal with the players rank. That is, different things happen
  * when the same method is called for different ranks
@@ -14,6 +13,7 @@ public enum PlayerRanks {
 	 * Player rank peasant
 	 */
 	PEASANT {
+
 		/**
 		 * How salary is calculated for peasants
 		 */
@@ -67,6 +67,7 @@ public enum PlayerRanks {
 	 * Player rank lord
 	 */
 	LORD {
+
 		/**
 		 * How salary is calculated for Lords
 		 */
@@ -88,17 +89,17 @@ public enum PlayerRanks {
 			return 200;
 		}
 	},
-	
-	
+
+	/**
+	 * Player rank king
+	 */
 	KINGS {
 		
 		/**
 		 * How salary is calculated for the king
 		 */
 		public int getSalary(int dots) {
-		
 			return 40 * dots;
-			
 		}
 
 		/**
@@ -119,6 +120,4 @@ public enum PlayerRanks {
 	public abstract int getSalary(int dots);
 	public abstract int nbrOfLevels();
 	public abstract int calculateTax();
-	
-	
 }

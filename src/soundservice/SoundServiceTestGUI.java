@@ -9,7 +9,6 @@ import java.awt.*;
  * This class provides a GUI to test some of the functions of the SoundService class.
  */
 public class SoundServiceTestGUI extends JPanel {
-
 	private JPanel pnlMain = new JPanel();
 
 	//SoundFx elements
@@ -22,19 +21,16 @@ public class SoundServiceTestGUI extends JPanel {
 	private JButton btnJail = new JButton("Jail");
 	private JButton btnRankUp = new JButton("Rank Up");
 
-	//Background music elements
 	private JLabel lblBackgroundMusic = new JLabel("Background Music");
 	private JButton btnStartBgMusic = new JButton("Start");
 	private JButton btnStopBgMusic = new JButton("Stop");
 	private JButton btnToggleBgMusic = new JButton("Toggle");
 
 	public SoundServiceTestGUI() {
-
 		pnlMain.setBackground(new Color(150, 150, 150));
 		pnlMain.setPreferredSize(new Dimension(320, 320));
 
 		pnlMain.add(btnCoin);
-
 		pnlMain.add(btnDice);
 
 		btnDoubleRoll.setEnabled(false);
@@ -55,20 +51,13 @@ public class SoundServiceTestGUI extends JPanel {
 		pnlMain.add(btnToggleBgMusic);
 
 		add(pnlMain);
-
 		this.addBtnListeners();
-
 	}
 
 	/**
 	 * Adds listeners to all of the buttons
 	 */
 	private void addBtnListeners() {
-
-		/* Anonymous function
-		This function is called when the add button's action is fired.
-		The parameter e is an event object
-		 */
 		btnCoin.addActionListener(e -> { SoundService.instance().playSoundFx(SoundFx.SOUND_COIN); });
 
 		btnDice.addActionListener(e -> { SoundService.instance().playSoundFx(SoundFx.SOUND_DICE); });
@@ -81,11 +70,7 @@ public class SoundServiceTestGUI extends JPanel {
 	}
 
 	public static void main(String[] args) {
-
-		//GUI
 		SoundServiceTestGUI testGui = new SoundServiceTestGUI();
-
-		//Window
 		JFrame frame = new JFrame("SoundServiceTestGUI");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(testGui);
@@ -93,5 +78,4 @@ public class SoundServiceTestGUI extends JPanel {
 		frame.setResizable(false);
 		frame.setVisible(true);
 	}
-
 }

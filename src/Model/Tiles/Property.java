@@ -1,10 +1,8 @@
 package Model.Tiles;
 
 import java.awt.Color;
-
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-
 import Model.player.Player;
 
 /**
@@ -36,7 +34,6 @@ public class Property implements Tile {
         this.name = name;
         this.color = color;
         this.img = img;
-
         this.price = price;
         setDefaultRent(defaultRent);
         setRentPerLevel(rentPerLevel);
@@ -149,5 +146,4 @@ public class Property implements Tile {
     public ImageIcon getPicture() {
         return this.img;
     }
-
 }

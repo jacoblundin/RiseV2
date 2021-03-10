@@ -12,14 +12,10 @@ import javax.swing.ImageIcon;
  * @author AevanDino, SebastianViro
  */
 public class SundayChurch implements Tile {
-
-	//Tile variables
 	private String name = "Sunday Church";
 	private Color color = Color.DARK_GRAY;
 	private String info;
 	private ImageIcon img = new ImageIcon("tilePics/church.png");
-
-	//Class variables
 	private int collectedGold = 0;
 
 	public void payTax(int amount) {
@@ -30,9 +26,6 @@ public class SundayChurch implements Tile {
 		player.increaseBalance(collectedGold);
 		collectedGold = 0;
 	}
-
-
-	//Tile methods
 
 	public String getName() {
 		return this.name;
@@ -50,5 +43,4 @@ public class SundayChurch implements Tile {
 	public ImageIcon getPicture() {
 		return this.img;
 	}
-
 }

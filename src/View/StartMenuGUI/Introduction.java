@@ -8,7 +8,6 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -22,7 +21,6 @@ import javax.swing.SwingConstants;
  * @author Muhammad Abdulkhuder, Sebastian Viro
  */
 public class Introduction extends JPanel {
-
 	private JLabel lblTitel = new JLabel("Welcome to Rise!");
 	private JLabel lblPic = new JLabel();
 	private JFrame frame;
@@ -50,7 +48,6 @@ public class Introduction extends JPanel {
 				"\r\n" + 
 				"You start as peasants and will rise through the ranks when your total wealth reaches a certain number. Player one will now begin by rolling the dice and then after that the player will press the end turn button to let the next player begin his turn. To know more press the info button in the menu tab. Now good luck on your adventures!  \r\n" +
 				"");
-		
 		taText.setEditable(false);
 		lblTitel.setBackground(Color.black);
 		taText.setForeground(Color.black);
@@ -64,13 +61,11 @@ public class Introduction extends JPanel {
 		BufferedImage img = null;
 		try {
 			img = ImageIO.read(new File("images/backpaper.jpg"));
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		Image resizedImg = img.getScaledInstance(lblPic.getWidth(), lblPic.getHeight(), Image.SCALE_SMOOTH);
-
 		lblPic.setIcon(new ImageIcon(resizedImg));
 		
 		add(lblTitel);

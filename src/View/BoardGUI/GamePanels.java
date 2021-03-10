@@ -1,21 +1,18 @@
 package View.BoardGUI;
 
 import java.awt.Color;
-
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
-
 import Controller.Controller;
 import Model.Tiles.TileCollection;
 import View.GameFlowGUI.GameFlowPanel;

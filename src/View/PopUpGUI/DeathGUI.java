@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,8 +15,6 @@ import javax.swing.JPanel;
  * @author Sebastian Viro, Muhammad Abdulkhuder
  */
 public class DeathGUI extends JPanel implements ActionListener{
-
-
 	private JLabel lblPic = new JLabel("");
 	private JButton btnExit = new JButton("The plague has taken you, you lost");
 	private Font font = new Font("Gabriola", Font.BOLD, 32);

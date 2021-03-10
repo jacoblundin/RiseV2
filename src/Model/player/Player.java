@@ -5,9 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-
 import View.WestGUI.WestSidePanel;
-
 import Model.Tiles.Property;
 import Model.Tiles.Tavern;
 import Model.Tiles.Tile;
@@ -318,32 +316,21 @@ public class Player {
     }
 
     public void removeProperty(Property property) {
-
         this.propertiesOwned.remove(property);
         property.setOwner(null);
-
     }
 
     public void sellProperty(Property property) {
-
         int total = (property.getPrice() + (property.getLevel() * property.getLevelPrice()));
-
         int res = JOptionPane.showConfirmDialog(null,
                 "Do you really want to sell " + property.getName() + " for: " + total);
-
         if (res == 0) {
-
-            //Log sell event
             GameHistoryLog.instance().logPropertySellEvent(this, property);
-
             increaseBalance(total);
             this.propertiesOwned.remove(property);
             property.setOwner(null);
         }
-
-        //TODO play klirr sound here?
     }
-
 
     /**
      * @param newTavern add a new Tavern to a user
@@ -368,7 +355,6 @@ public class Player {
     public void clearPlayer() {
         for (int i = 0; i < propertiesOwned.size(); i++) {
             propertiesOwned.get(i).clearProperty();
-
         }
         for (int i = 0; i < tavernsOwned.size(); i++) {
             tavernsOwned.get(i).clearTavern();
@@ -376,7 +362,6 @@ public class Player {
     }
 
     public Property getPropertyAt(int pos) {
-
         return this.propertiesOwned.get(pos);
     }
 

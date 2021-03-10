@@ -11,22 +11,17 @@ import javax.swing.ImageIcon;
  * @author SebastianViro, AevanDino, MuhammadAbdulkhuder
  */
 public class FortuneTeller implements Tile {
-
 	private Color color = Color.DARK_GRAY;
 	private String name = "Fortune Teller";
 	private ImageIcon img = new ImageIcon("tilePics/fortune.png");
-
 	private String fortune = "";
 	private Boolean isBlessing = false;
-
 	private int amount;
-
 
 	/**
 	 * Empty constructor
 	 */
 	public FortuneTeller() {
-
 	}
 
 	/**
@@ -70,7 +65,6 @@ public class FortuneTeller implements Tile {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-
 
 	//Tile methods
 

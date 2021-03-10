@@ -1,20 +1,14 @@
 package Model.Tiles;
 
 import java.awt.Color;
-
 import javax.swing.ImageIcon;
-
 import Model.player.Player;
 
 public class Tavern implements Tile {
-
-	//Tile variables
 	private String name;
 	private Color color = Color.DARK_GRAY;
 	private String info;
 	private ImageIcon img = new ImageIcon("tilePics/tavern.png");
-
-	//Class variables
 	private Player owner;
 	private int price;
 
@@ -29,7 +23,6 @@ public class Tavern implements Tile {
 	}
 
 	public Boolean getPurchasable() {
-		//If there is no owner the tavern is purchasable
 		return this.owner == null;
 	}
 
@@ -44,9 +37,6 @@ public class Tavern implements Tile {
 	public int getPrice() {
 		return price;
 	}
-
-
-	//Tile methods
 
 	public String getName() {
 		return this.name;
@@ -74,5 +64,4 @@ public class Tavern implements Tile {
 	public ImageIcon getPicture() {
 		return this.img;
 	}
-
 }

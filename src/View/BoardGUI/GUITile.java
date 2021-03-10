@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -75,7 +74,6 @@ public class GUITile extends JLabel {
             infoLabel.setPreferredSize(new Dimension(20, 200));
             add(infoLabel, BorderLayout.WEST);
         }
-
     }
 
     /**
@@ -112,5 +110,4 @@ public class GUITile extends JLabel {
         labels[player.getOriginalPlayerIndex()].setIcon(null);
         labels[player.getOriginalPlayerIndex()].setHorizontalAlignment(CENTER);
     }
-
 }

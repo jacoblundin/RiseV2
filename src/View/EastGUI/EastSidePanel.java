@@ -2,9 +2,7 @@ package View.EastGUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
-
 import javax.swing.*;
-
 import Controller.Controller;
 import Controller.ManageEvents;
 import Model.Tiles.Property;
@@ -39,7 +37,6 @@ public class EastSidePanel extends JPanel {
         tab.setBounds(0, 0, 355, 860);
         tab.setBackground(new Color(0, 0, 0));
         add(tab);
-
         addTabs();
     }
 
@@ -73,7 +70,6 @@ public class EastSidePanel extends JPanel {
      */
     public void setTab() {
         tab.setBackgroundAt(currentPlayer, null);
-
         currentPlayer++;
         if (currentPlayer > playerList.getLength() - 1) {
             currentPlayer = 0;
@@ -81,7 +77,6 @@ public class EastSidePanel extends JPanel {
             tab.setForeground(Color.white);
             tab.setBackground(new Color(157, 0, 0));
             tab.setBackgroundAt(currentPlayer, new Color(0, 157, 0));
-
         } else {
             tab.setSelectedIndex(currentPlayer);
             tab.setForeground(Color.white);

@@ -4,9 +4,7 @@ import javax.sound.sampled.*;
 import java.io.File;
 
 public class SoundFxThread extends Thread {
-
 	private Buffer<SoundFx> soundBuffer;
-
 	private boolean soundFxOn = true;
 	private double gain = 0.08;
 
@@ -16,17 +14,14 @@ public class SoundFxThread extends Thread {
 
 	@Override
 	public void run() {
-
 		SoundFx sound;
 
 		while (true) {
 			try {
 				sound = soundBuffer.get();
-
 				if(soundFxOn) {
 					new Thread(new SoundFxConsumer(sound)).start();
 				}
-
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -80,7 +75,6 @@ public class SoundFxThread extends Thread {
 			}
 		}
 
-		// Sets the volume of the sound effects
 		public void setVolume(Clip clip, double gain)
 		{
 			FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
@@ -88,5 +82,4 @@ public class SoundFxThread extends Thread {
 			gainControl.setValue(dB);
 		}
 	}
-
 }

@@ -49,7 +49,6 @@ public class GameHistoryLog {
         String playerName = player.getName();
         String landingTileColorHex = Utils.colorToHexString(landingTile.getColor());
         String landingTileName = landingTile.getName();
-
         gameHistoryPanel.append(String.format("<font color=%s><b>%s</b></font> rolled a combined <b>%d</b>, landing on <font color=%s><b>%s</b></font>.", playerColorHex, playerName, sumRoll, landingTileColorHex, landingTileName));
     }
 
@@ -103,7 +102,6 @@ public class GameHistoryLog {
         String propertyOwnerName = propertyTile.getOwner().getName();
         String propertyOwnerColorHex = Utils.colorToHexString(propertyTile.getOwner().getPlayerColor());
         int propertyTileRent = propertyTile.getTotalRent();
-
         gameHistoryPanel.append(String.format("%s visited %s's %s and had to pay %s in rent.", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatPlayerName(propertyOwnerName, propertyOwnerColorHex), htmlFormatTileName(propertyTileName, propertyTileColorHex), htmlFormatGoldCoins(propertyTileRent)));
     }
 
@@ -165,13 +163,10 @@ public class GameHistoryLog {
         gameHistoryPanel.append(String.format("%s stayed the round in jail.", htmlFormatPlayerName(playerName, playerColorHex)));
     }
 
-
     //HTML format helpers
-
     private String htmlFormatGoldCoins(int goldCoinsAmount) {
         String goldCoinImgPath = "file:images/coin.jpg";
         String ret = "<b>" + goldCoinsAmount + "</b>" + "<img src=" + goldCoinImgPath + " height=11 width=11>" + " gold coins";
-
         return ret;
     }
 
@@ -189,5 +184,4 @@ public class GameHistoryLog {
         String ret = "<font color=" + hexColorString + "><b>" + tileName + "</b></font>";
         return ret;
     }
-
 }

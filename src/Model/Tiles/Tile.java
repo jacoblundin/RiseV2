@@ -1,7 +1,6 @@
 package Model.Tiles;
 
 import java.awt.Color;
-
 import javax.swing.ImageIcon;
 
 /**
@@ -31,5 +30,4 @@ public interface Tile {
 	 * @return info, information about tile. (Price, owner, stuff).
 	 */
 	public String getTileInfo();
-
 }

@@ -5,8 +5,6 @@ import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
-
-import Controller.ManageEvents;
 import Model.player.PlayerList;
 
 /**

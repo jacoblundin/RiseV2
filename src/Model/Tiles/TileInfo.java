@@ -10,7 +10,6 @@ public class TileInfo {
 	private String[] title;	
 	
 	public TileInfo() {
-		
 	}
 	
 	/**
@@ -19,7 +18,6 @@ public class TileInfo {
 	 * @return information about the insert index
 	 */
 	public String getInfo(int tile) {
-		
 		info = new String[]{"\n\n            Cash in 200 GC \n"
 				+ "            when you pass ",
 				"2", "\n\n          Fortune Teller\n            will tell you \n           your fortune", "4", 

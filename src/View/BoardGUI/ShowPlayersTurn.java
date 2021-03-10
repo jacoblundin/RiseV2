@@ -10,9 +10,7 @@ import javax.swing.*;
  * @author Rohan Samandari
  */
 public class ShowPlayersTurn extends JPanel{
-	
 	private static final long serialVersionUID = 1L;
-	
 	private JLabel lblPlayer;
 	private Color players;
 	private String playerName = "Player";
@@ -33,7 +31,6 @@ public class ShowPlayersTurn extends JPanel{
 	private void showTheLabel() {
 		setPreferredSize(new Dimension(250,50));
 		setBackground(players);
-		
 		lblPlayer = new JLabel(playerName);
 		lblPlayer.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPlayer.setForeground(Color.white);

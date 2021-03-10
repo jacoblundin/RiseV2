@@ -5,7 +5,6 @@ import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Map;
-
 import Controller.Controller;
 import Model.player.Player;
 import Model.player.PlayerList;
@@ -144,7 +143,7 @@ public class Duel extends JFrame {
         winnerLabel.setBackground(Color.WHITE);
         winnerLabel.setBounds(300, 300, 200, 200);
         winnerLabel.setOpaque(true);
-        winnerLabel.setFont(new Font("Times New Roman", Font.PLAIN, 40));
+        winnerLabel.setFont(new Font("Times New Roman", Font.PLAIN, 30));
         winnerLabel.setVisible(false);
         background.add(winnerLabel);
     }

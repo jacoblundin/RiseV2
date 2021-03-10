@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.concurrent.CompletableFuture;
-
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,7 +19,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-
 import View.BoardGUI.GamePanels;
 import Model.player.PlayerList;
 import soundservice.SoundService;
@@ -32,9 +30,7 @@ import soundservice.SoundService;
  * @author Aevan Dino
  */
 public class StartingScreen extends JFrame {
-
     private static final long serialVersionUID = 1L;
-
     private PlayerList playerList = new PlayerList();
     GamePanels mainWindow;
     private JButton btnConfirm = new JButton("Confirm");
@@ -290,7 +286,6 @@ public class StartingScreen extends JFrame {
                 } else {
 
                     switch (amountOfPlayers) {
-
                         case 2:
                             if (playerColors[0].getSelectedItem().equals(playerColors[1].getSelectedItem())) {
                                 JOptionPane.showMessageDialog(null, "Two players are not allowed to have the same color");
@@ -339,7 +334,6 @@ public class StartingScreen extends JFrame {
         private void createNewUsers() {
 
             for (int i = 0; i < amountOfPlayers; i++) {
-
                 if (playerTf[i].getText().length() >= 10) {
                     playerTf[i].setText(playerTf[i].getText().substring(0, 10));
                 }

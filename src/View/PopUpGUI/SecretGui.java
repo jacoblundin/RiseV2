@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,7 +13,6 @@ import javax.swing.JLabel;
  * @author Muhammad Abdulkhuder, Sebastian Viro
  */
 public class SecretGui extends JFrame {
-
 	private static final long serialVersionUID = 1L;
 	private JLabel lblSecret = new JLabel();
     private Thread thread;
@@ -26,7 +24,6 @@ public class SecretGui extends JFrame {
      * Constructor which creates View.GUI to show
      */
 	public SecretGui() {
-			
 	   	setLayout(new BorderLayout());
 	   	setPreferredSize(new Dimension(320, 180));
 	   	setBackground(Color.black);
@@ -43,7 +40,6 @@ public class SecretGui extends JFrame {
 	   	setVisible(true);
 	   	thread  = new Thread(new Sleeper());
 	   	thread.start();
-		
 	}
 	
 	/**

@@ -66,7 +66,6 @@ public class Menu extends JPanel {
      * This method initiates all the action listeners of the menu's menu items.
      */
     private void initActionListeners() {
-
         menuItemExit.addActionListener((event) -> {
             System.exit(0);
         });
@@ -80,7 +79,6 @@ public class Menu extends JPanel {
         });
 
         menuItemSetVolume.addActionListener((event) -> {
-
             double gain = Double.parseDouble(JOptionPane.showInputDialog(null,"Set volume by writing a number between 1 and 10:", 5));
             if(gain<=10 || gain>=1)
             {
@@ -96,15 +94,10 @@ public class Menu extends JPanel {
         menuItemRestart.addActionListener((event) -> {
             gamePanels.destroyFrame();
             introduction.destroyFrame();
-
-            // Needs to start in its own thread because otherwise it's started in Swing's
-            // event thread and we get a hard lock.
             var thread = new Thread(() -> {
                 Main.main(new String[]{});
             });
             thread.start();
-
         });
     }
-
 }

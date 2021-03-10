@@ -7,7 +7,6 @@ import Model.player.PlayerAndTiles;
 import Model.player.PlayerFromJSON;
 import Model.player.PlayerList;
 import Model.player.PlayerRanks;
-import UnusedClasses.cheat.CheatGui;
 import View.BoardGUI.GamePanels;
 import View.GameFlowGUI.GameFlowPanel;
 import View.StartMenuGUI.Introduction;
@@ -15,7 +14,6 @@ import View.StartMenuGUI.StartingScreen;
 import com.google.gson.Gson;
 import gamehistorylog.GameHistoryLog;
 import soundservice.SoundService;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -37,7 +35,6 @@ public class Main {
             var rank = playerData.rank;
             var color = playerData.color;
             var owns = playerData.owns;
-
             playerList.addNewPlayer(name, color);
             var player = playerList.getPlayerFromIndex(i);
             player.setBalance(gold);
@@ -94,20 +91,16 @@ public class Main {
                 System.err.println("Too many command line arguments.");
                 System.exit(1);
             }
-
             var intro = new Introduction();
             var gamePanels = new GamePanels(playerList, tileCollection, intro);
             gamePanels.startBoard();
-
             var controller = new Controller(gamePanels.getBoard(), playerList, gamePanels.getWestPanel(),
                     gamePanels.getGameFlowPanel(), gamePanels.getEastSidePanel(), gamePanels.getGameFlowPanel().getDice());
-
             gamePanels.setController(controller);
 
             // If you want the cheat GUI:
-//            GameFlowPanel gameFlowPanel = gamePanels.getGameFlowPanel();
-//            gameFlowPanel.setCheatGUI(new CheatGui(controller));
-
+//           GameFlowPanel gameFlowPanel = gamePanels.getGameFlowPanel();
+//           gameFlowPanel.setCheatGUI(new CheatGui(controller));
             intro.startGUI();
         } catch (ExecutionException | InterruptedException e) {
             System.err.println("ExecutionException or InterruptedException when loading game. Not handled.");
