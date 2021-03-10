@@ -20,6 +20,7 @@ public class SoundServiceTestGUI extends JPanel {
 	private JButton btnWork = new JButton("Work");
 	private JButton btnJail = new JButton("Jail");
 	private JButton btnRankUp = new JButton("Rank Up");
+	private JButton btnFortuneCurse = new JButton("Curse");
 
 	private JLabel lblBackgroundMusic = new JLabel("Background Music");
 	private JButton btnStartBgMusic = new JButton("Start");
@@ -32,6 +33,7 @@ public class SoundServiceTestGUI extends JPanel {
 
 		pnlMain.add(btnCoin);
 		pnlMain.add(btnDice);
+		pnlMain.add(btnFortuneCurse);
 
 		btnDoubleRoll.setEnabled(false);
 		pnlMain.add(btnDoubleRoll);
@@ -61,6 +63,8 @@ public class SoundServiceTestGUI extends JPanel {
 		btnCoin.addActionListener(e -> { SoundService.instance().playSoundFx(SoundFx.SOUND_COIN); });
 
 		btnDice.addActionListener(e -> { SoundService.instance().playSoundFx(SoundFx.SOUND_DICE); });
+
+		btnFortuneCurse.addActionListener(e -> { SoundService.instance().playSoundFx(SoundFx.SOUND_CHURCHBELLS); });
 
 		btnStartBgMusic.addActionListener(e -> { SoundService.instance().playBgMusic(); });
 

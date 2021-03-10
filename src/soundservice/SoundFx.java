@@ -13,7 +13,11 @@ public enum SoundFx {
     SOUND_RANK("sounds/MagicWand.wav"),
     SOUND_DEFEND("sounds/defend_self.wav"),
     SOUND_WAR_NOT_OVER("sounds/war_not_over.wav"),
-    SOUND_AWKWARD("sounds/awkward.wav");
+    SOUND_AWKWARD("sounds/awkward.wav"),
+    SOUND_VICTORY("sounds/Victory.wav"),
+    SOUND_FORTUNE_BLESSING("sounds/Cheer.wav"),
+    SOUND_FORTUNE_CURSE("sounds/WitchLaugh.wav"),
+    SOUND_CHURCHBELLS("sounds/ChurchBells.wav");
 
     private final String filePath;
 

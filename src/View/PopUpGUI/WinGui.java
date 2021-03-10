@@ -1,10 +1,10 @@
 package View.PopUpGUI;
 
+import soundservice.SoundFx;
+import soundservice.SoundService;
+
 import java.awt.Dimension;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * Class to display a gui for the winner.
@@ -30,6 +30,7 @@ public class WinGui extends JPanel {
 		lblLblpic.setIcon(new ImageIcon("images/Rise Winner.png"));
 		add(lblLblpic);
 		getFrame();
+		victory();
 	}
 
 	/**
@@ -43,5 +44,15 @@ public class WinGui extends JPanel {
 		frame.pack();
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
+	}
+
+	private void victory() {
+		SwingUtilities.invokeLater(() -> {
+			try {
+				SoundService.instance().playSoundFx(SoundFx.SOUND_AWKWARD);
+				Thread.sleep(3000);
+			} catch (InterruptedException ignore) {
+			}
+		});
 	}
 }
