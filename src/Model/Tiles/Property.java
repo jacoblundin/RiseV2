@@ -100,10 +100,11 @@ public class Property implements Tile {
     }
 
     public void decreaseLevel() {
-        int res = JOptionPane.showConfirmDialog(null, "Do you really want to downgrade " + getName() + " for: " + getLevelPrice());
+        int res = JOptionPane.showConfirmDialog(null, "Do you really want to downgrade " + getName() + " for: " + getLevelPrice()/2
+                + "\nits half of what you upgrade it for");
         if (levels > 0 && res == 0) {
             this.levels -= 1;
-            owner.increaseBalance(getLevelPrice());
+            owner.increaseBalance(getLevelPrice()/2);
         }
     }
 
