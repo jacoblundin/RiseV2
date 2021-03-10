@@ -164,7 +164,7 @@ public class ManageEvents {
             control(player, rent);
             if (player.isAlive()) {
                 var owner = property.getOwner();
-                JOptionPane.showMessageDialog(null, player.getName() + " paid " + rent + " GC to "
+                JOptionPane.showMessageDialog(null, player.getName() + " you have to pay " + rent + " GC in rent to "
                         + owner.getName());
                 gameHistoryLog.logPropertyRentEvent(player, property);
                 player.decreaseBalance(rent);
@@ -190,7 +190,7 @@ public class ManageEvents {
         gameHistoryLog.logWorkEvent(player, tempWorkObject.getPay());
         SoundService.instance().playSoundFx(SoundFx.SOUND_WORK);
         JOptionPane.showMessageDialog(null,
-                "The roll is " + roll + "\n" + "You got: " + tempWorkObject.getPay() + " GC for your hard work");
+                "Your a hard worker \nThe dice are rolled and shows " + roll + "\n" + " therefore you get " + tempWorkObject.getPay() + " GC for your hard work");
     }
 
     /**
@@ -207,7 +207,7 @@ public class ManageEvents {
         if (player.isAlive()) {
             SoundService.instance().playSoundFx(SoundFx.SOUND_CHURCHTAX);
             gameHistoryLog.logTaxEvent(player, 200);
-            JOptionPane.showMessageDialog(null, "You paid 200 gold in tax to the Church");
+            JOptionPane.showMessageDialog(null, "You have to pay 200 gold in tax to the Church");
             player.decreaseBalance(chargePlayer);
             player.decreaseNetWorth(chargePlayer);
             taxCounter++;
@@ -236,7 +236,7 @@ public class ManageEvents {
 
         if (tempTavernObj.getPurchasable()) {
             if (player.getBalance() < tempTavernObj.getPrice()) {
-                JOptionPane.showMessageDialog(null, "Not enough funds to purchase this tavern");
+                JOptionPane.showMessageDialog(null, "You have not enough funds to purchase this tavern");
             } else {
                 tavernDialog(tempTavernObj, player);
             }
@@ -251,7 +251,7 @@ public class ManageEvents {
 
             control(player, randomValue);
             if (player.isAlive() == true) {
-                JOptionPane.showMessageDialog(null, player.getName() + " paid " + randomValue + " GC to "
+                JOptionPane.showMessageDialog(null, player.getName() + " you have to pay " + randomValue + " GC in rent to "
                         + tempTavernObj.getOwner().getName());
                 //TODO Log tavern rent
 				/*westPanel.append(player.getName() + " paid " + randomValue + " GC to "
@@ -275,7 +275,7 @@ public class ManageEvents {
             if (player.getBalance() > (player.getJailCounter() * 50)) {
                 jailDialog(player);
             } else {
-                JOptionPane.showMessageDialog(null, "You can not afford the bail");
+                JOptionPane.showMessageDialog(null, "Sorry, you can not afford the bail");
                 SoundService.instance().playSoundFx(SoundFx.SOUND_PRISON);
             }
         } else if (player.getJailCounter() >= 2) {
@@ -297,7 +297,7 @@ public class ManageEvents {
         board.removePlayer(player);
         player.setPositionInSpecificIndex(10);
         board.setPlayer(player);
-        JOptionPane.showMessageDialog(null, player.getName() + " got in jail.");
+        JOptionPane.showMessageDialog(null, "Sorry, " + player.getName() + " you are going to jail");
         SoundService.instance().playSoundFx(SoundFx.SOUND_PRISON2);
         SoundService.instance().playSoundFx(SoundFx.SOUND_PRISON3);
         gameHistoryLog.logJailEnterEvent(player);
@@ -373,7 +373,7 @@ public class ManageEvents {
      */
     public void jailDialog(Player player) {
         int yesOrNo = JOptionPane.showConfirmDialog(null,
-                "Do you want to pay the bail\nWhich is " + (player.getJailCounter() * 50) + " GC?", "JOption",
+                "Do you want to pay the bail\nof " + (player.getJailCounter() * 50) + " GC?", "JOption",
                 JOptionPane.YES_NO_OPTION);
         int totalBail = player.getJailCounter() * 50;
         if (yesOrNo == 0 && (totalBail <= player.getBalance())) {
@@ -452,6 +452,7 @@ public class ManageEvents {
          * @param player   Starts the sleeper
          */
         public SecretSleeper(FortuneTeller tempCard, Player player) {
+            JOptionPane.showMessageDialog(null, "You got an easter egg!\n You get five fortunes");
             this.tempCard = tempCard;
             this.player = player;
             start();
@@ -469,7 +470,7 @@ public class ManageEvents {
                     gainControl.setValue(dB);
                     clip.start();
                     fortune(tempCard, player);
-                    Thread.sleep(3000);
+                    Thread.sleep(4000);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
