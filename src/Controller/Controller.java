@@ -22,6 +22,7 @@ public class Controller {
     private final EastSidePanel eastSidePanel;
     private final ManageEvents manageEvents;
     private final Dice dice;
+    private GameHistoryLog gameHistoryLog;
 
     public Controller(Board board, PlayerList playerList, WestSidePanel westPanel, GameFlowPanel gameFlowPanel,
                       EastSidePanel eastSidePanel, Dice dice) {
@@ -32,6 +33,7 @@ public class Controller {
         this.eastSidePanel = eastSidePanel;
         this.manageEvents = new ManageEvents(board, playerList, westPanel, gameFlowPanel, eastSidePanel, this);
         this.dice = dice;
+        gameHistoryLog = GameHistoryLog.instance();
     }
 
     public void rollDice() {
@@ -128,6 +130,8 @@ public class Controller {
         loser.decreaseNetWorth(500);
         updatePlayerRanks();
         manageEvents.control(loser, 500);
+        gameHistoryLog.logDuelWinner(winner, 500);
+        gameHistoryLog.logDuelLoser(loser, 500);
     }
 
     public void updatePlayerRanks() {

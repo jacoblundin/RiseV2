@@ -182,6 +182,18 @@ public class GameHistoryLog {
 
     }
 
+    public void logDuelWinner(Player player, int income) {
+        String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
+        String playerName = player.getName();
+        gameHistoryPanel.append(String.format("%s won a duel and earned %s", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatGoldCoins(income)));
+    }
+
+    public void logDuelLoser(Player player, int amount) {
+        String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
+        String playerName = player.getName();
+        gameHistoryPanel.append(String.format("%s lost a duel and lost %s", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatGoldCoins(amount)));
+    }
+
     //HTML format helpers
     private String htmlFormatGoldCoins(int goldCoinsAmount) {
         String goldCoinImgPath = "file:images/coin.jpg";
