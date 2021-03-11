@@ -26,7 +26,7 @@ public class PropertyWindow extends JPanel {
         setOpaque(false);
         setLayout(null);
         UIManager.put("TabbedPane.contentOpaque", false);
-        UIManager.put("TabbedPane.selected", Color.cyan);
+        UIManager.put("TabbedPane.selected", new Color(112, 105, 105));
 
         tab = new JTabbedPane();
         tab.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);

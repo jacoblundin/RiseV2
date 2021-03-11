@@ -9,7 +9,7 @@ import Model.Tiles.Property;
 import Model.player.PlayerList;
 
 /**
- * this class add tabs that displays informations about the players
+ * this class add tabs that displays information about the players
  * in tabs
  *
  * @author Abdulkhuder Muhammad, Sebastian Viro.
@@ -31,7 +31,7 @@ public class EastSidePanel extends JPanel {
         setOpaque(false);
         setLayout(null);
         UIManager.put("TabbedPane.contentOpaque", false);
-        UIManager.put("TabbedPane.selected", Color.cyan);
+        UIManager.put("TabbedPane.selected", new Color(112, 105, 105));
 
         tab = new JTabbedPane();
         tab.setBounds(0, 0, 355, 860);
@@ -60,13 +60,13 @@ public class EastSidePanel extends JPanel {
             tab.setSelectedIndex(currentPlayer);
             tab.setForeground(Color.white);
             tab.setBackground(new Color(157, 0, 0));
-            tab.setBackgroundAt(currentPlayer, new Color(0, 157, 0));
+            tab.setBackgroundAt(currentPlayer, new Color(214, 208, 208));
         });
     }
 
     /**
      * this method is used to display the correct color
-     * the active players turn should be green and the others should be red.
+     * the active players turn should be white and the others should be red.
      */
     public void setTab() {
         tab.setBackgroundAt(currentPlayer, null);
@@ -76,12 +76,12 @@ public class EastSidePanel extends JPanel {
             tab.setSelectedIndex(currentPlayer);
             tab.setForeground(Color.white);
             tab.setBackground(new Color(157, 0, 0));
-            tab.setBackgroundAt(currentPlayer, new Color(0, 157, 0));
+            tab.setBackgroundAt(currentPlayer, new Color(214, 208, 208));
         } else {
             tab.setSelectedIndex(currentPlayer);
             tab.setForeground(Color.white);
             tab.setBackground(new Color(157, 0, 0));
-            tab.setBackgroundAt(currentPlayer, new Color(0, 157, 0));
+            tab.setBackgroundAt(currentPlayer, new Color(214, 208, 208));
         }
     }
 
