@@ -137,7 +137,7 @@ public class ManageEvents {
             playerList.updatePlayerList();
             eastPanel.addTabs();
             board.removePlayer(player);
-            deathGUI.addGui();
+            deathGUI.addGui(player);
             controller.drawBorderColors();
         }
     }
