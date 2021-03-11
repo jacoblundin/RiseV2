@@ -82,11 +82,11 @@ public class ManageEvents {
         player.checkPlayerRank();
 
         if (player.getPlayerRank() == PlayerRanks.KINGS) {
-            new WinGui();
+            new WinGui(player);
         }
 
         if (playerList.getLength() == 1) {
-            new WinGui();
+            new WinGui(player);
         }
 
         if (tile instanceof Property) {

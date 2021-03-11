@@ -1,5 +1,6 @@
 package View.PopUpGUI;
 
+import Model.player.Player;
 import soundservice.SoundFx;
 import soundservice.SoundService;
 
@@ -16,14 +17,14 @@ public class WinGui extends JPanel {
 	/**
 	 * Constructor calls the method to draw the gui.
 	 */
-	public WinGui() {
-		addgui();
+	public WinGui(Player player) {
+		addgui(player);
 	}
 	
 	/**
 	 * Draws the View.GUI.
 	 */
-	public void addgui() {
+	public void addgui(Player player) {
 		setPreferredSize(new Dimension(1000, 500));
 		setLayout(null);
 		lblLblpic.setBounds(0, 0, 1027, 500);
@@ -31,6 +32,7 @@ public class WinGui extends JPanel {
 		add(lblLblpic);
 		getFrame();
 		victory();
+		JOptionPane.showMessageDialog(null, "Congratulations " + player.getName() + " you are king and won the game");
 	}
 
 	/**
