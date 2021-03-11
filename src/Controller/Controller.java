@@ -127,6 +127,7 @@ public class Controller {
         loser.decreaseBalance(500);
         loser.decreaseNetWorth(500);
         updatePlayerRanks();
+        manageEvents.control(loser, 500);
     }
 
     public void updatePlayerRanks() {
