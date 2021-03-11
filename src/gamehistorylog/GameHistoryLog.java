@@ -1,5 +1,6 @@
 package gamehistorylog;
 
+import Model.Tiles.FortuneTeller;
 import Model.Tiles.Property;
 import Model.Tiles.Tile;
 import Model.player.Player;
@@ -161,6 +162,19 @@ public class GameHistoryLog {
         String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
         String playerName = player.getName();
         gameHistoryPanel.append(String.format("%s stayed the round in jail.", htmlFormatPlayerName(playerName, playerColorHex)));
+    }
+
+    public void logFortuneBlessingEvent(Player player, int pay) {
+        String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
+        String playerName = player.getName();
+        gameHistoryPanel.append(String.format("%s collected %s from fortune teller", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatGoldCoins(pay)));
+    }
+
+    public void logFortuneCurseEvent(Player player, int pay) {
+        String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
+        String playerName = player.getName();
+        gameHistoryPanel.append(String.format("%s lost %s from fortune teller", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatGoldCoins(pay)));
+
     }
 
     //HTML format helpers

@@ -419,19 +419,20 @@ public class ManageEvents {
             tempCard.setFortune("CURSE");
             control(player, pay);
             if (player.isAlive()) {
-                //TODO: Log Fortune event
                 player.decreaseBalance(pay);
                 player.decreaseNetWorth(pay);
                 msgGUI.newFortune(false, pay);
+                gameHistoryLog.logFortuneCurseEvent(player, pay);
                 SoundService.instance().playSoundFx(SoundFx.SOUND_FORTUNE_CURSE);
             }
         } else {
+            int pay = (tempCard.getAmount());
             tempCard.setIsBlessing(true);
             tempCard.setFortune("BLESSING");
             player.increaseBalance(tempCard.getAmount());
             player.increaseNetWorth(tempCard.getAmount());
-            //TODO: Log Fortune event
             msgGUI.newFortune(true, tempCard.getAmount());
+            gameHistoryLog.logFortuneBlessingEvent(player, pay);
             SoundService.instance().playSoundFx(SoundFx.SOUND_FORTUNE_BLESSING);
         }
     }

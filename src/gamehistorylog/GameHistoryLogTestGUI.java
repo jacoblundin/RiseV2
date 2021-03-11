@@ -202,11 +202,11 @@ public class GameHistoryLogTestGUI extends JPanel {
         });
 
         btnFortuneBlessing.addActionListener(e -> {
-
+            gameHistoryLog.logFortuneBlessingEvent(this.activePlayer, 150);
         });
 
         btnFortuneCurse.addActionListener(e -> {
-
+            gameHistoryLog.logFortuneCurseEvent(this.activePlayer, 200);
         });
 
         btnJailEnter.addActionListener(e -> {
