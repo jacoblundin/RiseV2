@@ -164,6 +164,12 @@ public class GameHistoryLog {
         gameHistoryPanel.append(String.format("%s stayed the round in jail.", htmlFormatPlayerName(playerName, playerColorHex)));
     }
 
+    public void logJailExitCostEvent(Player player, int totalBail) {
+        String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
+        String playerName = player.getName();
+        gameHistoryPanel.append(String.format("%s has been released from jail after paying %s.", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatGoldCoins(totalBail)));
+    }
+
     public void logFortuneBlessingEvent(Player player, int pay) {
         String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
         String playerName = player.getName();

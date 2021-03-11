@@ -214,7 +214,7 @@ public class GameHistoryLogTestGUI extends JPanel {
         });
 
         btnJailExit.addActionListener(e -> {
-            gameHistoryLog.logJailExitEvent(this.activePlayer);
+            gameHistoryLog.logJailExitCostEvent(this.activePlayer, 200);
         });
 
         btnJailStay.addActionListener(e -> {

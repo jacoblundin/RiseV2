@@ -378,10 +378,9 @@ public class ManageEvents {
         if (yesOrNo == 0 && (totalBail <= player.getBalance())) {
             player.setJailCounter(0);
             player.setPlayerIsInJail(false);
-            gameHistoryLog.logJailExitEvent(player);
+            gameHistoryLog.logJailExitCostEvent(player, totalBail);
             gameFlowPanel.activateRollDice();
             SoundService.instance().playSoundFx(SoundFx.SOUND_CHEER);
-
         } else {
             SoundService.instance().playSoundFx(SoundFx.SOUND_PRISON);
             gameHistoryLog.logJailStayEvent(player);
