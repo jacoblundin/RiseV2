@@ -34,7 +34,6 @@ public class BackgroundMusic {
 			// Set the gain (between 0.0 and 1.0)
 			setVolume(0.05);
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
-			clip.stop();
 		} catch (Exception e) {
 			System.out.println("===== Exception occurred =====");
 			e.printStackTrace();
