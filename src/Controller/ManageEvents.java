@@ -34,9 +34,8 @@ import soundservice.SoundService;
 /**
  * The class handles all the Controller.events that occur when a Model.player lands on a tile.
  *
- * @author Seth Oberg, Rohan Samandari,Muhammad Abdulkhuder ,Sebastian Viro, Aevan Dino.
+ * @author Seth Oberg, Rohan Samandari, Muhammad Abdulkhuder, Sebastian Viro, Aevan Dino.
  */
-
 public class ManageEvents {
     private PlayerList playerList;
     private Board board;
