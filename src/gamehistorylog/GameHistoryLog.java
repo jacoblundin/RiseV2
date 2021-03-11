@@ -1,6 +1,5 @@
 package gamehistorylog;
 
-import Model.Tiles.FortuneTeller;
 import Model.Tiles.Property;
 import Model.Tiles.Tile;
 import Model.player.Player;
@@ -158,16 +157,16 @@ public class GameHistoryLog {
         gameHistoryPanel.append(String.format("%s has been released from jail.", htmlFormatPlayerName(playerName, playerColorHex)));
     }
 
-    public void logJailStayEvent(Player player) {
-        String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
-        String playerName = player.getName();
-        gameHistoryPanel.append(String.format("%s stayed the round in jail.", htmlFormatPlayerName(playerName, playerColorHex)));
-    }
-
     public void logJailExitCostEvent(Player player, int totalBail) {
         String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
         String playerName = player.getName();
         gameHistoryPanel.append(String.format("%s has been released from jail after paying %s.", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatGoldCoins(totalBail)));
+    }
+
+    public void logJailStayEvent(Player player) {
+        String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
+        String playerName = player.getName();
+        gameHistoryPanel.append(String.format("%1$s stayed the round in jail. %1$s has been in jail for %2$s rounds.", htmlFormatPlayerName(playerName, playerColorHex), player.getJailCounter()));
     }
 
     public void logFortuneBlessingEvent(Player player, int pay) {

@@ -185,7 +185,6 @@ public class ManageEvents {
         tempWorkObject.setPlayer(player);
         tempWorkObject.payPlayer(getRoll());
 
-        //Log work event
         gameHistoryLog.logWorkEvent(player, tempWorkObject.getPay());
         SoundService.instance().playSoundFx(SoundFx.SOUND_WORK);
         JOptionPane.showMessageDialog(null,
