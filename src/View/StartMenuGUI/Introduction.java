@@ -1,10 +1,6 @@
 package View.StartMenuGUI;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -25,8 +21,34 @@ public class Introduction extends JPanel {
 	private JLabel lblPic = new JLabel();
 	private JFrame frame;
 	private JTextArea taText = new JTextArea();
-	private Font fontTitel = new Font("ALGERIAN", Font.ITALIC, 20);
-	private Font fontText = new Font("Gabriola", Font.ITALIC, 22);
+
+	// Lagt till fonter -----------
+	private File gabriolaTtfFile = new File("fonts/Gabriola.ttf");
+	private Font fontGabriola;
+	{
+		try {
+			fontGabriola = Font.createFont(Font.TRUETYPE_FONT, gabriolaTtfFile);
+		} catch (FontFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	private File algerianTtfFile = new File("fonts/Algerian.ttf");
+	private Font fontAlgerian;
+	{
+		try {
+			fontAlgerian = Font.createFont(Font.TRUETYPE_FONT, algerianTtfFile);
+		} catch (FontFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	private Font fontTitel = fontAlgerian.deriveFont(Font.ITALIC, 20);
+			//new Font("ALGERIAN", Font.ITALIC, 20);
+	private Font fontText = fontGabriola.deriveFont(Font.ITALIC, 22);
+					//new Font("Gabriola", Font.ITALIC, 22);
 
 	/**
 	 * Constructor that calls upon method which draws gui

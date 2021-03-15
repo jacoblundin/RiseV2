@@ -1,9 +1,6 @@
 package View.EastGUI;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -36,8 +33,25 @@ public class PlayerProperties extends JPanel implements ActionListener {
     private JButton btnDowngrade = new JButton("Downgrade");
     private JButton btnTrade = new JButton("Trade");
     private JButton btnSell = new JButton("Sell");
-    private Font font = new Font("ALGERIAN", Font.BOLD, 22);
-    private Font fontLevel = new Font("ALGERIAN", Font.BOLD, 50);
+
+    // Lagt till font -------------
+    private File algerianTtfFile = new File("fonts/Algerian.ttf");
+    private Font fontAlgerian;
+    {
+        try {
+            fontAlgerian = Font.createFont(Font.TRUETYPE_FONT, algerianTtfFile);
+        } catch (FontFormatException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private Font font = fontAlgerian.deriveFont(Font.BOLD, 22);
+            //new Font("ALGERIAN", Font.BOLD, 22);
+    private Font fontLevel = fontAlgerian.deriveFont(Font.BOLD, 50);
+                    //new Font("ALGERIAN", Font.BOLD, 50);
+    //-----------------------
+
     private String plus = "+";
     private PlayerList playerList;
     private int playerAtI, propertyAtI;

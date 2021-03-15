@@ -1,12 +1,12 @@
 package View.StartMenuGUI;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -40,10 +40,27 @@ public class StartingScreen extends JFrame {
     private ImageIcon imgBackground = new ImageIcon(
             new ImageIcon("images/fancyRoll.jpg").getImage().getScaledInstance(900, 860, Image.SCALE_SMOOTH));
 
-    private Font fontRadioButtons = new Font("Gabriola", Font.PLAIN, 24);
-    private Font fontHeader = new Font("Gabriola", Font.BOLD, 92);
-    private Font fontLabel = new Font("Gabriola", Font.BOLD, 42);
-    private Font fontLabelPlayer = new Font("Gabriola", Font.BOLD, 30);
+    // Lagt till font ---------
+    private File gabriolaTtfFile = new File("fonts/Gabriola.ttf");
+    private Font fontGabriola;
+    {
+        try {
+            fontGabriola = Font.createFont(Font.TRUETYPE_FONT, gabriolaTtfFile);
+        } catch (FontFormatException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+     private Font fontRadioButtons = fontGabriola.deriveFont(Font.BOLD, 24);
+            // new Font("Gabriola", Font.PLAIN, 24);
+    private Font fontHeader = fontGabriola.deriveFont(Font.BOLD, 92);
+                    //new Font("Gabriola", Font.BOLD, 92);
+    private Font fontLabel =  fontGabriola.deriveFont(Font.BOLD, 42);
+                            //new Font("Gabriola", Font.BOLD, 42);
+    private Font fontLabelPlayer =  fontGabriola.deriveFont(Font.BOLD, 30);
+                                    //new Font("Gabriola", Font.BOLD, 30);
+    //------------
 
     private JPanel pnlPlayerInfo = new JPanel();
 
