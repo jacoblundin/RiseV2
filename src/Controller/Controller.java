@@ -171,7 +171,6 @@ public class Controller {
 
                     goEvent();
                     redrawPlayerInfo();
-                    checkDuel();
                     gameFlowPanel.setEndTurnButton(true);
                 }
 
@@ -180,36 +179,6 @@ public class Controller {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }
-        }
-
-        /**
-         * Checks if two players are on the same tile and should start a duel.
-         */
-        private void checkDuel() {
-            List<Player> playersOnTile = new ArrayList<Player>();
-            Player player = null;
-
-            for (int i = 0; i < playerList.getLength(); i++) {
-                player = playerList.getActivePlayers().get(i);
-                int positionOfPlayer = player.getPosition();
-
-                if (activePlayer.getPosition() == positionOfPlayer && !activePlayer.getName().equals(player.getName())) {
-                    playersOnTile.add(player);
-                    System.out.println("Player added to playersOnTile: " + player.getName());
-                }
-            }
-
-            if (!playersOnTile.isEmpty() && playersOnTile.size() > 1) {
-                int playerNbr = Integer.parseInt(JOptionPane.showInputDialog("Which player would you like to meet in a duel? Write their number:"));
-                for (Player playerCheck : playersOnTile) {
-                    if (playerNbr == playerCheck.getPlayerIndex()) {
-                        Duel duel = new Duel(activePlayer, playerCheck, controller);
-                    }
-                }
-            } else if (playersOnTile.size() == 1) {
-                player = playersOnTile.get(0);
-                Duel duel = new Duel(activePlayer, player, controller);
             }
         }
     }

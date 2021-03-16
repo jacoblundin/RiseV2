@@ -1,12 +1,16 @@
 package Controller;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 import javax.swing.JOptionPane;
+
+import View.Duel.Duel;
 import View.GameFlowGUI.GameFlowPanel;
 import View.WestGUI.WestSidePanel;
 import View.BoardGUI.Board;
@@ -80,6 +84,7 @@ public class ManageEvents {
      */
     public void newEvent(Tile tile, Player player) {
         player.checkPlayerRank();
+        checkDuel(player);
 
         if (player.getPlayerRank() == PlayerRanks.KINGS) {
             new WinGui(player);
@@ -120,6 +125,7 @@ public class ManageEvents {
         if (tile instanceof FortuneTeller) {
             fortuneTellerEvent(tile, player);
         }
+
         controller.updatePlayerRanks();
         controller.redrawPlayerInfo();
     }
@@ -313,6 +319,42 @@ public class ManageEvents {
         player.increaseNetWorth(taxPayout);
         taxCounter = 0;
         gameHistoryLog.logTaxPayoutEvent(player, taxPayout);
+    }
+
+    /**
+     * Checks if two players are on the same tile and should start a duel.
+     */
+    private void checkDuel(Player activePlayer) {
+        List<Player> playersOnTile = new ArrayList<Player>();
+        Player player = null;
+
+        for (int i = 0; i < playerList.getLength(); i++) {
+            player = playerList.getActivePlayers().get(i);
+            int positionOfPlayer = player.getPosition();
+
+            if (activePlayer.getPosition() == positionOfPlayer && !activePlayer.getName().equals(player.getName())) {
+                playersOnTile.add(player);
+            }
+        }
+
+        if (!playersOnTile.isEmpty() && playersOnTile.size() > 1) {
+            while (true) {
+                try {
+                    int playerNbr = Integer.parseInt(JOptionPane.showInputDialog("Which player would you like to meet in a duel? Write their number:"));
+                    for (Player playerCheck : playersOnTile) {
+                        if ((playerNbr - 1) == playerCheck.getPlayerIndex()) {
+                            Duel duel = new Duel(activePlayer, playerCheck, controller);
+                        }
+                    }
+                    break;
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "You did not enter a valid number. Please try again");
+                }
+            }
+        } else if (playersOnTile.size() == 1) {
+            player = playersOnTile.get(0);
+            Duel duel = new Duel(activePlayer, player, controller);
+        }
     }
 
     /**
