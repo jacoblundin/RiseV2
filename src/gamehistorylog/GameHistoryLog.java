@@ -150,7 +150,7 @@ public class GameHistoryLog {
     public void logPlayerEliminatedEvent(Player player) {
         String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
         String playerName = player.getName();
-        gameHistoryPanel.append(String.format("%s has been eliminated!", htmlFormatPlayerName(playerName, playerColorHex)));
+        gameHistoryPanel.append(String.format("%s has been eliminated from the game!", htmlFormatPlayerName(playerName, playerColorHex)));
     }
 
     public void logJailEnterEvent(Player player) {
@@ -235,13 +235,6 @@ public class GameHistoryLog {
         gameHistoryPanel.append(String.format("%1$s completed a trade with %2$s. %1$s traded away %3$s and %5$s to %2$s and received %4$s in return", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatPlayerName(playerName2, playerColorHex2), htmlFormatTileName(propertyTileName, propertyTileColorHex), htmlFormatTileName(propertyTileName2, propertyTileColorHex2), htmlFormatGoldCoins(offer)));
     }
 
-    public void logDeathEvent(Player player) {
-        String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
-        String playerName = player.getName();
-        gameHistoryPanel.append(String.format("%s has been eliminated from the game", htmlFormatPlayerName(playerName, playerColorHex)));
-    }
-
-    //HTML format helpers
     private String htmlFormatGoldCoins(int goldCoinsAmount) {
         String goldCoinImgPath = "file:images/coin.jpg";
         String ret = "<b>" + goldCoinsAmount + "</b>" + "<img src=" + goldCoinImgPath + " height=11 width=11>" + " gold coins";
