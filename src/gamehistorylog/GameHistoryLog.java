@@ -52,6 +52,14 @@ public class GameHistoryLog {
         gameHistoryPanel.append(String.format("<font color=%s><b>%s</b></font> rolled a combined <b>%d</b>, landing on <font color=%s><b>%s</b></font>.", playerColorHex, playerName, sumRoll, landingTileColorHex, landingTileName));
     }
 
+    public void logDoubleDiceRollEvent(Player player, Tile landingTile, int doubleRoll) {
+        String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
+        String playerName = player.getName();
+        String landingTileColorHex = Utils.colorToHexString(landingTile.getColor());
+        String landingTileName = landingTile.getName();
+        gameHistoryPanel.append(String.format("<font color=%s><b>%s</b></font> rolled a combined <b>%d</b>, landing on <font color=%s><b>%s</b></font>.", playerColorHex, playerName, doubleRoll, landingTileColorHex, landingTileName));
+    }
+
     public void logWorkEvent(Player player, int payAmount) {
         String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
         String playerName = player.getName();

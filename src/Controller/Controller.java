@@ -49,6 +49,13 @@ public class Controller {
         movePlayerThread.start();
         redrawPlayerInfo();
     }
+    
+    private void doubleRoll(int roll, int d1, int d2) {
+        Player activePlayer = playerList.getActivePlayer();
+        activePlayer.checkPlayerRank();
+        manageEvents.setRoll(roll);
+        Thread movePlayerThread = new Thread(new PlayerMover(roll, this));
+    }
 
     /*
      * When a player ends their turn
@@ -74,7 +81,8 @@ public class Controller {
     }
 
     public void upgradeProperty(Property property) {
-        property.increaseLevel();
+        var owner = property.getOwner();
+        property.increaseLevel(property);
         redrawPlayerInfo();
     }
 
@@ -94,7 +102,7 @@ public class Controller {
     }
 
     public void downgradeProperty(Property property) {
-        property.decreaseLevel();
+        property.decreaseLevel(property);
         redrawPlayerInfo();
     }
 
@@ -149,6 +157,7 @@ public class Controller {
         int roll;
         Player activePlayer;
         Controller controller;
+        
 
         public PlayerMover(int roll, Controller controller) {
             this.roll = roll;

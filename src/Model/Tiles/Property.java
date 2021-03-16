@@ -4,6 +4,7 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import Model.player.Player;
+import gamehistorylog.GameHistoryLog;
 
 /**
  * Class for property.
@@ -86,11 +87,12 @@ public class Property implements Tile {
         this.levelPrice = levelPrice;
     }
 
-    public void increaseLevel() {
+    public void increaseLevel(Property property) {
         int res = JOptionPane.showConfirmDialog(null, "Do you want to upgrade " + getName() + " for: " + getLevelPrice());
         if (res == 0 && owner.getPlayerRank().nbrOfLevels() > levels && owner.getBalance() >= getLevelPrice()) {
             this.levels += 1;
             owner.decreaseBalance(getLevelPrice());
+            GameHistoryLog.instance().logPropertyUpgradeEvent(owner, property);
         } else if (res == 0 && owner.getPlayerRank().nbrOfLevels() == levels) {
             JOptionPane.showMessageDialog(null, "You cannot upgrade the property further at your current rank.");
 
@@ -99,12 +101,13 @@ public class Property implements Tile {
         }
     }
 
-    public void decreaseLevel() {
+    public void decreaseLevel(Property property) {
         int res = JOptionPane.showConfirmDialog(null, "Do you really want to downgrade " + getName() + " for: " + getLevelPrice()/2
                 + "\nits half of what you upgrade it for");
         if (levels > 0 && res == 0) {
             this.levels -= 1;
             owner.increaseBalance(getLevelPrice()/2);
+            GameHistoryLog.instance().logPropertyDownGradeEvent(owner, property);
         }
     }
 
