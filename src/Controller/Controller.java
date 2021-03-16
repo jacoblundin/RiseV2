@@ -49,13 +49,6 @@ public class Controller {
         movePlayerThread.start();
         redrawPlayerInfo();
     }
-    
-    private void doubleRoll(int roll, int d1, int d2) {
-        Player activePlayer = playerList.getActivePlayer();
-        activePlayer.checkPlayerRank();
-        manageEvents.setRoll(roll);
-        Thread movePlayerThread = new Thread(new PlayerMover(roll, this));
-    }
 
     /*
      * When a player ends their turn
