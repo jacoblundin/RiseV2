@@ -39,7 +39,7 @@ public class PropertyEventTests {
         TileCollection tileCollection = new TileCollection();
         westSidePanel = new WestSidePanel();
         playerList = new PlayerList();
-        board = new Board(null, westSidePanel, tileCollection);
+        board = new Board(playerList, westSidePanel, tileCollection);
         gameFlowPanel = null;
         eastSidePanel = null;
         controller = new Controller(null, null, null, null, null,null);
@@ -125,7 +125,20 @@ public class PropertyEventTests {
     @Test
     void testPropertyRentGoldPayed()
     {
+        Player playerPayRent = new Player("", null, Color.GREEN, 0);
+        Player playerOwner = new Player("", null, Color.RED, 0);
+        Property property = new Property("Wood Cutter Camp", 60, 2, 30, new Color(58,20,56,255), 50,new ImageIcon("tilePics/Wood.png"));
 
+        property.setOwner(playerOwner);
+
+        int playerBalance = 60;
+        playerPayRent.setBalance(playerBalance);
+        playerPayRent.setNetWorth(playerBalance);
+
+        manageEvents.propertyEvent(property, playerPayRent);
+
+        assertEquals(playerBalance-2, playerPayRent.getBalance());
+        assertEquals(playerBalance-2, playerPayRent.getNetWorth());
     }
 
     /**
@@ -134,6 +147,20 @@ public class PropertyEventTests {
     @Test
     void testPropertyRentGoldEarned()
     {
+        Player playerPayRent = new Player("", null, Color.BLUE, 0);
+        Player playerOwner = new Player("", null, Color.RED, 0);
+        Property property = new Property("Wood Cutter Camp", 60, 2, 30, new Color(58,20,56,255), 50,new ImageIcon("tilePics/Wood.png"));
+
+        property.setOwner(playerOwner);
+
+        int playerBalance = 60;
+        playerOwner.setBalance(playerBalance);
+        playerOwner.setNetWorth(playerBalance);
+
+        manageEvents.propertyEvent(property, playerPayRent);
+
+        assertEquals(playerBalance+2, playerOwner.getBalance());
+        assertEquals(playerBalance+2, playerOwner.getNetWorth());
 
     }
 
