@@ -145,6 +145,7 @@ public class ManageEvents {
             board.removePlayer(player);
             deathGUI.addGui(player);
             controller.drawBorderColors();
+            gameHistoryLog.logDeathEvent(player);
         }
     }
 

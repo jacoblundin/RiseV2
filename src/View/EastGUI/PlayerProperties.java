@@ -258,8 +258,8 @@ public class PlayerProperties extends JPanel implements ActionListener {
                 if (type == 3) {
                     confirm = JOptionPane.showConfirmDialog(null,
                             otherPlayer.getName() + " Are you okay with this trade?" + "\n You are getting " + offer
-                                    + "Gold coins" + "\n and are trading away " + activePlayerProperty.getName() + "\n for "
-                                    + otherPlayersProperty.getName());
+                                    + " Gold coins" + "\n and are trading away " + otherPlayersProperty.getName() + "\n for "
+                                    + activePlayerProperty.getName());
 
                     if (confirm == 0) {
 

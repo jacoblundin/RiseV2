@@ -129,7 +129,7 @@ public class GameHistoryLog {
         String propertyTileColorHex = Utils.colorToHexString(propertyTile.getColor());
         String propertyTileName = propertyTile.getName();
         int propertyTileLevel = propertyTile.getLevel();
-        int propertyTileUpgradePrice = propertyTile.getLevelPrice(); //TODO: WARNING:This might cause the wrong information to be displayed, if this value changes after an upgrade the new upgrade price will be returned here and not the old
+        int propertyTileUpgradePrice = propertyTile.getLevelPrice()/2; //TODO: WARNING:This might cause the wrong information to be displayed, if this value changes after an upgrade the new upgrade price will be returned here and not the old
         gameHistoryPanel.append(String.format("%s downgraded %s to level %s, recouping %s.", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatTileName(propertyTileName, propertyTileColorHex), propertyTileLevel, htmlFormatGoldCoins(propertyTileUpgradePrice)));
     }
 
@@ -233,6 +233,12 @@ public class GameHistoryLog {
         String propertyTileName = propertyTile.getName();
         String propertyTileName2 = propertyTile2.getName();
         gameHistoryPanel.append(String.format("%1$s completed a trade with %2$s. %1$s traded away %3$s and %5$s to %2$s and received %4$s in return", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatPlayerName(playerName2, playerColorHex2), htmlFormatTileName(propertyTileName, propertyTileColorHex), htmlFormatTileName(propertyTileName2, propertyTileColorHex2), htmlFormatGoldCoins(offer)));
+    }
+
+    public void logDeathEvent(Player player) {
+        String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
+        String playerName = player.getName();
+        gameHistoryPanel.append(String.format("%s has been eliminated from the game", htmlFormatPlayerName(playerName, playerColorHex)));
     }
 
     //HTML format helpers
