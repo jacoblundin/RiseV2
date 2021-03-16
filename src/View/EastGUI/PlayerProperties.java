@@ -48,9 +48,9 @@ public class PlayerProperties extends JPanel implements ActionListener {
         }
     }
     private Font font = fontAlgerian.deriveFont(Font.BOLD, 22);
-            //new Font("ALGERIAN", Font.BOLD, 22);
+    //new Font("ALGERIAN", Font.BOLD, 22);
     private Font fontLevel = fontAlgerian.deriveFont(Font.BOLD, 50);
-                    //new Font("ALGERIAN", Font.BOLD, 50);
+    //new Font("ALGERIAN", Font.BOLD, 50);
     //-----------------------
 
     private String plus = "+";
@@ -261,41 +261,43 @@ public class PlayerProperties extends JPanel implements ActionListener {
                                     + "Gold coins" + "\n and are trading away " + activePlayerProperty.getName() + "\n for "
                                     + otherPlayersProperty.getName());
 
-                    activePlayer.removeProperty(activePlayerProperty);
-                    otherPlayer.removeProperty(otherPlayersProperty);
+                    if (confirm == 0) {
 
-                    activePlayer.decreaseBalance(offer);
-                    activePlayer.decreaseNetWorth(offer);
+                        activePlayer.removeProperty(activePlayerProperty);
+                        otherPlayer.removeProperty(otherPlayersProperty);
 
-                    otherPlayer.increaseBalance(offer);
-                    otherPlayer.increaseNetWorth(offer);
+                        activePlayer.decreaseBalance(offer);
+                        activePlayer.decreaseNetWorth(offer);
 
-                    activePlayerProperty.setOwner(otherPlayer);
-                    activePlayer.addNewProperty(otherPlayersProperty);
+                        otherPlayer.increaseBalance(offer);
+                        otherPlayer.increaseNetWorth(offer);
 
-                    otherPlayersProperty.setOwner(activePlayer);
-                    otherPlayer.addNewProperty(activePlayerProperty);
+                        activePlayerProperty.setOwner(otherPlayer);
+                        activePlayer.addNewProperty(otherPlayersProperty);
 
-                    JOptionPane.showMessageDialog(null, "Trade Complete! Omedato gosaimasu!!!");
-                    GameHistoryLog.instance().logTradeEventGoldAndProperty(activePlayer, otherPlayer, activePlayerProperty, otherPlayersProperty, offer);
+                        otherPlayersProperty.setOwner(activePlayer);
+                        otherPlayer.addNewProperty(activePlayerProperty);
+
+                        JOptionPane.showMessageDialog(null, "Trade Complete! Omedato gosaimasu!!!");
+                        GameHistoryLog.instance().logTradeEventGoldAndProperty(activePlayer, otherPlayer, activePlayerProperty, otherPlayersProperty, offer);
+                    }
                 }
+                    eastSidePanel.tradeProperty();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Trade can not be done! The player you picked does not own any properties!");
+                }
+            }
+        }
 
-                eastSidePanel.tradeProperty();
-            } else {
-                JOptionPane.showMessageDialog(null, "Trade can not be done! The player you picked does not own any properties!");
+        /**
+         * @param playerList
+         * @param playerIndex
+         * @param propertyIndex updates levels shown adds a plus to the picture
+         */
+        public void updateLevels(PlayerList playerList, int playerIndex, int propertyIndex) {
+            int lvl = playerList.getPlayerFromIndex(playerIndex).getPropertyAt(propertyIndex).getLevel();
+            for (int i = 0; i < lvl; i++) {
+                taLevel.append(plus);
             }
         }
     }
-
-    /**
-     * @param playerList
-     * @param playerIndex
-     * @param propertyIndex updates levels shown adds a plus to the picture
-     */
-    public void updateLevels(PlayerList playerList, int playerIndex, int propertyIndex) {
-        int lvl = playerList.getPlayerFromIndex(playerIndex).getPropertyAt(propertyIndex).getLevel();
-        for (int i = 0; i < lvl; i++) {
-            taLevel.append(plus);
-        }
-    }
-}
