@@ -18,6 +18,7 @@ import javax.swing.border.MatteBorder;
 import Model.player.Player;
 import Model.player.PlayerList;
 import Model.Tiles.Property;
+import gamehistorylog.GameHistoryLog;
 
 /**
  * @author Muhammad Abdulkhuder Aevan Dino sebastian Viro.
@@ -212,22 +213,15 @@ public class PlayerProperties extends JPanel implements ActionListener {
                 Property otherPlayersProperty = playerList.getPlayerFromIndex(otherPlayerInt)
                         .getPropertyAt(whichPropertyYouWant);
 
-                if (type == 1 || type == 3) {
+                if (type == 1) {
                     confirm = JOptionPane.showConfirmDialog(null,
-                            otherPlayer.getName() + " Are you okay with this trade?" + "\n You are getting " + offer
-                                    + "Gold coins" + "\n and are trading away " + activePlayerProperty.getName() + "\n for "
-                                    + otherPlayersProperty.getName());
+                            otherPlayer.getName() + " Are you okay with this trade?" + "\n You are getting "
+                                    + activePlayerProperty.getName() + "\n and are trading away " + otherPlayersProperty.getName());
 
                     if (confirm == 0) {
 
                         activePlayer.removeProperty(activePlayerProperty);
                         otherPlayer.removeProperty(otherPlayersProperty);
-
-                        activePlayer.decreaseBalance(offer);
-                        activePlayer.decreaseNetWorth(offer);
-
-                        otherPlayer.increaseBalance(offer);
-                        otherPlayer.increaseNetWorth(offer);
 
                         activePlayerProperty.setOwner(otherPlayer);
                         activePlayer.addNewProperty(otherPlayersProperty);
@@ -236,6 +230,7 @@ public class PlayerProperties extends JPanel implements ActionListener {
                         otherPlayer.addNewProperty(activePlayerProperty);
 
                         JOptionPane.showMessageDialog(null, "Trade Complete! Omedato gosaimasu!!!");
+                        GameHistoryLog.instance().logTradeEventProperty(activePlayer, otherPlayer, activePlayerProperty, otherPlayersProperty);
                     }
                 }
 
@@ -254,9 +249,37 @@ public class PlayerProperties extends JPanel implements ActionListener {
 
                         otherPlayer.increaseBalance(offer);
                         otherPlayer.increaseNetWorth(offer);
+
                         JOptionPane.showMessageDialog(null, "Trade Complete! Omedato gosaimasu!!!");
+                        GameHistoryLog.instance().logTradeEventGold(activePlayer, otherPlayer, otherPlayersProperty, offer);
+
                     }
                 }
+                if (type == 3) {
+                    confirm = JOptionPane.showConfirmDialog(null,
+                            otherPlayer.getName() + " Are you okay with this trade?" + "\n You are getting " + offer
+                                    + "Gold coins" + "\n and are trading away " + activePlayerProperty.getName() + "\n for "
+                                    + otherPlayersProperty.getName());
+
+                    activePlayer.removeProperty(activePlayerProperty);
+                    otherPlayer.removeProperty(otherPlayersProperty);
+
+                    activePlayer.decreaseBalance(offer);
+                    activePlayer.decreaseNetWorth(offer);
+
+                    otherPlayer.increaseBalance(offer);
+                    otherPlayer.increaseNetWorth(offer);
+
+                    activePlayerProperty.setOwner(otherPlayer);
+                    activePlayer.addNewProperty(otherPlayersProperty);
+
+                    otherPlayersProperty.setOwner(activePlayer);
+                    otherPlayer.addNewProperty(activePlayerProperty);
+
+                    JOptionPane.showMessageDialog(null, "Trade Complete! Omedato gosaimasu!!!");
+                    GameHistoryLog.instance().logTradeEventGoldAndProperty(activePlayer, otherPlayer, activePlayerProperty, otherPlayersProperty, offer);
+                }
+
                 eastSidePanel.tradeProperty();
             } else {
                 JOptionPane.showMessageDialog(null, "Trade can not be done! The player you picked does not own any properties!");
