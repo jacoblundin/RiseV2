@@ -3,6 +3,7 @@ package Controller;
 import Model.Tiles.Property;
 import Model.player.Player;
 import Model.player.PlayerList;
+import Model.player.PlayerRanks;
 import View.BoardGUI.Board;
 import View.Duel.Duel;
 import View.EastGUI.EastSidePanel;
@@ -125,14 +126,28 @@ public class Controller {
     }
 
     public void duelWinner(Player winner, Player loser) {
-        winner.increaseBalance(500);
-        winner.increaseNetWorth(500);
-        loser.decreaseBalance(500);
-        loser.decreaseNetWorth(500);
+        PlayerRanks rankOfLoser = loser.getPlayerRank();
+        int profitAndLoss = 0;
+
+        if (rankOfLoser == PlayerRanks.PEASANT) {
+            profitAndLoss = 100;
+        }
+
+        if (rankOfLoser == PlayerRanks.KNIGHT) {
+            profitAndLoss = 300;
+        }
+
+        if (rankOfLoser == PlayerRanks.LORD) {
+            profitAndLoss = 800;
+        }
+        winner.increaseBalance(profitAndLoss);
+        winner.increaseNetWorth(profitAndLoss);
+        loser.decreaseBalance(profitAndLoss);
+        loser.decreaseNetWorth(profitAndLoss);
         updatePlayerRanks();
-        manageEvents.control(loser, 500);
-        gameHistoryLog.logDuelWinner(winner, 500);
-        gameHistoryLog.logDuelLoser(loser, 500);
+        manageEvents.control(loser, profitAndLoss);
+        gameHistoryLog.logDuelWinner(winner, profitAndLoss);
+        gameHistoryLog.logDuelLoser(loser, profitAndLoss);
     }
 
     public void updatePlayerRanks() {
