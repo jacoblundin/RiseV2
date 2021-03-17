@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+
 import View.WestGUI.WestSidePanel;
 import Model.Tiles.Property;
 import Model.Tiles.Tavern;
@@ -276,6 +277,21 @@ public class Player {
                 GameHistoryLog.instance().logPlayerRankDownEvent(this);
                 break;
         }
+    }
+
+    public int setLeftToNextRank(PlayerList playerList, int playerNbr) {
+        PlayerRanks currentRank = playerList.getPlayerFromIndex(playerNbr).getPlayerRank();
+        int nextRank = 0;
+        if (currentRank == PlayerRanks.PEASANT) {
+            nextRank = 2000;
+        }
+        if (currentRank == PlayerRanks.KNIGHT) {
+            nextRank = 4000;
+        }
+        if (currentRank == PlayerRanks.LORD) {
+            nextRank = 7500;
+        }
+        return nextRank;
     }
 
     /**
