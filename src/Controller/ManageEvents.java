@@ -339,17 +339,21 @@ public class ManageEvents {
         }
 
         if (!playersOnTile.isEmpty() && playersOnTile.size() > 1) {
-            while (true) {
+            int playerNbr = 0;
+            boolean validInt = true;
+
+            while (validInt == true) {
                 try {
-                    int playerNbr = Integer.parseInt(JOptionPane.showInputDialog("Which player would you like to meet in a duel? Write their number:"));
-                    for (Player playerCheck : playersOnTile) {
-                        if ((playerNbr - 1) == playerCheck.getPlayerIndex()) {
-                            Duel duel = new Duel(activePlayer, playerCheck, controller);
-                        }
-                    }
-                    break;
+                    playerNbr = Integer.parseInt(JOptionPane.showInputDialog("Which player would you like to meet in a duel? Write their number:"));
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(null, "You did not enter a valid number. Please try again.");
+                }
+
+                for (Player playerCheck : playersOnTile) {
+                    if (playerNbr == (playerCheck.getPlayerIndex() + 1)) {
+                        validInt = false;
+                        Duel duel = new Duel(activePlayer, playerCheck, controller);
+                    }
                 }
             }
         } else if (playersOnTile.size() == 1) {

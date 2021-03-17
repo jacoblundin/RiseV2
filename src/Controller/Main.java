@@ -100,8 +100,8 @@ public class Main {
             gamePanels.setController(controller);
 
             // If you want the cheat GUI:
-//           GameFlowPanel gameFlowPanel = gamePanels.getGameFlowPanel();
-//           gameFlowPanel.setCheatGUI(new CheatGui(controller));
+           GameFlowPanel gameFlowPanel = gamePanels.getGameFlowPanel();
+           gameFlowPanel.setCheatGUI(new CheatGui(controller));
             intro.startGUI();
         } catch (ExecutionException | InterruptedException e) {
             System.err.println("ExecutionException or InterruptedException when loading game. Not handled.");
