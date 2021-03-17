@@ -385,8 +385,8 @@ public class ManageEvents {
      * @param player, Model.player who landed on the tavern.
      */
     public void tavernDialog(Tavern tavern, Player player) {
-        int yesOrNo = JOptionPane.showConfirmDialog(null, "Do you want to purchase this tavern for " + tavern.getPrice() + " gold coins?", "JOption",
-                JOptionPane.YES_NO_OPTION);
+        int yesOrNo = JOptionPane.showConfirmDialog(null, "Do you want to purchase this tavern for " + tavern.getPrice() + " gold coins?",
+                "Decide your fate!", JOptionPane.YES_NO_OPTION);
 
         if (yesOrNo == 0 && (tavern.getPrice() <= player.getBalance())) {
             tavern.setOwner(player);
