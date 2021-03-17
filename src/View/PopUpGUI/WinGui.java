@@ -1,6 +1,7 @@
 package View.PopUpGUI;
 
 import Model.player.Player;
+import gamehistorylog.GameHistoryLog;
 import soundservice.SoundFx;
 import soundservice.SoundService;
 
@@ -32,6 +33,7 @@ public class WinGui extends JPanel {
 		add(lblLblpic);
 		getFrame();
 		victory();
+		GameHistoryLog.instance().logPlayerWinEvent(player);
 		JOptionPane.showMessageDialog(null, "Congratulations " + player.getName() + " you are king and won the game");
 	}
 

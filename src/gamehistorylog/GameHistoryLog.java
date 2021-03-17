@@ -173,6 +173,12 @@ public class GameHistoryLog {
         gameHistoryPanel.append(String.format("%s has been eliminated from the game!", htmlFormatPlayerName(playerName, playerColorHex)));
     }
 
+    public void logPlayerWinEvent(Player player) {
+        String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
+        String playerName = player.getName();
+        gameHistoryPanel.append(String.format("%s has won the game!", htmlFormatPlayerName(playerName, playerColorHex)));
+    }
+
     public void logJailEnterEvent(Player player) {
         String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
         String playerName = player.getName();
