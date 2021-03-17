@@ -1,6 +1,7 @@
 package gamehistorylog;
 
 import Model.Tiles.Property;
+import Model.Tiles.Tavern;
 import Model.Tiles.Tile;
 import Model.player.Player;
 import utils.Utils;
@@ -131,6 +132,25 @@ public class GameHistoryLog {
         int propertyTileLevel = propertyTile.getLevel();
         int propertyTileUpgradePrice = propertyTile.getLevelPrice()/2; //TODO: WARNING:This might cause the wrong information to be displayed, if this value changes after an upgrade the new upgrade price will be returned here and not the old
         gameHistoryPanel.append(String.format("%s downgraded %s to level %s, recouping %s.", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatTileName(propertyTileName, propertyTileColorHex), propertyTileLevel, htmlFormatGoldCoins(propertyTileUpgradePrice)));
+    }
+
+    public void logTavernBuyEvent(Player player, Tavern propertyTile) {
+        String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
+        String playerName = player.getName();
+        String propertyTileColorHex = Utils.colorToHexString(propertyTile.getColor());
+        String propertyTileName = propertyTile.getName();
+        int propertyTilePrice = propertyTile.getPrice();
+        gameHistoryPanel.append(String.format("%s purchased %s for %s.", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatTileName(propertyTileName, propertyTileColorHex), htmlFormatGoldCoins(propertyTilePrice)));
+    }
+
+    public void logTavernRentEvent(Player player, Tavern propertyTile, int randomValue) {
+        String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
+        String playerName = player.getName();
+        String propertyTileColorHex = Utils.colorToHexString(propertyTile.getColor());
+        String propertyTileName = propertyTile.getName();
+        String propertyOwnerName = propertyTile.getOwner().getName();
+        String propertyOwnerColorHex = Utils.colorToHexString(propertyTile.getOwner().getPlayerColor());
+        gameHistoryPanel.append(String.format("%s visited %s's %s and had to pay %s in rent.", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatPlayerName(propertyOwnerName, propertyOwnerColorHex), htmlFormatTileName(propertyTileName, propertyTileColorHex), htmlFormatGoldCoins(randomValue)));
     }
 
     public void logPlayerRankUpEvent(Player player) {

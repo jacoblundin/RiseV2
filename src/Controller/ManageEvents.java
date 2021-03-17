@@ -259,8 +259,7 @@ public class ManageEvents {
                 JOptionPane.showMessageDialog(null, player.getName() + " you have to pay " + randomValue + " gold in rent to "
                         + tempTavernObj.getOwner().getName() + ".");
                 //TODO Log tavern rent
-				/*westPanel.append(player.getName() + " paid " + randomValue + " GC to "
-						+ tempTavernObj.getOwner().getName() + "\n");*/
+                gameHistoryLog.logTavernRentEvent(player, tempTavernObj, randomValue);
                 tempTavernObj.getOwner().increaseBalance(randomValue);
                 tempTavernObj.getOwner().increaseNetWorth(randomValue);
                 player.decreaseBalance(randomValue);
@@ -397,8 +396,7 @@ public class ManageEvents {
             player.addNewTavern(tavern);
             player.decreaseBalance(tavern.getPrice());
             controller.drawBorderColors();
-            //TODO Log tavern purchase
-            //gameHistoryLog.logPropertyBuyEvent(player, tavern);
+            gameHistoryLog.logTavernBuyEvent(player, tavern);
         }
     }
 

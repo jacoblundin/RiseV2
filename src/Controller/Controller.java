@@ -5,15 +5,13 @@ import Model.player.Player;
 import Model.player.PlayerList;
 import Model.player.PlayerRanks;
 import View.BoardGUI.Board;
-import View.Duel.Duel;
 import View.EastGUI.EastSidePanel;
 import View.GameFlowGUI.GameFlowPanel;
 import View.WestGUI.WestSidePanel;
 import dice.Dice;
 import gamehistorylog.GameHistoryLog;
+
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Controller {
     private final Board board;
@@ -182,15 +180,14 @@ public class Controller {
                 if (i == (roll - 1)) {
                     GameHistoryLog.instance().logDiceRollEvent(activePlayer, board.getDestinationTile(activePlayer.getPosition()), roll);
 
-                    //Create the event the landing tile
-                    manageEvents.newEvent(board.getDestinationTile(activePlayer.getPosition()),
-                            activePlayer);
+                        //Create the event the landing tile
+                        manageEvents.newEvent(board.getDestinationTile(activePlayer.getPosition()),
+                                activePlayer);
 
-                    goEvent();
-                    redrawPlayerInfo();
-                    gameFlowPanel.setEndTurnButton(true);
+                        goEvent();
+                        redrawPlayerInfo();
+                        gameFlowPanel.setEndTurnButton(true);
                 }
-
                 try {
                     Thread.sleep(250);
                 } catch (InterruptedException e) {
