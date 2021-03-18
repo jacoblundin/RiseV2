@@ -262,6 +262,7 @@ public class ManageEvents {
                 tempTavernObj.getOwner().increaseBalance(randomValue);
                 tempTavernObj.getOwner().increaseNetWorth(randomValue);
                 player.decreaseBalance(randomValue);
+                player.decreaseNetWorth(randomValue);
             }
         }
     }
