@@ -151,6 +151,7 @@ public class GameHistoryLogTestGUI extends JPanel {
         });
 
         btnDoubleRoll.addActionListener(e -> {
+            gameHistoryLog.logDoubleDiceRollEvent(this.activePlayer, this.landingTile, 4 + 4);
         });
 
         btnWork.addActionListener(e -> {

@@ -1,6 +1,7 @@
 package gamehistorylog;
 
 import Model.Tiles.Property;
+import Model.Tiles.Tavern;
 import Model.Tiles.Tile;
 import Model.player.Player;
 import utils.Utils;
@@ -50,6 +51,14 @@ public class GameHistoryLog {
         String landingTileColorHex = Utils.colorToHexString(landingTile.getColor());
         String landingTileName = landingTile.getName();
         gameHistoryPanel.append(String.format("<font color=%s><b>%s</b></font> rolled a combined <b>%d</b>, landing on <font color=%s><b>%s</b></font>.", playerColorHex, playerName, sumRoll, landingTileColorHex, landingTileName));
+    }
+
+    public void logDoubleDiceRollEvent(Player player, Tile landingTile, int doubleRoll) {
+        String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
+        String playerName = player.getName();
+        String landingTileColorHex = Utils.colorToHexString(landingTile.getColor());
+        String landingTileName = landingTile.getName();
+        gameHistoryPanel.append(String.format("<font color=%s><b>%s</b></font> rolled a combined <b>%d</b>, landing on <font color=%s><b>%s</b></font>.", playerColorHex, playerName, doubleRoll, landingTileColorHex, landingTileName));
     }
 
     public void logWorkEvent(Player player, int payAmount) {
@@ -121,8 +130,27 @@ public class GameHistoryLog {
         String propertyTileColorHex = Utils.colorToHexString(propertyTile.getColor());
         String propertyTileName = propertyTile.getName();
         int propertyTileLevel = propertyTile.getLevel();
-        int propertyTileUpgradePrice = propertyTile.getLevelPrice(); //TODO: WARNING:This might cause the wrong information to be displayed, if this value changes after an upgrade the new upgrade price will be returned here and not the old
+        int propertyTileUpgradePrice = propertyTile.getLevelPrice()/2; //TODO: WARNING:This might cause the wrong information to be displayed, if this value changes after an upgrade the new upgrade price will be returned here and not the old
         gameHistoryPanel.append(String.format("%s downgraded %s to level %s, recouping %s.", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatTileName(propertyTileName, propertyTileColorHex), propertyTileLevel, htmlFormatGoldCoins(propertyTileUpgradePrice)));
+    }
+
+    public void logTavernBuyEvent(Player player, Tavern propertyTile) {
+        String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
+        String playerName = player.getName();
+        String propertyTileColorHex = Utils.colorToHexString(propertyTile.getColor());
+        String propertyTileName = propertyTile.getName();
+        int propertyTilePrice = propertyTile.getPrice();
+        gameHistoryPanel.append(String.format("%s purchased %s for %s.", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatTileName(propertyTileName, propertyTileColorHex), htmlFormatGoldCoins(propertyTilePrice)));
+    }
+
+    public void logTavernRentEvent(Player player, Tavern propertyTile, int randomValue) {
+        String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
+        String playerName = player.getName();
+        String propertyTileColorHex = Utils.colorToHexString(propertyTile.getColor());
+        String propertyTileName = propertyTile.getName();
+        String propertyOwnerName = propertyTile.getOwner().getName();
+        String propertyOwnerColorHex = Utils.colorToHexString(propertyTile.getOwner().getPlayerColor());
+        gameHistoryPanel.append(String.format("%s visited %s's %s and had to pay %s in rent.", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatPlayerName(propertyOwnerName, propertyOwnerColorHex), htmlFormatTileName(propertyTileName, propertyTileColorHex), htmlFormatGoldCoins(randomValue)));
     }
 
     public void logPlayerRankUpEvent(Player player) {
@@ -142,7 +170,13 @@ public class GameHistoryLog {
     public void logPlayerEliminatedEvent(Player player) {
         String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
         String playerName = player.getName();
-        gameHistoryPanel.append(String.format("%s has been eliminated!", htmlFormatPlayerName(playerName, playerColorHex)));
+        gameHistoryPanel.append(String.format("%s has been eliminated from the game!", htmlFormatPlayerName(playerName, playerColorHex)));
+    }
+
+    public void logPlayerWinEvent(Player player) {
+        String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
+        String playerName = player.getName();
+        gameHistoryPanel.append(String.format("%s has won the game!", htmlFormatPlayerName(playerName, playerColorHex)));
     }
 
     public void logJailEnterEvent(Player player) {
@@ -169,17 +203,16 @@ public class GameHistoryLog {
         gameHistoryPanel.append(String.format("%1$s stayed the round in jail. %1$s has been in jail for %2$s rounds.", htmlFormatPlayerName(playerName, playerColorHex), player.getJailCounter()));
     }
 
-    public void logFortuneBlessingEvent(Player player, int pay) {
+    public void logFortuneBlessingEvent(Player player, int income) {
         String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
         String playerName = player.getName();
-        gameHistoryPanel.append(String.format("%s collected %s from fortune teller", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatGoldCoins(pay)));
+        gameHistoryPanel.append(String.format("%s collected %s from fortune teller", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatGoldCoins(income)));
     }
 
-    public void logFortuneCurseEvent(Player player, int pay) {
+    public void logFortuneCurseEvent(Player player, int amount) {
         String playerColorHex = Utils.colorToHexString(player.getPlayerColor());
         String playerName = player.getName();
-        gameHistoryPanel.append(String.format("%s lost %s from fortune teller", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatGoldCoins(pay)));
-
+        gameHistoryPanel.append(String.format("%s lost %s from fortune teller", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatGoldCoins(amount)));
     }
 
     public void logDuelWinner(Player player, int income) {
@@ -194,7 +227,40 @@ public class GameHistoryLog {
         gameHistoryPanel.append(String.format("%s lost a duel and lost %s", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatGoldCoins(amount)));
     }
 
-    //HTML format helpers
+    public void logTradeEventGold(Player activePlayer, Player otherPlayer, Property propertyTile, int offer){
+        String playerColorHex = Utils.colorToHexString(activePlayer.getPlayerColor());
+        String playerColorHex2 = Utils.colorToHexString(otherPlayer.getPlayerColor());
+        String playerName = activePlayer.getName();
+        String playerName2 = otherPlayer.getName();
+        String propertyTileColorHex = Utils.colorToHexString(propertyTile.getColor());
+        String propertyTileName = propertyTile.getName();
+        gameHistoryPanel.append(String.format("%1$s completed a trade with %2$s. %1$s has purchased %3$s from %2$s for %4$s", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatPlayerName(playerName2, playerColorHex2), htmlFormatTileName(propertyTileName, propertyTileColorHex), htmlFormatGoldCoins(offer)));
+    }
+
+    public void logTradeEventProperty(Player activePlayer, Player otherPlayer, Property propertyTile, Property propertyTile2){
+        String playerColorHex = Utils.colorToHexString(activePlayer.getPlayerColor());
+        String playerColorHex2 = Utils.colorToHexString(otherPlayer.getPlayerColor());
+        String playerName = activePlayer.getName();
+        String playerName2 = otherPlayer.getName();
+        String propertyTileColorHex = Utils.colorToHexString(propertyTile.getColor());
+        String propertyTileColorHex2 = Utils.colorToHexString(propertyTile2.getColor());
+        String propertyTileName = propertyTile.getName();
+        String propertyTileName2 = propertyTile2.getName();
+        gameHistoryPanel.append(String.format("%1$s completed a trade with %2$s. %1$s traded away %3$s to %2$s and received %4$s in return.", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatPlayerName(playerName2, playerColorHex2), htmlFormatTileName(propertyTileName, propertyTileColorHex),htmlFormatTileName(propertyTileName2, propertyTileColorHex2)));
+    }
+
+    public void logTradeEventGoldAndProperty(Player activePlayer, Player otherPlayer, Property propertyTile, Property propertyTile2, int offer) {
+        String playerColorHex = Utils.colorToHexString(activePlayer.getPlayerColor());
+        String playerColorHex2 = Utils.colorToHexString(otherPlayer.getPlayerColor());
+        String playerName = activePlayer.getName();
+        String playerName2 = otherPlayer.getName();
+        String propertyTileColorHex = Utils.colorToHexString(propertyTile.getColor());
+        String propertyTileColorHex2 = Utils.colorToHexString(propertyTile2.getColor());
+        String propertyTileName = propertyTile.getName();
+        String propertyTileName2 = propertyTile2.getName();
+        gameHistoryPanel.append(String.format("%1$s completed a trade with %2$s. %1$s traded away %3$s and %5$s to %2$s and received %4$s in return", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatPlayerName(playerName2, playerColorHex2), htmlFormatTileName(propertyTileName, propertyTileColorHex), htmlFormatTileName(propertyTileName2, propertyTileColorHex2), htmlFormatGoldCoins(offer)));
+    }
+
     private String htmlFormatGoldCoins(int goldCoinsAmount) {
         String goldCoinImgPath = "file:images/coin.jpg";
         String ret = "<b>" + goldCoinsAmount + "</b>" + "<img src=" + goldCoinImgPath + " height=11 width=11>" + " gold coins";

@@ -1,12 +1,16 @@
 package Controller;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 import javax.swing.JOptionPane;
+
+import View.Duel.Duel;
 import View.GameFlowGUI.GameFlowPanel;
 import View.WestGUI.WestSidePanel;
 import View.BoardGUI.Board;
@@ -80,6 +84,7 @@ public class ManageEvents {
      */
     public void newEvent(Tile tile, Player player) {
         player.checkPlayerRank();
+        checkDuel(player);
 
         if (player.getPlayerRank() == PlayerRanks.KINGS) {
             new WinGui(player);
@@ -120,6 +125,7 @@ public class ManageEvents {
         if (tile instanceof FortuneTeller) {
             fortuneTellerEvent(tile, player);
         }
+
         controller.updatePlayerRanks();
         controller.redrawPlayerInfo();
     }
@@ -139,6 +145,7 @@ public class ManageEvents {
             board.removePlayer(player);
             deathGUI.addGui(player);
             controller.drawBorderColors();
+            gameHistoryLog.logPlayerEliminatedEvent(player);
         }
     }
 
@@ -154,7 +161,7 @@ public class ManageEvents {
 
         if (property.getPurchasable()) {
             if (player.getBalance() < property.getPrice()) {
-                JOptionPane.showMessageDialog(null, "Not enough funds to purchase this property");
+                JOptionPane.showMessageDialog(null, "Not enough funds to purchase this property.");
             } else {
                 propertyDialog(property, player);
             }
@@ -163,8 +170,8 @@ public class ManageEvents {
             control(player, rent);
             if (player.isAlive()) {
                 var owner = property.getOwner();
-                JOptionPane.showMessageDialog(null, player.getName() + " you have to pay " + rent + " GC in rent to "
-                        + owner.getName());
+                JOptionPane.showMessageDialog(null, player.getName() + " you have to pay " + rent + " gold in rent to "
+                        + owner.getName() + ".");
                 gameHistoryLog.logPropertyRentEvent(player, property);
                 player.decreaseBalance(rent);
                 player.decreaseNetWorth(rent);
@@ -188,7 +195,7 @@ public class ManageEvents {
         gameHistoryLog.logWorkEvent(player, tempWorkObject.getPay());
         SoundService.instance().playSoundFx(SoundFx.SOUND_WORK);
         JOptionPane.showMessageDialog(null,
-                "Your a hard worker \nThe dice are rolled and shows " + roll + "\n" + " therefore you get " + tempWorkObject.getPay() + " GC for your hard work");
+                "You're a hard worker. \nThe dice are rolled and shows " + roll + "\n" + " therefore you get " + tempWorkObject.getPay() + " gold for your hard work.");
     }
 
     /**
@@ -205,7 +212,7 @@ public class ManageEvents {
         if (player.isAlive()) {
             SoundService.instance().playSoundFx(SoundFx.SOUND_CHURCHTAX);
             gameHistoryLog.logTaxEvent(player, 200);
-            JOptionPane.showMessageDialog(null, "You have to pay 200 gold in tax to the Church");
+            JOptionPane.showMessageDialog(null, "You have to pay 200 gold in tax to the Church.");
             player.decreaseBalance(chargePlayer);
             player.decreaseNetWorth(chargePlayer);
             taxCounter++;
@@ -234,7 +241,7 @@ public class ManageEvents {
 
         if (tempTavernObj.getPurchasable()) {
             if (player.getBalance() < tempTavernObj.getPrice()) {
-                JOptionPane.showMessageDialog(null, "You have not enough funds to purchase this tavern");
+                JOptionPane.showMessageDialog(null, "You have not enough funds to purchase this tavern.");
             } else {
                 tavernDialog(tempTavernObj, player);
             }
@@ -249,11 +256,10 @@ public class ManageEvents {
 
             control(player, randomValue);
             if (player.isAlive() == true) {
-                JOptionPane.showMessageDialog(null, player.getName() + " you have to pay " + randomValue + " GC in rent to "
-                        + tempTavernObj.getOwner().getName());
+                JOptionPane.showMessageDialog(null, player.getName() + " you have to pay " + randomValue + " gold in rent to "
+                        + tempTavernObj.getOwner().getName() + ".");
                 //TODO Log tavern rent
-				/*westPanel.append(player.getName() + " paid " + randomValue + " GC to "
-						+ tempTavernObj.getOwner().getName() + "\n");*/
+                gameHistoryLog.logTavernRentEvent(player, tempTavernObj, randomValue);
                 tempTavernObj.getOwner().increaseBalance(randomValue);
                 tempTavernObj.getOwner().increaseNetWorth(randomValue);
                 player.decreaseBalance(randomValue);
@@ -273,7 +279,7 @@ public class ManageEvents {
             if (player.getBalance() > (player.getJailCounter() * 50)) {
                 jailDialog(player);
             } else {
-                JOptionPane.showMessageDialog(null, "Sorry, you can not afford the bail");
+                JOptionPane.showMessageDialog(null, "Sorry, you can not afford the bail.");
                 SoundService.instance().playSoundFx(SoundFx.SOUND_PRISON);
             }
         } else if (player.getJailCounter() >= 2) {
@@ -295,7 +301,7 @@ public class ManageEvents {
         board.removePlayer(player);
         player.setPositionInSpecificIndex(10);
         board.setPlayer(player);
-        JOptionPane.showMessageDialog(null, "Sorry, " + player.getName() + " you are going to jail");
+        JOptionPane.showMessageDialog(null, "Sorry, " + player.getName() + " you are going to jail.");
         SoundService.instance().playSoundFx(SoundFx.SOUND_PRISON2);
         SoundService.instance().playSoundFx(SoundFx.SOUND_PRISON3);
         gameHistoryLog.logJailEnterEvent(player);
@@ -316,6 +322,46 @@ public class ManageEvents {
     }
 
     /**
+     * Checks if two players are on the same tile and should start a duel.
+     */
+    private void checkDuel(Player activePlayer) {
+        List<Player> playersOnTile = new ArrayList<Player>();
+        Player player = null;
+
+        for (int i = 0; i < playerList.getLength(); i++) {
+            player = playerList.getActivePlayers().get(i);
+            int positionOfPlayer = player.getPosition();
+
+            if (activePlayer.getPosition() == positionOfPlayer && !activePlayer.getName().equals(player.getName())) {
+                playersOnTile.add(player);
+            }
+        }
+
+        if (!playersOnTile.isEmpty() && playersOnTile.size() > 1) {
+            int playerNbr = 0;
+            boolean validInt = true;
+
+            while (validInt == true) {
+                try {
+                    playerNbr = Integer.parseInt(JOptionPane.showInputDialog("Which player would you like to meet in a duel? Write their number:"));
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "You did not enter a valid number. Please try again.");
+                }
+
+                for (Player playerCheck : playersOnTile) {
+                    if (playerNbr == (playerCheck.getPlayerIndex() + 1)) {
+                        validInt = false;
+                        Duel duel = new Duel(activePlayer, playerCheck, controller);
+                    }
+                }
+            }
+        } else if (playersOnTile.size() == 1) {
+            player = playersOnTile.get(0);
+            Duel duel = new Duel(activePlayer, player, controller);
+        }
+    }
+
+    /**
      * Method for a dialog if the player is able to purchase a property.
      *
      * @param property in question.
@@ -323,7 +369,7 @@ public class ManageEvents {
      */
     public void propertyDialog(Property property, Player player) {
         int yesOrNo = JOptionPane.showConfirmDialog(null,
-                property.getName() + "\n" + "Do you want to purchase this property for " + property.getPrice() + " GC",
+                property.getName() + "\n" + "Do you want to purchase this property for " + property.getPrice() + " gold coins?",
                 "Decide your fate!", JOptionPane.YES_NO_OPTION);
 
         if (yesOrNo == 0 && (property.getPrice() <= player.getBalance())) {
@@ -342,16 +388,15 @@ public class ManageEvents {
      * @param player, Model.player who landed on the tavern.
      */
     public void tavernDialog(Tavern tavern, Player player) {
-        int yesOrNo = JOptionPane.showConfirmDialog(null, "Do you want to purchase this property?", "JOption",
-                JOptionPane.YES_NO_OPTION);
+        int yesOrNo = JOptionPane.showConfirmDialog(null, "Do you want to purchase this tavern for " + tavern.getPrice() + " gold coins?",
+                "Decide your fate!", JOptionPane.YES_NO_OPTION);
 
         if (yesOrNo == 0 && (tavern.getPrice() <= player.getBalance())) {
             tavern.setOwner(player);
             player.addNewTavern(tavern);
             player.decreaseBalance(tavern.getPrice());
             controller.drawBorderColors();
-            //TODO Log tavern purchase
-            //gameHistoryLog.logPropertyBuyEvent(player, tavern);
+            gameHistoryLog.logTavernBuyEvent(player, tavern);
         }
     }
 
@@ -371,7 +416,7 @@ public class ManageEvents {
      */
     public void jailDialog(Player player) {
         int yesOrNo = JOptionPane.showConfirmDialog(null,
-                "Do you want to pay the bail\nof " + (player.getJailCounter() * 50) + " GC?", "JOption",
+                "Do you want to pay the bail\nof " + (player.getJailCounter() * 50) + " gold coins?", "JOption",
                 JOptionPane.YES_NO_OPTION);
         int totalBail = player.getJailCounter() * 50;
         if (yesOrNo == 0 && (totalBail <= player.getBalance())) {

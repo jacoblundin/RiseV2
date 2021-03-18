@@ -3,16 +3,15 @@ package Controller;
 import Model.Tiles.Property;
 import Model.player.Player;
 import Model.player.PlayerList;
+import Model.player.PlayerRanks;
 import View.BoardGUI.Board;
-import View.Duel.Duel;
 import View.EastGUI.EastSidePanel;
 import View.GameFlowGUI.GameFlowPanel;
 import View.WestGUI.WestSidePanel;
 import dice.Dice;
 import gamehistorylog.GameHistoryLog;
+
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Controller {
     private final Board board;
@@ -74,7 +73,8 @@ public class Controller {
     }
 
     public void upgradeProperty(Property property) {
-        property.increaseLevel();
+        var owner = property.getOwner();
+        property.increaseLevel(property);
         redrawPlayerInfo();
     }
 
@@ -94,7 +94,7 @@ public class Controller {
     }
 
     public void downgradeProperty(Property property) {
-        property.decreaseLevel();
+        property.decreaseLevel(property);
         redrawPlayerInfo();
     }
 
@@ -124,14 +124,28 @@ public class Controller {
     }
 
     public void duelWinner(Player winner, Player loser) {
-        winner.increaseBalance(500);
-        winner.increaseNetWorth(500);
-        loser.decreaseBalance(500);
-        loser.decreaseNetWorth(500);
+        PlayerRanks rankOfLoser = loser.getPlayerRank();
+        int profitAndLoss = 0;
+
+        if (rankOfLoser == PlayerRanks.PEASANT) {
+            profitAndLoss = 100;
+        }
+
+        if (rankOfLoser == PlayerRanks.KNIGHT) {
+            profitAndLoss = 300;
+        }
+
+        if (rankOfLoser == PlayerRanks.LORD) {
+            profitAndLoss = 800;
+        }
+        winner.increaseBalance(profitAndLoss);
+        winner.increaseNetWorth(profitAndLoss);
+        loser.decreaseBalance(profitAndLoss);
+        loser.decreaseNetWorth(profitAndLoss);
         updatePlayerRanks();
-        manageEvents.control(loser, 500);
-        gameHistoryLog.logDuelWinner(winner, 500);
-        gameHistoryLog.logDuelLoser(loser, 500);
+        manageEvents.control(loser, profitAndLoss);
+        gameHistoryLog.logDuelWinner(winner, profitAndLoss);
+        gameHistoryLog.logDuelLoser(loser, profitAndLoss);
     }
 
     public void updatePlayerRanks() {
@@ -149,6 +163,7 @@ public class Controller {
         int roll;
         Player activePlayer;
         Controller controller;
+        
 
         public PlayerMover(int roll, Controller controller) {
             this.roll = roll;
@@ -165,51 +180,19 @@ public class Controller {
                 if (i == (roll - 1)) {
                     GameHistoryLog.instance().logDiceRollEvent(activePlayer, board.getDestinationTile(activePlayer.getPosition()), roll);
 
-                    //Create the event the landing tile
-                    manageEvents.newEvent(board.getDestinationTile(activePlayer.getPosition()),
-                            activePlayer);
+                        //Create the event the landing tile
+                        manageEvents.newEvent(board.getDestinationTile(activePlayer.getPosition()),
+                                activePlayer);
 
-                    goEvent();
-                    redrawPlayerInfo();
-                    checkDuel();
-                    gameFlowPanel.setEndTurnButton(true);
+                        goEvent();
+                        redrawPlayerInfo();
+                        gameFlowPanel.setEndTurnButton(true);
                 }
-
                 try {
                     Thread.sleep(250);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }
-        }
-
-        /**
-         * Checks if two players are on the same tile and should start a duel.
-         */
-        private void checkDuel() {
-            List<Player> playersOnTile = new ArrayList<Player>();
-            Player player = null;
-
-            for (int i = 0; i < playerList.getLength(); i++) {
-                player = playerList.getActivePlayers().get(i);
-                int positionOfPlayer = player.getPosition();
-
-                if (activePlayer.getPosition() == positionOfPlayer && !activePlayer.getName().equals(player.getName())) {
-                    playersOnTile.add(player);
-                    System.out.println("Player added to playersOnTile: " + player.getName());
-                }
-            }
-
-            if (!playersOnTile.isEmpty() && playersOnTile.size() > 1) {
-                int playerNbr = Integer.parseInt(JOptionPane.showInputDialog("Which player would you like to meet in a duel? Write their number:"));
-                for (Player playerCheck : playersOnTile) {
-                    if (playerNbr == playerCheck.getPlayerIndex()) {
-                        Duel duel = new Duel(activePlayer, playerCheck, controller);
-                    }
-                }
-            } else if (playersOnTile.size() == 1) {
-                player = playersOnTile.get(0);
-                Duel duel = new Duel(activePlayer, player, controller);
             }
         }
     }
