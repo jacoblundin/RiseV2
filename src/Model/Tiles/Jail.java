@@ -12,7 +12,6 @@ import javax.swing.ImageIcon;
 public class Jail implements Tile {
 	private String name = "Go to Jail";
 	private Color color = Color.DARK_GRAY;
-	private String info;
 	private ImageIcon img = new ImageIcon("tilePics/jail.png");
 
 	@Override

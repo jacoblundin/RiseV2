@@ -258,7 +258,6 @@ public class ManageEvents {
             if (player.isAlive() == true) {
                 JOptionPane.showMessageDialog(null, player.getName() + " you have to pay " + randomValue + " gold in rent to "
                         + tempTavernObj.getOwner().getName() + ".");
-                //TODO Log tavern rent
                 gameHistoryLog.logTavernRentEvent(player, tempTavernObj, randomValue);
                 tempTavernObj.getOwner().increaseBalance(randomValue);
                 tempTavernObj.getOwner().increaseNetWorth(randomValue);
@@ -416,7 +415,7 @@ public class ManageEvents {
      */
     public void jailDialog(Player player) {
         int yesOrNo = JOptionPane.showConfirmDialog(null,
-                "Do you want to pay the bail\nof " + (player.getJailCounter() * 50) + " gold coins?", "JOption",
+                "Do you want to pay the bail\nof " + (player.getJailCounter() * 50) + " gold coins?", "Bail",
                 JOptionPane.YES_NO_OPTION);
         int totalBail = player.getJailCounter() * 50;
         if (yesOrNo == 0 && (totalBail <= player.getBalance())) {

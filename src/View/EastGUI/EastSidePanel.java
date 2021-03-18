@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.*;
 import Controller.Controller;
-import Controller.ManageEvents;
 import Model.Tiles.Property;
 import Model.player.PlayerList;
 

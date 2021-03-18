@@ -120,7 +120,7 @@ public class GameHistoryLog {
         String propertyTileColorHex = Utils.colorToHexString(propertyTile.getColor());
         String propertyTileName = propertyTile.getName();
         int propertyTileLevel = propertyTile.getLevel();
-        int propertyTileUpgradePrice = propertyTile.getLevelPrice(); //TODO: WARNING:This might cause the wrong information to be displayed, if this value changes after an upgrade the new upgrade price will be returned here and not the old
+        int propertyTileUpgradePrice = propertyTile.getLevelPrice();
         gameHistoryPanel.append(String.format("%s upgraded %s to level %s, for %s.", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatTileName(propertyTileName, propertyTileColorHex), propertyTileLevel, htmlFormatGoldCoins(propertyTileUpgradePrice)));
     }
 
@@ -130,7 +130,7 @@ public class GameHistoryLog {
         String propertyTileColorHex = Utils.colorToHexString(propertyTile.getColor());
         String propertyTileName = propertyTile.getName();
         int propertyTileLevel = propertyTile.getLevel();
-        int propertyTileUpgradePrice = propertyTile.getLevelPrice()/2; //TODO: WARNING:This might cause the wrong information to be displayed, if this value changes after an upgrade the new upgrade price will be returned here and not the old
+        int propertyTileUpgradePrice = propertyTile.getLevelPrice()/2;
         gameHistoryPanel.append(String.format("%s downgraded %s to level %s, recouping %s.", htmlFormatPlayerName(playerName, playerColorHex), htmlFormatTileName(propertyTileName, propertyTileColorHex), propertyTileLevel, htmlFormatGoldCoins(propertyTileUpgradePrice)));
     }
 

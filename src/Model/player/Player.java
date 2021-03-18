@@ -1,7 +1,6 @@
 package Model.player;
 
 import java.awt.Color;
-import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -313,6 +312,7 @@ public class Player {
      */
     public void decreaseNetWorth(int decrease) {
         this.netWorth -= decrease;
+        checkPlayerRank();
     }
 
     /**
@@ -320,6 +320,7 @@ public class Player {
      */
     public void increaseNetWorth(int income) {
         this.netWorth += income;
+        checkPlayerRank();
     }
 
     /**

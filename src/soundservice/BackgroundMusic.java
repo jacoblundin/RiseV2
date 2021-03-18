@@ -76,15 +76,13 @@ public class BackgroundMusic {
 	/**
 	 * Sets the volume of the sound effects
  	 */
-	public void setVolume(double gain)
-	{
+	public void setVolume(double gain) {
 		FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
 		float dB = (float) (Math.log(gain) / Math.log(10.0) * 20.0);
 		gainControl.setValue(dB);
 	}
 
-	public void changeVolume(double gain)
-	{
+	public void changeVolume(double gain) {
 		this.gain = gain;
 		setVolume(gain);
 	}

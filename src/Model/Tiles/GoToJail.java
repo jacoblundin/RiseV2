@@ -25,7 +25,7 @@ public class GoToJail implements Tile {
 
 	@Override
 	public String getTileInfo() {
-		return null; //TODO: this should not be null
+		return null;
 	}
 
 	@Override

@@ -158,8 +158,6 @@ public class Controller {
     }
 
     private class PlayerMover implements Runnable {
-        //TODO: Needs refactoring, this should only graphically move the players piece.
-        // But it handles more than just the view, which is unnecessary.
         int roll;
         Player activePlayer;
         Controller controller;
