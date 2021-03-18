@@ -16,7 +16,6 @@ import org.junit.jupiter.api.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,10 +38,10 @@ public class PropertyEventTests {
         TileCollection tileCollection = new TileCollection();
         westSidePanel = new WestSidePanel();
         playerList = new PlayerList();
-        board = new Board(null, westSidePanel, tileCollection);
+        board = new Board(playerList, westSidePanel, tileCollection);
         gameFlowPanel = null;
         eastSidePanel = null;
-        controller = new Controller(null, null, null, null, null,null);
+        controller = new Controller(board, null, null, null, null,null);
 
         manageEvents = new ManageEvents(board, playerList, westSidePanel, gameFlowPanel, eastSidePanel, controller);
     }
@@ -52,7 +51,7 @@ public class PropertyEventTests {
      */
     @Test
     void testPropertyPurchaseNotEnoughGold() {
-        Player playerBuyer = new Player("", null, null, 0);
+        Player playerBuyer = new Player("JohnDoe", null, null, 0);
         Property property = new Property("Wood Cutter Camp", 60, 2, 30, new Color(58,20,56,255), 50,new ImageIcon("tilePics/Wood.png"));
 
         int buyerOwnedProperties = playerBuyer.getProperties().size();
@@ -71,44 +70,50 @@ public class PropertyEventTests {
 
     /**
      * Test that a player can purchase an unowned property when they have enough gold to do so
+     *
+     * Expected result:
      */
     @Test
     void testPropertyPurchaseEnoughGold() {
-        Player playerBuyer = new Player("", null, Color.BLUE, 0);
+        Player playerBuyer = new Player("JohnDoe", null, Color.BLUE, 0);
         Property property = new Property("Wood Cutter Camp", 60, 2, 30, new Color(58,20,56,255), 50,new ImageIcon("tilePics/Wood.png"));
 
-        int playerBalance = 61;
+        int initBalance = 61;
+        int finalBalance = 1;
+        int finalNetWorth = initBalance; //Initial balance is the same as initial net worth. Net worth should not change when buying a property
 
-        playerBuyer.setBalance(playerBalance);
-        playerBuyer.setNetWorth(playerBalance);
+        playerBuyer.setBalance(initBalance);
+        playerBuyer.setNetWorth(initBalance);
 
         manageEvents.propertyEvent(property, playerBuyer);
 
-        assertEquals(property, playerBuyer.getProperties().get(0));
-        assertEquals(playerBuyer.getBalance(), playerBalance);
-        assertEquals(playerBuyer.getNetWorth(), playerBalance);
+        assertEquals(property, playerBuyer.getProperties().get(0)); //Assert that the player now owns the property
+        assertEquals(finalBalance, playerBuyer.getBalance()); //Assert that the players gold coins are updated
+        assertEquals(finalNetWorth, playerBuyer.getNetWorth()); //Assert that the players net worth is updated
     }
 
     /**
      * Test that a player can purchase an unowned property when the player only has the exact amount of gold required
      *
+     *
      */
     @Test
     void testPropertyPurchaseJustEnoughGold() {
-        Player playerBuyer = new Player("", null, null, 0);
+        Player playerBuyer = new Player("JohnDoe", null, Color.BLUE, 0);
         Property property = new Property("Wood Cutter Camp", 60, 2, 30, new Color(58,20,56,255), 50,new ImageIcon("tilePics/Wood.png"));
 
-        int buyerOwnedProperties = playerBuyer.getProperties().size();
-        int playerBalance = 59;
+        int initBalance = 60;
+        int finalBalance = 0;
+        int finalNetWorth = initBalance; //Initial balance is the same as initial net worth.
 
-        playerBuyer.setBalance(playerBalance);
-        playerBuyer.setNetWorth(playerBalance);
+        playerBuyer.setBalance(initBalance);
+        playerBuyer.setNetWorth(initBalance);
 
         manageEvents.propertyEvent(property, playerBuyer);
 
-        assertEquals(buyerOwnedProperties, playerBuyer.getProperties().size());
-        assertEquals(playerBuyer.getBalance(), playerBalance);
-        assertEquals(playerBuyer.getNetWorth(), playerBalance);
+        assertEquals(property, playerBuyer.getProperties().get(0)); //Assert that the player now owns the property
+        assertEquals(finalBalance, playerBuyer.getBalance()); //Assert that the players gold coins are updated
+        assertEquals(finalNetWorth, playerBuyer.getNetWorth()); //Assert that the players net worth is updated
     }
 
     /**
@@ -145,6 +150,8 @@ public class PropertyEventTests {
     {
 
     }
+
+    //Test owner win
 
     /**
      * Tests if the player ranks down when paying rent.

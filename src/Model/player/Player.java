@@ -376,7 +376,7 @@ public class Player {
     }
 
     public void checkPlayerRank() {
-        if (this.netWorth <= 2000) {
+        if (this.netWorth < 2000) {
             setPlayerRank(PlayerRanks.PEASANT);
         } else if (this.netWorth < 4000) {
             setPlayerRank(PlayerRanks.KNIGHT);
