@@ -158,8 +158,6 @@ public class Controller {
     }
 
     private class PlayerMover implements Runnable {
-        //TODO: Needs refactoring, this should only graphically move the players piece.
-        // But it handles more than just the view, which is unnecessary.
         int roll;
         Player activePlayer;
         Controller controller;
@@ -178,7 +176,8 @@ public class Controller {
                 board.setPlayer(activePlayer);
 
                 if (i == (roll - 1)) {
-                    GameHistoryLog.instance().logDiceRollEvent(activePlayer, board.getDestinationTile(activePlayer.getPosition()), roll);
+                    GameHistoryLog.instance().logDiceRollEvent(activePlayer, board.getDestinationTile
+                            (activePlayer.getPosition()), roll);
 
                         //Create the event the landing tile
                         manageEvents.newEvent(board.getDestinationTile(activePlayer.getPosition()),

@@ -6,20 +6,20 @@ package dice;
 public class DiceData {
 
     static String[] dieFaceFilePaths = {
-            "DicePictures/faceValue1White.png",
-            "DicePictures/faceValue2White.png",
-            "DicePictures/faceValue3White.png",
-            "DicePictures/faceValue4White.png",
-            "DicePictures/faceValue5White.png",
-            "DicePictures/faceValue6White.png",
+            "images/DicePictures/faceValue1White.png",
+            "images/DicePictures/faceValue2White.png",
+            "images/DicePictures/faceValue3White.png",
+            "images/DicePictures/faceValue4White.png",
+            "images/DicePictures/faceValue5White.png",
+            "images/DicePictures/faceValue6White.png",
     };
 
     static String[] doubleRollDieFaceFilePaths = {
-            "DicePictures/faceValue1.png",
-            "DicePictures/faceValue2.png",
-            "DicePictures/faceValue3.png",
-            "DicePictures/faceValue4.png",
-            "DicePictures/faceValue5.png",
-            "DicePictures/faceValue6.png",
+            "images/DicePictures/faceValue1.png",
+            "images/DicePictures/faceValue2.png",
+            "images/DicePictures/faceValue3.png",
+            "images/DicePictures/faceValue4.png",
+            "images/DicePictures/faceValue5.png",
+            "images/DicePictures/faceValue6.png",
     };
 }

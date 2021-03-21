@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.*;
 import Controller.Controller;
-import Controller.ManageEvents;
 import Model.Tiles.Property;
 import Model.player.PlayerList;
 
@@ -51,7 +50,7 @@ public class EastSidePanel extends JPanel {
             SwingUtilities.invokeLater(() -> {
                 PlayerInfoPanel playerInfoPnl = new PlayerInfoPanel(playerList, index, this);
                 playerInfoPnl.setOpaque(false);
-                tab.addTab("Player " + (index + 1), playerInfoPnl);
+                tab.addTab(playerList.getPlayerFromIndex(index).getName() + " (" + (index + 1) + ")", playerInfoPnl);
                 tab.setOpaque(false);
             });
         }

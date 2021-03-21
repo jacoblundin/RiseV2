@@ -6,7 +6,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import Controller.Controller;
-import UnusedClasses.cheat.CheatGui;
+import Cheat.cheat.CheatGui;
 import View.BoardGUI.ShowPlayersTurn;
 import View.WestGUI.WestSidePanel;
 import View.BoardGUI.Board;

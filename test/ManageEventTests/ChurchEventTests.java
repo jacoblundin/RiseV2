@@ -161,24 +161,9 @@ public class ChurchEventTests {
 	@Test
 	void testTaxPayoutWin() {
 
-		playerList.addNewPlayer("JohnDoe", "RED");
-		playerList.addNewPlayer("JaneDoe", "GREEN");
-		Player playerPayer = playerList.getPlayerFromIndex(0);
-		Player playerReceiver = playerList.getPlayerFromIndex(1);
+		//Can't currently test if a win has occurred
 
-		playerReceiver.setPosition(10); //To avoid triggering a duel
-
-		playerReceiver.setBalance(7400);
-		playerReceiver.setNetWorth(7400);
-		int newBalance = playerReceiver.getBalance() + (TAX_AMOUNT);
-		int newNetWorth = playerReceiver.getBalance() + (TAX_AMOUNT);
-
-		manageEvents.newEvent(taxTile, playerPayer);
-
-		manageEvents.newEvent(churchTile, playerReceiver);
-
-		assertEquals(newBalance, playerReceiver.getBalance());
-		assertEquals(newNetWorth, playerReceiver.getNetWorth());
+		fail("Test not implemented"); //Fail the test
 
 	}
 

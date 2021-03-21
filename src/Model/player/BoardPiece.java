@@ -28,7 +28,7 @@ public class BoardPiece {
                     break;
                 case KINGS:
                 default:
-                    baseImagePath = peasantImgPath; //TODO get default and king piece images
+                    baseImagePath = peasantImgPath;
                     break;
             }
 

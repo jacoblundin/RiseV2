@@ -170,7 +170,8 @@ public class ManageEvents {
             control(player, rent);
             if (player.isAlive()) {
                 var owner = property.getOwner();
-                JOptionPane.showMessageDialog(null, player.getName() + " you have to pay " + rent + " gold in rent to "
+                JOptionPane.showMessageDialog(null, player.getName() + " you have to pay "
+                        + rent + " gold in rent to "
                         + owner.getName() + ".");
                 gameHistoryLog.logPropertyRentEvent(player, property);
                 player.decreaseBalance(rent);
@@ -195,7 +196,8 @@ public class ManageEvents {
         gameHistoryLog.logWorkEvent(player, tempWorkObject.getPay());
         SoundService.instance().playSoundFx(SoundFx.SOUND_WORK);
         JOptionPane.showMessageDialog(null,
-                "You're a hard worker. \nThe dice are rolled and shows " + roll + "\n" + " therefore you get " + tempWorkObject.getPay() + " gold for your hard work.");
+                "You're a hard worker. \nThe dice are rolled and shows " + roll + "\n" + " therefore you get "
+                        + tempWorkObject.getPay() + " gold for your hard work.");
     }
 
     /**
@@ -256,13 +258,14 @@ public class ManageEvents {
 
             control(player, randomValue);
             if (player.isAlive() == true) {
-                JOptionPane.showMessageDialog(null, player.getName() + " you have to pay " + randomValue + " gold in rent to "
+                JOptionPane.showMessageDialog(null, player.getName() + " you have to pay "
+                        + randomValue + " gold in rent to "
                         + tempTavernObj.getOwner().getName() + ".");
-                //TODO Log tavern rent
                 gameHistoryLog.logTavernRentEvent(player, tempTavernObj, randomValue);
                 tempTavernObj.getOwner().increaseBalance(randomValue);
                 tempTavernObj.getOwner().increaseNetWorth(randomValue);
                 player.decreaseBalance(randomValue);
+                player.decreaseNetWorth(randomValue);
             }
         }
     }
@@ -369,7 +372,8 @@ public class ManageEvents {
      */
     public void propertyDialog(Property property, Player player) {
         int yesOrNo = JOptionPane.showConfirmDialog(null,
-                property.getName() + "\n" + "Do you want to purchase this property for " + property.getPrice() + " gold coins?",
+                property.getName() + "\n" + "Do you want to purchase this property for " + property.getPrice()
+                        + " gold coins?",
                 "Decide your fate!", JOptionPane.YES_NO_OPTION);
 
         if (yesOrNo == 0 && (property.getPrice() <= player.getBalance())) {
@@ -388,7 +392,8 @@ public class ManageEvents {
      * @param player, Model.player who landed on the tavern.
      */
     public void tavernDialog(Tavern tavern, Player player) {
-        int yesOrNo = JOptionPane.showConfirmDialog(null, "Do you want to purchase this tavern for " + tavern.getPrice() + " gold coins?",
+        int yesOrNo = JOptionPane.showConfirmDialog(null, "Do you want to purchase this tavern for "
+                        + tavern.getPrice() + " gold coins?",
                 "Decide your fate!", JOptionPane.YES_NO_OPTION);
 
         if (yesOrNo == 0 && (tavern.getPrice() <= player.getBalance())) {
@@ -416,7 +421,7 @@ public class ManageEvents {
      */
     public void jailDialog(Player player) {
         int yesOrNo = JOptionPane.showConfirmDialog(null,
-                "Do you want to pay the bail\nof " + (player.getJailCounter() * 50) + " gold coins?", "JOption",
+                "Do you want to pay the bail\nof " + (player.getJailCounter() * 50) + " gold coins?", "Bail",
                 JOptionPane.YES_NO_OPTION);
         int totalBail = player.getJailCounter() * 50;
         if (yesOrNo == 0 && (totalBail <= player.getBalance())) {

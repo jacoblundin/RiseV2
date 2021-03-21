@@ -1,4 +1,4 @@
-package UnusedClasses.cheat;
+package Cheat.cheat;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -8,7 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import Controller.Controller;
-import View.GameFlowGUI.GameFlowPanel;
 
 /**
  * This class is used for testing purposes only.

@@ -1,14 +1,10 @@
 package Model.player;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-
 import javax.swing.ImageIcon;
-
 import Model.colorsAndIcons.ColorIconMap;
 import Model.colorsAndIcons.StringColorMap;
-import View.EastGUI.EastSidePanel;
 
 /**
  * A class that holds all active players
