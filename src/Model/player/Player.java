@@ -254,29 +254,29 @@ public class Player {
      * @param playerRank set the rank of this Model.player
      */
     public void setPlayerRank(PlayerRanks playerRank) {
-        switch (this.playerRank.compareTo(playerRank)) {
-            case -1:
+        int compareValue = this.playerRank.compareTo(playerRank);
+
+        if (compareValue < 0) {
                 //Rank up
-                this.playerRank = playerRank;
-                this.playerIcon = BoardPiece.newPiece(playerRank, this.playerColor);
-                SoundService.instance().playSoundFx(SoundFx.SOUND_RANK);
-                JOptionPane.showMessageDialog(null, name + ", you ranked up! You may now upgrade your buildings\n" +
-                        "to a higher level and you earn more from your work.");
-                GameHistoryLog.instance().logPlayerRankUpEvent(this);
-                break;
-            case 0:
-                //Equal rank set: do nothing
-                break;
-            case 1:
+            this.playerRank = playerRank;
+            this.playerIcon = BoardPiece.newPiece(playerRank, this.playerColor);
+            SoundService.instance().playSoundFx(SoundFx.SOUND_RANK);
+            JOptionPane.showMessageDialog(null, name + ", you ranked up! You may now upgrade your buildings\n" +
+                    "to a higher level and you earn more from your work.");
+            GameHistoryLog.instance().logPlayerRankUpEvent(this);
+
+        } else if (compareValue > 0) {
                 //Rank down
-                this.playerRank = playerRank;
-                this.playerIcon = BoardPiece.newPiece(playerRank, this.playerColor);
-                SoundService.instance().playSoundFx(SoundFx.SOUND_RANK);
-                JOptionPane.showMessageDialog(null, name + ", you fell in rank."
-                );
-                GameHistoryLog.instance().logPlayerRankDownEvent(this);
-                break;
+            this.playerRank = playerRank;
+            this.playerIcon = BoardPiece.newPiece(playerRank, this.playerColor);
+            SoundService.instance().playSoundFx(SoundFx.SOUND_RANK);
+            JOptionPane.showMessageDialog(null, name + ", you fell in rank.");
+            GameHistoryLog.instance().logPlayerRankDownEvent(this);
+
+        } else {
+            //Equal rank set: do nothing
         }
+
     }
 
     public int setLeftToNextRank(PlayerList playerList, int playerNbr) {

@@ -87,6 +87,8 @@ public class TaxEventTests {
 		playerList.addNewPlayer("JaneDoe", "GREEN");
 		Player player = playerList.getPlayerFromIndex(1);
 
+		player.setPosition(10); //To avoid triggering a duel
+
 		int playerBalance = 100;
 
 		player.setBalance(playerBalance);
@@ -103,11 +105,13 @@ public class TaxEventTests {
 	 * Test that a player can rank down if they get taxed
 	 */
 	@Test
-	void testTaxPlayerRankDown() {
+	void testTaxPlayerRankDown() throws InterruptedException {
 
 		playerList.addNewPlayer("JohnDoe", "RED");
 		playerList.addNewPlayer("JaneDoe", "GREEN");
 		Player player = playerList.getPlayerFromIndex(1);
+
+		player.setPosition(10); //To avoid triggering a duel
 
 		int playerBalance = 2100;
 
@@ -118,7 +122,8 @@ public class TaxEventTests {
 
 		manageEvents.newEvent(taxTile, player);
 
-		assertEquals(PlayerRanks.PEASANT, player.getPlayerRank());
+		Thread.sleep(1000); //This is needed since the rank check is performed by the Swing EDT
+		assertEquals(PlayerRanks.PEASANT, player.getPlayerRank()); //Race condition here, the EDT might not have had time to update the ranks
 
 	}
 

@@ -16,8 +16,6 @@ import Model.player.Player;
 
 import org.junit.jupiter.api.*;
 
-import java.awt.*;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ChurchEventTests {
@@ -65,6 +63,7 @@ public class ChurchEventTests {
 		playerList.addNewPlayer("JaneDoe", "GREEN");
 
 		Player playerReceiver = playerList.getPlayerFromIndex(1);
+		playerReceiver.setPosition(10); //To avoid triggering a duel
 
 		int initBalance = playerReceiver.getBalance();
 		int initNetWorth = playerReceiver.getNetWorth();
@@ -85,6 +84,8 @@ public class ChurchEventTests {
 		playerList.addNewPlayer("JaneDoe", "GREEN");
 		Player playerPayer = playerList.getPlayerFromIndex(0);
 		Player playerReceiver = playerList.getPlayerFromIndex(1);
+
+		playerReceiver.setPosition(10); //To avoid triggering a duel
 
 		int newBalance = playerReceiver.getBalance() + TAX_AMOUNT;
 		int newNetWorth = playerReceiver.getBalance() + TAX_AMOUNT;
@@ -108,6 +109,8 @@ public class ChurchEventTests {
 		Player playerPayer = playerList.getPlayerFromIndex(0);
 		Player playerReceiver = playerList.getPlayerFromIndex(1);
 
+		playerReceiver.setPosition(10); //To avoid triggering a duel
+
 		int newBalance = playerReceiver.getBalance() + (TAX_AMOUNT * 3);
 		int newNetWorth = playerReceiver.getBalance() + (TAX_AMOUNT * 3);
 
@@ -126,12 +129,14 @@ public class ChurchEventTests {
 	 * Test that a player can rank up from a church event
 	 */
 	@Test
-	void testTaxPayoutRankUp() {
+	void testTaxPayoutRankUp() throws InterruptedException {
 
 		playerList.addNewPlayer("JohnDoe", "RED");
 		playerList.addNewPlayer("JaneDoe", "GREEN");
 		Player playerPayer = playerList.getPlayerFromIndex(0);
 		Player playerReceiver = playerList.getPlayerFromIndex(1);
+
+		playerReceiver.setPosition(10); //To avoid triggering a duel
 
 		int newBalance = playerReceiver.getBalance() + (TAX_AMOUNT * 3);
 		int newNetWorth = playerReceiver.getBalance() + (TAX_AMOUNT * 3);
@@ -144,7 +149,9 @@ public class ChurchEventTests {
 
 		assertEquals(newBalance, playerReceiver.getBalance());
 		assertEquals(newNetWorth, playerReceiver.getNetWorth());
-		assertEquals(PlayerRanks.KNIGHT, playerReceiver.getPlayerRank()); //FIXME: PlayerRank is not checked in the correct order, and may lead to failure here.
+
+		Thread.sleep(1000); //This is needed since the rank check is performed by the Swing EDT
+		assertEquals(PlayerRanks.KNIGHT, playerReceiver.getPlayerRank()); //Race condition here, the EDT might not have had time to update the ranks
 
 	}
 
@@ -158,6 +165,8 @@ public class ChurchEventTests {
 		playerList.addNewPlayer("JaneDoe", "GREEN");
 		Player playerPayer = playerList.getPlayerFromIndex(0);
 		Player playerReceiver = playerList.getPlayerFromIndex(1);
+
+		playerReceiver.setPosition(10); //To avoid triggering a duel
 
 		playerReceiver.setBalance(7400);
 		playerReceiver.setNetWorth(7400);
