@@ -259,7 +259,8 @@ public class Player {
                 this.playerRank = playerRank;
                 this.playerIcon = BoardPiece.newPiece(playerRank, this.playerColor);
                 SoundService.instance().playSoundFx(SoundFx.SOUND_RANK);
-                JOptionPane.showMessageDialog(null, name + ", you ranked up! You may now upgrade your buildings\n" +
+                JOptionPane.showMessageDialog(null, name +
+                        ", you ranked up! You may now upgrade your buildings\n" +
                         "to a higher level and you earn more from your work.");
                 GameHistoryLog.instance().logPlayerRankUpEvent(this);
                 break;

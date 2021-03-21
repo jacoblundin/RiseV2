@@ -71,7 +71,8 @@ public class Menu extends JPanel {
         });
 
         menuItemSetVolume.addActionListener((event) -> {
-            double gain = Double.parseDouble(JOptionPane.showInputDialog(null,"Set volume by writing a number between 1 and 10:", 5));
+            double gain = Double.parseDouble(JOptionPane.showInputDialog
+                    (null,"Set volume by writing a number between 1 and 10:", 5));
             if(gain<=10 || gain>=1)
             {
             gain = gain/100;

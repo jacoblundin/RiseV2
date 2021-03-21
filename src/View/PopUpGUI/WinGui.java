@@ -34,7 +34,8 @@ public class WinGui extends JPanel {
 		getFrame();
 		victory();
 		GameHistoryLog.instance().logPlayerWinEvent(player);
-		JOptionPane.showMessageDialog(null, "Congratulations " + player.getName() + " you are king and won the game");
+		JOptionPane.showMessageDialog(null, "Congratulations " + player.getName()
+				+ " you are king and won the game");
 	}
 
 	/**

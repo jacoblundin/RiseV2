@@ -83,7 +83,8 @@ public class PlayerInfoPanel extends JPanel {
         lblNextRank.setText("Wealth required for higher rank:");
         lblNextRank.setFont(font);
         lblNextRank.setHorizontalAlignment(SwingConstants.CENTER);
-        lblLeftToNextRank.setText(playerList.getPlayerFromIndex(playerNbr).getNetWorth() + "/" + playerList.getActivePlayer().setLeftToNextRank(playerList, playerNbr));
+        lblLeftToNextRank.setText(playerList.getPlayerFromIndex(playerNbr).getNetWorth() + "/"
+                + playerList.getActivePlayer().setLeftToNextRank(playerList, playerNbr));
         lblLeftToNextRank.setFont(font);
         lblLeftToNextRank.setHorizontalAlignment(SwingConstants.CENTER);
         p5.add(lblNextRank);

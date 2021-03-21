@@ -73,7 +73,8 @@ public class GameHistoryPanel extends JPanel {
 	 */
 	public void append(String msg) {
 		try {
-			gameHistoryEditorKit.insertHTML(gameHistoryDocument, gameHistoryDocument.getLength(), msg, 0, 0, null);
+			gameHistoryEditorKit.insertHTML(gameHistoryDocument, gameHistoryDocument.getLength(), msg,
+					0, 0, null);
 		} catch (BadLocationException | IOException e) {
 			e.printStackTrace();
 		}

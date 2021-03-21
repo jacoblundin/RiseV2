@@ -68,7 +68,8 @@ public class GameHistoryLogTestGUI extends JPanel {
         this.player2 = new Player("Jerry", new ImageIcon(), new Color(135, 100, 62), 2);
         this.playerOwner = new Player("Spike", new ImageIcon(), new Color(168, 168, 168), 3);
         this.activePlayer = player1;
-        this.landingTile = new Property("Warehouse", 220, 18, 130, new Color(169, 60, 48, 255), 150, new ImageIcon("tilePics/warehouse.png"));
+        this.landingTile = new Property("Warehouse", 220, 18, 130,
+                new Color(169, 60, 48, 255), 150, new ImageIcon("tilePics/warehouse.png"));
         ((Property) landingTile).setOwner(this.playerOwner);
 
         this.gameHistoryLog = gameHistoryLog;

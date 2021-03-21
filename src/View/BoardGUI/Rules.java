@@ -59,7 +59,8 @@ public class Rules extends JPanel {
 
 	protected JComponent makeTextPanel(String text) {
 		JPanel panel = new JPanel(false);
-		ImageIcon imgBackground = new ImageIcon(new ImageIcon(text).getImage().getScaledInstance(525, 800, Image.SCALE_SMOOTH));
+		ImageIcon imgBackground = new ImageIcon(new ImageIcon(text).getImage()
+				.getScaledInstance(525, 800, Image.SCALE_SMOOTH));
 		JLabel filler = new JLabel(imgBackground);
 		filler.setHorizontalAlignment(JLabel.CENTER);
 		panel.setLayout(new GridLayout(1, 1));

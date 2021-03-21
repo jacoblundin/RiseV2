@@ -1,4 +1,4 @@
-package UnusedClasses.endGame;
+package Cheat.endGame;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
