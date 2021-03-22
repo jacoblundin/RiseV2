@@ -83,6 +83,7 @@ public class ManageEvents {
      * @param player, Model.player who landed on a tile.
      */
     public void newEvent(Tile tile, Player player) {
+        player.checkPassedGo();
         player.checkPlayerRank();
         checkDuel(player);
 
@@ -166,19 +167,24 @@ public class ManageEvents {
                 propertyDialog(property, player);
             }
         } else {
-            int rent = property.getTotalRent();
-            control(player, rent);
-            if (player.isAlive()) {
-                var owner = property.getOwner();
-                JOptionPane.showMessageDialog(null, player.getName() + " you have to pay "
-                        + rent + " gold in rent to "
-                        + owner.getName() + ".");
-                gameHistoryLog.logPropertyRentEvent(player, property);
-                player.decreaseBalance(rent);
-                player.decreaseNetWorth(rent);
-                owner.increaseBalance(rent);
-                owner.increaseNetWorth(rent);
+            Player owner = property.getOwner();
+
+            if (!owner.equals(player)) { //Owner should not pay rent to itself
+            	int rent = property.getTotalRent();
+            	control(player, rent);
+            	if (player.isAlive()) {
+                	JOptionPane.showMessageDialog(null, player.getName() + " you have to pay "
+                	        + rent + " gold in rent to "
+                	        + owner.getName() + ".");
+                	gameHistoryLog.logPropertyRentEvent(player, property);
+                	player.decreaseBalance(rent);
+                	player.decreaseNetWorth(rent);
+                	owner.increaseBalance(rent);
+                	owner.increaseNetWorth(rent);
+            	}
+
             }
+
         }
     }
 

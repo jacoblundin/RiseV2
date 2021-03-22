@@ -170,15 +170,23 @@ public class PropertyEventTests {
     }
 
     /**
+     * Tests that the owner of the property doesn't pay rent on their own properties.
+     */
+    @Test
+    void testPropertyRentOwner()
+    {
+        fail("Test not implemented"); //Fail the test
+    }
+
+    /**
      * Tests if the owner of the property ranks up when being payed rent.
      */
     @Test
     void testPropertyOwnerRankUp()
     {
-
+        fail("Test not implemented"); //Fail the test
     }
 
-    //Test owner win
 
     /**
      * Tests if the player ranks down when paying rent.
@@ -186,7 +194,16 @@ public class PropertyEventTests {
     @Test
     void testPropertyPlayerRankDown()
     {
+        fail("Test not implemented"); //Fail the test
+    }
 
+    /**
+     * Tests that an owner can win the game through receiving rent
+     */
+    @Test
+    void testPropertyOwnerWin()
+    {
+        fail("Test not implemented"); //Fail the test
     }
 
     /**
@@ -195,6 +212,6 @@ public class PropertyEventTests {
     @Test
     void testPropertyPlayerElimination()
     {
-
+        fail("Test not implemented"); //Fail the test
     }
 }

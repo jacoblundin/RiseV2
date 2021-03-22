@@ -98,25 +98,12 @@ public class Controller {
         redrawPlayerInfo();
     }
 
-    public void goEvent() {
-        Player activePlayer = playerList.getActivePlayer();
-        int payout = 200;
-
-        if (activePlayer.passedGo()) {
-            activePlayer.increaseBalance(200);
-            activePlayer.increaseNetWorth(200);
-            GameHistoryLog.instance().logPassGoEvent(activePlayer, payout);
-            activePlayer.resetPassedGo();
-        }
-    }
-
     public void moveWCheat(int i) {
         playerList.getActivePlayer().checkPlayerRank();
         board.removePlayer(playerList.getActivePlayer());
         playerList.getActivePlayer().setPosition(i);
         board.setPlayer(playerList.getActivePlayer());
         manageEvents.setRoll(i);
-        goEvent();
         manageEvents.newEvent(board.getDestinationTile(playerList.getActivePlayer().getPosition()),
                 playerList.getActivePlayer());
         redrawPlayerInfo();
@@ -183,7 +170,6 @@ public class Controller {
                         manageEvents.newEvent(board.getDestinationTile(activePlayer.getPosition()),
                                 activePlayer);
 
-                        goEvent();
                         redrawPlayerInfo();
                         gameFlowPanel.setEndTurnButton(true);
                 }

@@ -98,4 +98,13 @@ public class PlayerTests {
 
 	}
 
+	/**
+	 * Tests that passing go awards gold coins
+	 */
+	@Test
+	void testPlayerPassGo()
+	{
+		fail("Test not implemented"); //Fail the test
+	}
+
 }

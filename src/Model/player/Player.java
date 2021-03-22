@@ -177,17 +177,25 @@ public class Player {
     }
 
     /**
-     * @return playerPassedgo, boolean to keep track if user has passed go
+     * This method will check if the player has finished a lap (passed go).
+     * If the player has "passed go" the player will be awarded gold.
+     *
+     * Landing on the go tile also counts as "passing go".
      */
-    public boolean passedGo() {
-        return playerPassedgo;
-    }
+    public boolean checkPassedGo() {
+        boolean passedGo = this.playerPassedgo;
+        int payout = 200;
 
-    /**
-     * reset has passedGo variable to false
-     */
-    public void resetPassedGo() {
-        playerPassedgo = false;
+        if (this.playerPassedgo) {
+            this.increaseBalance(payout);
+            this.increaseNetWorth(payout);
+
+            GameHistoryLog.instance().logPassGoEvent(this, payout);
+
+            playerPassedgo = false;
+        }
+
+        return passedGo;
     }
 
     /**
