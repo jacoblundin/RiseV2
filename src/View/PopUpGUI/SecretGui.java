@@ -31,7 +31,7 @@ public class SecretGui extends JFrame {
 	   	setLocation(width/2 -160, height/2-375);
 	        
 	   	lblSecret.setPreferredSize(new Dimension(320, 180));
-	   	lblSecret.setIcon(new ImageIcon("images/$$$.jpg"));
+	   	lblSecret.setIcon(new ImageIcon("images/secret.jpg"));
 	       
 	   	add(lblSecret);	
 	   	setVisible(true);
