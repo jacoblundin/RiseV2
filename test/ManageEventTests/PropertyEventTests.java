@@ -76,7 +76,7 @@ public class PropertyEventTests {
     @Test
     void testPropertyPurchaseEnoughGold() {
         Player playerBuyer = new Player("JohnDoe", null, Color.BLUE, 0);
-        Property property = new Property("Wood Cutter Camp", 60, 2, 30, new Color(58,20,56,255), 50,new ImageIcon("tilePics/Wood.png"));
+        Property property = new Property("Wood Cutter Camp", 60, 2, 30, new Color(58,20,56,255), 50,new ImageIcon("images/tilePics/Wood.png"));
 
         int initBalance = 61;
         int finalBalance = 1;
@@ -100,7 +100,7 @@ public class PropertyEventTests {
     @Test
     void testPropertyPurchaseJustEnoughGold() {
         Player playerBuyer = new Player("JohnDoe", null, Color.BLUE, 0);
-        Property property = new Property("Wood Cutter Camp", 60, 2, 30, new Color(58,20,56,255), 50,new ImageIcon("tilePics/Wood.png"));
+        Property property = new Property("Wood Cutter Camp", 60, 2, 30, new Color(58,20,56,255), 50,new ImageIcon("images/tilePics/Wood.png"));
 
         int initBalance = 60;
         int finalBalance = 0;

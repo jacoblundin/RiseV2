@@ -55,32 +55,50 @@ public class PlayerProperties extends JPanel implements ActionListener {
 
     private String plus = "+";
     private PlayerList playerList;
-    private int playerAtI, propertyAtI;
+    //private int playerAtI, propertyAtI;
     private EastSidePanel eastSidePanel;
+    private Property property;
+    private Player player;
 
+    public PlayerProperties(Player player, Property property, PlayerList playerList) {
+        this.eastSidePanel = eastSidePanel;
+
+        buildPanel(player, property, playerList, false);
+
+    }
     /**
      * @param playerList
      * @param playerAtI
      * @param propertyAtI
      */
     public PlayerProperties(PlayerList playerList, int playerAtI, int propertyAtI, EastSidePanel eastSidePanel) {
-        this.playerList = playerList;
-        this.playerAtI = playerAtI;
-        this.propertyAtI = propertyAtI;
         this.eastSidePanel = eastSidePanel;
+        Player player = playerList.getPlayerFromIndex(playerAtI);
+        Property property = player.getProperties().get(propertyAtI);
+
+        buildPanel(player, property, playerList, true);
+
+    }
+
+    private void buildPanel(Player player, Property property, PlayerList playerList, boolean showActionButtons) {
+
+        this.player = player;
+        this.property = property;
+        this.playerList = playerList;
 
         setBorder(null);
         setOpaque(false);
         setBackground(Color.DARK_GRAY);
-        setPreferredSize(new Dimension(330, 607));
+        int preferredHeight = showActionButtons ? 647 : 547;
+        setPreferredSize(new Dimension(330, preferredHeight));
         setLayout(null);
 
         lblRent.setForeground(Color.white);
         lblRentPerLevel.setForeground(Color.white);
         lblRent.setText(
-                "The Rent is: " + playerList.getPlayerFromIndex(playerAtI).getPropertyAt(propertyAtI).getTotalRent());
+                "The Rent is: " + property.getTotalRent());
         lblRentPerLevel.setText("The rent per level : "
-                + playerList.getPlayerFromIndex(playerAtI).getPropertyAt(propertyAtI).getRentPerLevel());
+                + property.getRentPerLevel());
         lblRent.setFont(font);
         lblRentPerLevel.setFont(font);
 
@@ -89,35 +107,17 @@ public class PlayerProperties extends JPanel implements ActionListener {
         lblRentPerLevel.setBounds(0, 140, 330, 64);
         add(lblRentPerLevel);
 
-        btnDowngrade.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
-        btnDowngrade.setBounds(163, 481, 167, 53);
-        add(btnDowngrade);
-
-        btnUpgrade.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
-        btnUpgrade.setBounds(0, 481, 167, 53);
-        add(btnUpgrade);
-
-        btnTrade.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
-        btnTrade.setBounds(163, 532, 167, 46);
-        add(btnTrade);
-
-        btnSell.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
-        btnSell.setBounds(0, 532, 167, 46);
-        btnSell.setForeground(Color.red);
-        add(btnSell);
-        btnSell.setFont(font);
-
         taLevel.setEditable(false);
         taLevel.setBounds(46, 38, 263, 53);
         taLevel.setOpaque(false);
         taLevel.setFont(fontLevel);
         taLevel.setForeground(Color.white);
-        updateLevels(playerList, playerAtI, propertyAtI);
+        updateLevels(property);
         add(taLevel);
 
         lblName.setForeground(Color.white);
         lblName.setOpaque(false);
-        lblName.setText(playerList.getPlayerFromIndex(playerAtI).getProperty(propertyAtI).getName());
+        lblName.setText(property.getName());
 
         lblName.setHorizontalAlignment(SwingConstants.CENTER);
         lblName.setBounds(0, 11, 330, 46);
@@ -138,7 +138,7 @@ public class PlayerProperties extends JPanel implements ActionListener {
         BufferedImage img = null;
         try {
             img = ImageIO.read(new File(
-                    playerList.getPlayerFromIndex(playerAtI).getProperty(propertyAtI).getPicture().toString()));
+                    property.getPicture().toString()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -147,22 +147,46 @@ public class PlayerProperties extends JPanel implements ActionListener {
 
         lblPicture.setIcon(new ImageIcon(resizedImg));
 
-        btnUpgrade.addActionListener(this);
-        btnDowngrade.addActionListener(this);
-        btnSell.addActionListener(this);
-        btnTrade.addActionListener(this);
+        if (showActionButtons) {
+            btnDowngrade.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
+            btnDowngrade.setBounds(163, 481, 167, 53);
+            add(btnDowngrade);
+
+            btnUpgrade.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
+            btnUpgrade.setBounds(0, 481, 167, 53);
+            add(btnUpgrade);
+
+            btnTrade.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
+            btnTrade.setBounds(163, 532, 167, 46);
+            add(btnTrade);
+
+            btnSell.setBorder(new MatteBorder(2, 2, 2, 2, (Color) new Color(0, 0, 0)));
+            btnSell.setBounds(0, 532, 167, 46);
+            btnSell.setForeground(Color.red);
+            add(btnSell);
+            btnSell.setFont(font);
+
+            btnUpgrade.addActionListener(this);
+            btnDowngrade.addActionListener(this);
+            btnSell.addActionListener(this);
+            btnTrade.addActionListener(this);
+        } else {
+            //TODO This is a temporary solution
+            JLabel lblPurchase = new JLabel("Do you want to purchase " + property.getName() + "?");
+            lblPurchase.setLocation(0, 481);
+            lblPurchase.setBounds(0, 481, 330, 50);
+            add(lblPurchase);
+        }
+
     }
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnSell) {
-            Property property = playerList.getPlayerFromIndex(playerAtI).getPropertyAt(propertyAtI);
-            eastSidePanel.sellProperty(property);
+            eastSidePanel.sellProperty(this.property);
         } else if (e.getSource() == btnUpgrade) {
-            Property property = playerList.getPlayerFromIndex(playerAtI).getPropertyAt(propertyAtI);
-            eastSidePanel.upgradeProperty(property);
+            eastSidePanel.upgradeProperty(this.property);
         } else if (e.getSource() == btnDowngrade) {
-            Property property = playerList.getPlayerFromIndex(playerAtI).getPropertyAt(propertyAtI);
-            eastSidePanel.downgradeProperty(property);
+            eastSidePanel.downgradeProperty(this.property);
         } else if (e.getSource() == btnTrade) {
             int otherPlayerInt = 0;
             int whichPropertyToGive = 0;
@@ -295,7 +319,12 @@ public class PlayerProperties extends JPanel implements ActionListener {
          * @param propertyIndex updates levels shown adds a plus to the picture
          */
         public void updateLevels(PlayerList playerList, int playerIndex, int propertyIndex) {
-            int lvl = playerList.getPlayerFromIndex(playerIndex).getPropertyAt(propertyIndex).getLevel();
+            Property property = playerList.getPlayerFromIndex(playerIndex).getPropertyAt(propertyIndex);
+            updateLevels(property);
+        }
+
+        public void updateLevels(Property property) {
+            int lvl = property.getLevel();
             for (int i = 0; i < lvl; i++) {
                 taLevel.append(plus);
             }
