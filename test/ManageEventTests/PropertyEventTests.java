@@ -121,6 +121,18 @@ public class PropertyEventTests {
      */
     @Test
     void testPropertyPurchaseNotAvailable() {
+        Player playerBuyer = new Player("Buy", null, Color.GREEN, 0);
+        Player playerOwner = new Player("Own", null, Color.RED, 0);
+        Property property = new Property("Wood Cutter Camp", 60, 2, 30, new Color(58,20,56,255), 50,new ImageIcon("tilePics/Wood.png"));
+
+        property.setOwner(playerOwner);
+
+        int nrOwnedPropertiesExpected = playerBuyer.getProperties().size();
+
+        manageEvents.propertyEvent(property, playerBuyer);
+
+        assertEquals(nrOwnedPropertiesExpected, playerBuyer.getProperties().size());
+        assertEquals(playerOwner, property.getOwner());
 
     }
 
